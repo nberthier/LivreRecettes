@@ -61,12 +61,7 @@ public class LivreWindowController implements Initializable {
         recettesTable.prefWidthProperty().bind(anchorPaneFirst.prefWidthProperty());
         nomColumn.prefWidthProperty().bind(recettesTable.prefWidthProperty().subtract(5));
         gridPane.prefWidthProperty().bind(anchorPaneSecond.prefHeightProperty().subtract(hBox.getPrefHeight()));
-        //recetteScrollPane.prefHeightProperty().bind(gridPane.heightProperty().subtract(30*4));
         recetteLabel.prefWidthProperty().bind(recetteScrollPane.widthProperty().subtract(15));
-        //recetteLabel.prefHeightProperty().bind(recetteScrollPane.heightProperty());
-        //column1.prefWidthProperty().bind(gridPane.prefWidthProperty().multiply(0.3));
-        //column2.prefWidthProperty().bind(gridPane.prefWidthProperty().multiply(0.3));
-        //column3.prefWidthProperty().bind(gridPane.prefWidthProperty().multiply(0.4));
         
         nomColumn.setCellValueFactory(cellData -> cellData.getValue().nomProperty());
         afficherDetailsRecette(null);
@@ -89,7 +84,7 @@ public class LivreWindowController implements Initializable {
             difficulteLabel.setText(recette.getDifficulte().toString());
             budgetLabel.setText(recette.getPrix().toString());         
             recetteLabel.setText(recette.getRecette());
-            ingredientsLabel.setItems(FXCollections.observableArrayList(recette.getIngredients()));
+            ingredientsLabel.setItems(recette.getIngredientsObservable());
         }else{
             nomLabel.setText("");
             dureeLabel.setText("");
@@ -121,7 +116,10 @@ public class LivreWindowController implements Initializable {
     private void ajouterRecette(){
         IRecette nouvelle = Fabrique.creerRecette();
         nouvelle = main.lancerRecetteFormulaire(nouvelle);
-        if(nouvelle != null) main.getLivre().ajouterRecette(nouvelle);
+        if(nouvelle != null){
+            main.getLivre().ajouterRecette(nouvelle);
+            recettesTable.getSelectionModel().select(nouvelle);
+        }
     }
     
     @FXML
@@ -130,7 +128,10 @@ public class LivreWindowController implements Initializable {
         if(nouvelle != null){
             String old = nouvelle.getNom();
             nouvelle = main.lancerRecetteFormulaire(nouvelle);
-            if(nouvelle != null) main.getLivre().modifierRecette(old,nouvelle);
+            if(nouvelle != null){
+                main.getLivre().modifierRecette(old,nouvelle);
+                recettesTable.getSelectionModel().select(nouvelle);
+            }
         } else{
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(main.getStage());

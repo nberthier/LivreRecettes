@@ -8,6 +8,7 @@ package model;
 import java.util.List;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -16,6 +17,10 @@ import javafx.beans.property.StringProperty;
 public interface IRecette {// extends IngredientBis{
     
     public void ajouterIngredient(IIngredient ingredient);
+    public void ajouterIngredients(List<IIngredient> ingredients);
+    
+    public void supprimerIngredient(IIngredient ingredient);
+    public void supprimerIngredient(int index);
 
     public String getNom();
     public StringProperty nomProperty();
@@ -33,6 +38,7 @@ public interface IRecette {// extends IngredientBis{
     public StringProperty recetteProperty();
     
     public List<IIngredient> getIngredients(); 
+    public ObservableList<IIngredient> getIngredientsObservable(); 
     
     public int nbIngredients();
     public StringProperty nbIngredientsProperty();

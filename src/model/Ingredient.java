@@ -13,17 +13,17 @@ class Ingredient implements IIngredient {
     
     private String nom;
     public String getNom(){ return nom; }
-    protected void setNom(String nom){ this.nom = nom; }
+    public void setNom(String nom){ this.nom = nom; }
     
     private int quantite;
-    protected void setQuantite(int quantite){
+    public void setQuantite(int quantite){
         if(quantite < 0) quantite *= -1;
         this.quantite = quantite; 
     }
     public int getQuantite(){ return this.quantite; }
     
     private Unite unite;
-    protected void setUnite(Unite unite){ this.unite = unite; }
+    public void setUnite(Unite unite){ this.unite = unite; }
     public Unite getUnite(){ return this.unite; }
     protected String getUniteToString(){ 
         String uniteStr = this.unite.toString();
@@ -63,5 +63,15 @@ class Ingredient implements IIngredient {
     
     public boolean equals(Ingredient i){
         return this.hashCode() == i.hashCode();
+    }
+    
+    public Object clone(){
+        Ingredient ing = null;
+        try{
+            ing = (Ingredient) super.clone();
+        }catch(CloneNotSupportedException e){
+            e.printStackTrace(System.err);
+        }
+        return ing;
     }
 }

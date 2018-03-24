@@ -9,9 +9,13 @@ package model;
  *
  * @author Clément
  */
-public interface IIngredient { // extends IngredientBis {
+public interface IIngredient extends Cloneable { // extends IngredientBis {
     
-    public String getNom();    
+    public String getNom(); 
+    public void setNom(String nom);
     public int getQuantite();
+    public void setQuantite(int quantite);   
     public Unite getUnite();
+    public void setUnite(Unite unite);
+    public Object clone();
 }

@@ -19,7 +19,6 @@ public enum Unite {
     g ("g", true),
     mL ("mL", true),
     L ("L", true),
-    recette ("", true),
     cuillere ("cuillère"),
     cuillereSoupe ("cuillère à soupe"),
     tranche ("tranche"),

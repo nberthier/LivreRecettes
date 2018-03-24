@@ -7,10 +7,13 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -55,9 +58,13 @@ class Recette implements IRecette{
     /**
      * Liste des ingredients
      */
-    private List<IIngredient> ingredients;
+    private ObservableList<IIngredient> ingredients; //= FXCollections.observableArrayList();
+    public List<IIngredient> getIngredients() { return ingredients.stream().collect(Collectors.toList()); }
+    public void setIngredients(List<IIngredient> liste) { this.ingredients = FXCollections.observableArrayList(liste); }
+    public ObservableList<IIngredient> getIngredientsObservable() { return ingredients; }
+    /*private List<IIngredient> ingredients;
     public List<IIngredient> getIngredients() { return ingredients; }
-    protected void setIngredients(List<IIngredient> ingredients) { this.ingredients = ingredients; }
+    protected void setIngredients(List<IIngredient> ingredients) { this.ingredients = ingredients; }*/
     
     /**
      * Nombre d'ingrédients
@@ -89,12 +96,12 @@ class Recette implements IRecette{
      * Constructeur de Recette
      * @param nom
      * @param recette
-     * @param ingredients 
+     * @param liste 
      */
-    Recette(String nom, String recette, List<IIngredient> ingredients){
+    Recette(String nom, String recette, List<IIngredient> liste){
         setNom(nom);
         setRecette(recette);
-        setIngredients(ingredients);
+        setIngredients(liste);
         setDuree(0);
         setDifficulte(Difficulte.Inconnue);
         setPrix(Budget.Inconnu);
@@ -131,7 +138,19 @@ class Recette implements IRecette{
      * @param ingredient 
      */
     public void ajouterIngredient(IIngredient ingredient){
-        getIngredients().add(ingredient);
+        ingredients.add(ingredient);
+    }
+    
+    public void ajouterIngredients(List<IIngredient> ingredients){
+        setIngredients(ingredients);
+    }
+    
+    public void supprimerIngredient(IIngredient ingredient){
+        ingredients.remove(ingredient);
+    }
+    
+    public void supprimerIngredient(int index){
+        ingredients.remove(index);
     }
     
     public String toString(){

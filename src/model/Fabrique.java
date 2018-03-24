@@ -5,6 +5,10 @@
  */
 package model;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author cb946032
@@ -25,5 +29,16 @@ public class Fabrique {
     
     public static IIngredient creerIngredient(String nom, int quatite, Unite unite){
         return new Ingredient(nom, quatite, unite);
+    }
+    
+    public static IIngredient creerIIngredient(IIngredient ingredient){
+        return (IIngredient)ingredient.clone();
+    }
+    
+    public static List<IIngredient> cloneListeIngredients(List<IIngredient> ingredients){
+        List<IIngredient> copy = new ArrayList<>();
+        for(IIngredient i : ingredients)
+            copy.add(Fabrique.creerIIngredient(i));
+        return copy;
     }
 }
