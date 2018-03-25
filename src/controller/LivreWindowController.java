@@ -57,6 +57,7 @@ public class LivreWindowController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        splitpane.setDividerPositions(0.22);
         anchorPaneFirst.prefWidthProperty().bind(splitpane.getDividers().get(0).positionProperty());
         recettesTable.prefWidthProperty().bind(anchorPaneFirst.prefWidthProperty());
         nomColumn.prefWidthProperty().bind(recettesTable.prefWidthProperty().subtract(5));

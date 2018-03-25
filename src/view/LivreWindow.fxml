@@ -7,16 +7,16 @@
 <?import javafx.scene.text.TextFlow?>
 <?import model.Livre?>
 
-<AnchorPane fx:id="anchorPaneRoot" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LivreWindowController">
+<AnchorPane fx:id="anchorPaneRoot" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LivreWindowController">
     <children>
-        <SplitPane fx:id="splitpane" dividerPositions="0.25" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <SplitPane styleClass="background" fx:id="splitpane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
                 <AnchorPane fx:id="anchorPaneFirst">
                     <children>
-                        <TableView fx:id="recettesTable" layoutX="-12.0" layoutY="49.0" prefHeight="298.0" prefWidth="120.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TableView fx:id="recettesTable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"><!-- prefHeight="300.0" prefWidth="200.0" -->
                             <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/></columnResizePolicy>
                             <columns>
-                                <TableColumn fx:id="nomColumn" prefWidth="145.0" text="Nom" resizable="true"/>
+                                <TableColumn fx:id="nomColumn" text="Nom" resizable="true"/><!-- prefWidth="145.0" -->
                             </columns>
                         </TableView>
                     </children>
@@ -25,33 +25,50 @@
                     <children>
                         <GridPane fx:id="gridPane" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" vgap="5" hgap="10">
                             <columnConstraints>
-                                <ColumnConstraints fx:id="column1" prefWidth="70" hgrow="NEVER"/>
-                                <ColumnConstraints fx:id="column2" prefWidth="140" hgrow="NEVER"/>
-                                <ColumnConstraints fx:id="column3" prefWidth="220" hgrow="NEVER"/>
+                                <ColumnConstraints fx:id="column1" percentWidth="34" hgrow="NEVER"/><!-- minWidth="7" percentWidth="20" prefWidth="70"  -->
+                                <ColumnConstraints fx:id="column2" percentWidth="33" hgrow="NEVER"/><!-- minWidth="14" percentWidth="15" prefWidth="140" -->
+                                <ColumnConstraints fx:id="column3" percentWidth="33" hgrow="NEVER"/><!-- minWidth="22" percentWidth="65" prefWidth="220" -->
                             </columnConstraints>
                             <rowConstraints>
-                                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints prefHeight="150.0" vgrow="ALWAYS" />
+                                <RowConstraints vgrow="NEVER" prefHeight="30.0"/><!-- prefHeight="30.0" -->
+                                <RowConstraints vgrow="NEVER" prefHeight="30.0"/>
+                                <RowConstraints vgrow="NEVER" prefHeight="30.0"/>
+                                <RowConstraints vgrow="NEVER" prefHeight="30.0"/>
+                                <RowConstraints vgrow="ALWAYS" prefHeight="150"/>
+                                <RowConstraints vgrow="NEVER" prefHeight="30.0"/>
+                                <RowConstraints vgrow="ALWAYS" prefHeight="150"/><!-- percentHeight="50" prefHeight="150" -->
                             </rowConstraints>
                             <children>
                                 <Label text="Nom : " />
-                                <Label text="Duree : " GridPane.rowIndex="1" />
-                                <Label text="Difficulte : " GridPane.rowIndex="2" />
-                                <Label text="Budget : " GridPane.rowIndex="3" />
-                                <Label text="Ingredients : " GridPane.columnIndex="2"/>
-                                <ListView fx:id="ingredientsLabel" GridPane.rowIndex="1" GridPane.columnIndex="2" GridPane.rowSpan="4"/>
-                                <Label text="Recette : " GridPane.rowIndex="4" />
-                                <ScrollPane fx:id="recetteScrollPane" GridPane.rowIndex="5" GridPane.columnSpan="3" vbarPolicy="AS_NEEDED" hbarPolicy="NEVER">
-                                    <Label fx:id="recetteLabel" text="label" wrapText="true" GridPane.rowIndex="5" GridPane.columnSpan="2"/>
+                                <Label fx:id="nomLabel" styleClass="label-bright"  text="Label" GridPane.columnIndex="1" GridPane.columnSpan="2"/>
+                                
+                                <Label text="Duree : " GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                                <!--GridPane GridPane.columnIndex="0" GridPane.rowIndex="2" >
+                                    <columnConstraints>
+                                        <ColumnConstraints percentWidth="30" hgrow="NEVER" halignment="RIGHT"/>
+                                        <ColumnConstraints percentWidth="70" hgrow="NEVER"/>
+                                    </columnConstraints>
+                                    <children-->
+                                <HBox  GridPane.columnIndex="0" GridPane.rowIndex="2" >
+                                        <Label fx:id="dureeLabel" styleClass="label-bright" text="Label"/>
+                                        <Label styleClass="label-bright" text=" minutes" GridPane.columnIndex="1"/>
+                                </HBox>
+                                    <!--/children>                                    
+                                </GridPane-->
+                                
+                                <Label text="Difficulte : " GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                                <Label fx:id="difficulteLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                
+                                <Label text="Budget : " GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                                <Label fx:id="budgetLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                
+                                <Label text="Ingredients : " GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                                <ListView fx:id="ingredientsLabel" styleClass="label-bright" GridPane.rowIndex="4" GridPane.columnSpan="3"/>
+                                
+                                <Label text="Recette : " GridPane.rowIndex="5" />
+                                <ScrollPane fx:id="recetteScrollPane" GridPane.rowIndex="6" GridPane.columnSpan="3" vbarPolicy="AS_NEEDED" hbarPolicy="NEVER">
+                                    <Label fx:id="recetteLabel" styleClass="label-text" text="label" wrapText="true"/>
                                 </ScrollPane>
-                                <Label fx:id="nomLabel" text="Label" GridPane.columnIndex="1" />
-                                <Label fx:id="dureeLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                <Label fx:id="difficulteLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                <Label fx:id="budgetLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                             </children>
                         </GridPane>
                         <HBox fx:id="hBox" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
@@ -59,9 +76,9 @@
                                 <Label text="Gestion des recettes"/>
                                 <ButtonBar>
                                     <buttons>
-                                        <Button mnemonicParsing="false" text="Ajouter" onAction="#ajouterRecette"/>
-                                        <Button mnemonicParsing="false" text="Modifier" onAction="#modifierRecette"/>
-                                        <Button mnemonicParsing="false" text="Supprimer" onAction="#supprimerRecette"/>
+                                        <Button mnemonicParsing="false" text="Ajouter" onAction="#ajouterRecette" prefWidth="120"/>
+                                        <Button mnemonicParsing="false" text="Modifier" onAction="#modifierRecette" prefWidth="120"/>
+                                        <Button mnemonicParsing="false" text="Supprimer" onAction="#supprimerRecette" prefWidth="120"/>
                                     </buttons>
                                 </ButtonBar>   
                             </children>                         

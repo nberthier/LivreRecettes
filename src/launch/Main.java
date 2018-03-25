@@ -71,7 +71,7 @@ public class Main extends Application {
             loader.setLocation(Main.class.getResource("/view/RootWindow.fxml"));
             
             rootWindow = (BorderPane) loader.load();
-            Scene scene = new Scene(rootWindow,600,400);
+            Scene scene = new Scene(rootWindow,700,600);
             
             stage.setScene(scene);
             stage.show();
