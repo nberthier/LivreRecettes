@@ -114,8 +114,7 @@ public class Main extends Application {
             controller.setMain(this);
             
             stageEdition.showAndWait();
-            
-            return controller.getRecette();
+            return controller.retour();
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
             return null;

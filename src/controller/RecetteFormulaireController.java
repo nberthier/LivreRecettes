@@ -57,13 +57,18 @@ public class RecetteFormulaireController implements Initializable {
     private HBox nbIngBox;
     
     private Stage stage;
+    
     private IRecette temporaire;
-    public IRecette getRecette(){
-        return temporaire;
-    }
+    
     private boolean valider = false;
     public boolean estValider(){
         return valider;
+    }
+    
+    public IRecette retour(){
+        if(estValider())
+            return temporaire;
+        else return null;
     }
     
     private List<IIngredient> oldList;
@@ -142,7 +147,6 @@ public class RecetteFormulaireController implements Initializable {
     
     @FXML
     public void annuler(){
-        System.out.println(oldList);
         temporaire.ajouterIngredients(oldList);
         stage.close();
     }
