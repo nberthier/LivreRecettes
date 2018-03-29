@@ -1,0 +1,50 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package controller;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import launch.Main;
+
+/**
+ * FXML Controller class
+ *
+ * @author Clément
+ */
+public class RootWindowController implements Initializable {
+
+    Main main;
+    
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+    }
+    
+    public void setMain(Main main) {
+        this.main = main;
+    }    
+    
+    @FXML
+    public void changerMode(){
+        
+    }
+    
+    @FXML
+    public void sauvegarder(){
+        main.getLivre().sauvegarderRecettes();
+    }
+    
+    @FXML
+    public void charger(){
+        main.getLivre().chargerRecettes();
+    }
+    
+}

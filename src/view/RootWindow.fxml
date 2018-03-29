@@ -1,27 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<!--AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RootWindowController"-->
-<BorderPane stylesheets="@stylesheet.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.40">
-   <top>
-      <MenuBar BorderPane.alignment="CENTER" styleClass="background">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-   </top>
+<BorderPane stylesheets="@stylesheet.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.40"  fx:controller="controller.RootWindowController">
+    <stylesheets>
+        <URL value="@stylesheet.css"/>
+    </stylesheets>
+    <top>
+        <MenuBar BorderPane.alignment="CENTER" styleClass="background">
+            <menus>
+                <Menu mnemonicParsing="false" text="Sauvegarde">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Changer mode" onAction="#changerMode">
+                        </MenuItem>
+                        <MenuItem mnemonicParsing="false" text="Sauvegarder" onAction="#sauvegarder">
+                            <accelerator>
+                                <!--KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP"/-->
+                            </accelerator>
+                        </MenuItem>
+                        <MenuItem mnemonicParsing="false" text="Charger" onAction="#charger"/>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Delete" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
 </BorderPane>

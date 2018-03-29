@@ -8,8 +8,10 @@ package launch;
 
 import controller.LivreWindowController;
 import controller.RecetteFormulaireController;
+import controller.RootWindowController;
 import data.XMLDataManager;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
@@ -48,6 +50,7 @@ public class Main extends Application {
     
     private ObservableList<IRecette> recettesList;
     public ObservableList<IRecette> getRecettesList(){ return recettesList; }
+    public void setRecetteList(List<IRecette> recettes){ recettesList = FXCollections.observableArrayList(recettes); }
     
     public Main(){
         setLivre(new Livre(new XMLDataManager()));
@@ -69,11 +72,12 @@ public class Main extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("/view/RootWindow.fxml"));
-            
             rootWindow = (BorderPane) loader.load();
-            Scene scene = new Scene(rootWindow,700,600);
             
-            stage.setScene(scene);
+            RootWindowController controller = loader.getController();
+            controller.setMain(this);
+            
+            stage.setScene(new Scene(rootWindow,700,600));
             stage.show();
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);

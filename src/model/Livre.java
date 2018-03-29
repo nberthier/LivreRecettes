@@ -50,11 +50,14 @@ public class Livre {
     }
     
     public void ajouterRecette(IRecette recette){
-        getRecettesObservable().add(recette);
+        if(!getRecettesObservable().contains(recette))
+            getRecettesObservable().add(recette);
     }
     
     public void ajouterRecettes(List<IRecette> recettes){
-        setRecettes(recettes);
+        //setRecettes(recettes);
+        for(IRecette recette : recettes)
+            ajouterRecette(recette);
     }
     
     public void supprimerRecette(IRecette recette){
@@ -73,7 +76,8 @@ public class Livre {
     
     public boolean chargerRecettes(){
         if(dataManager == null) return false;
-        setRecettes(getDataManager().chargementRecettes());        
+        getRecettesObservable().clear();
+        ajouterRecettes(getDataManager().chargementRecettes());
         return true;
     }
     
