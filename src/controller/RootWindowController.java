@@ -34,7 +34,7 @@ public class RootWindowController implements Initializable {
     
     @FXML
     public void changerMode(){
-        
+        /** créer nouvelle fenetre avec combobox **/
     }
     
     @FXML
