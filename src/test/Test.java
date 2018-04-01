@@ -10,19 +10,32 @@ import java.util.Scanner;
 import model.*;
 
 /**
- *
- * @author cb946032
+ * Classe de test en console,
+ * utile avant la création de la partie graphique
+ * 
+ * @author Clément
  */
 public class Test {
     
+    /**
+     * Attributs de classe permettant le bon fonctionnement
+     */
     private static String typeSauvegarde = "non sélectionné";
     private static Livre l = new Livre();
     
-    /*public static void main(String argc[]){
+    /**
+     * Fonction main de test
+     * @param argc les arguments passés en argument de la ligne de commande
+     */
+    public static void main(String argc[]){
         System.out.println("Menu principale : ");
         actions();
-    }*/
+    }
     
+    /**
+     * Fonction affichant le menu avec les différents choix d'action
+     * @return int la valeur du choix réalisé
+     */
     public static int menu(){
         System.out.println();
         System.out.println("1- Afficher les recettes");
@@ -36,12 +49,20 @@ public class Test {
         return choix();
     }
     
+    /**
+     * Demande le choix à réaliser,
+     * il faut entrer un entier
+     * @return int la valeur du choix
+     */
     public static int choix(){
         Scanner sc = new Scanner(System.in);
         System.out.print("Taper le numéro de l'action à effectuer :\t");
         return sc.nextInt();
     }
     
+    /**
+     * Gère les actions suivant celle choisie
+     */
     public static void actions(){
         int choix;
         while((choix = menu()) > 0){
@@ -71,6 +92,9 @@ public class Test {
         }
     }
     
+    /**
+     * Menu et choix du mode de persistance
+     */
     public static void typeSauvegarde(){
         boolean ok = false;
         Scanner sc = new Scanner(System.in);

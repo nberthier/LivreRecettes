@@ -21,7 +21,7 @@ import model.IIngredient;
 import model.Unite;
 
 /**
- *
+ * Cellule graphique de liste, d'un formulaire d'ingrédient
  * @author Clément
  */
 public class IngredientFormCell extends ListCell<IIngredient>{

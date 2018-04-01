@@ -11,8 +11,8 @@ import java.util.Map.Entry;
 import java.util.Objects;
 
 /**
- *
- * @author cb946032
+ * Enumération pour l'unité de la quantité d'un ingrédient
+ * @author Clément
  */
 public enum Unite {
     unite ("", true),
@@ -29,19 +29,35 @@ public enum Unite {
 
     private String valeur;
     private boolean measureUnit;
+    /**
+     * Accesseur si l'unite est une unité de mesure conventionnel
+     * @return boolean si ça l'est ou non
+     */
     public boolean isMeasureUnit(){
         return measureUnit;
     }
     
+    /**
+     * Constructeur d'une constante unité
+     * @param valeur le nom de l'unité
+     */
     Unite(String valeur) {
         this(valeur, false);
     }
     
+    /**
+     * Constructeur d'une unite
+     * @param valeur le nom
+     * @param mesure si c'est une unité de mesure ou non
+     */
     Unite(String valeur, boolean mesure){
         this.valeur = valeur;
         this.measureUnit = mesure;
     }
     
+    /**
+     * Permet d'assigner un entier à chaque constante de l'unité
+     */
     private static Map<Integer, Unite> map = new HashMap<Integer, Unite>();
     static {
         int i = 0;
@@ -51,10 +67,18 @@ public enum Unite {
         }
     }
     
+    /**
+     * Redéfinition de la fonction toString()
+     * @return String le nom
+     */
     public String toString(){
         return valeur;
     }
     
+    /**
+     * Recupère l'entier associé à une des constantes de l'unité
+     * @return l'entier associé à une constante
+     */
     public int toInt(){
         for(Entry<Integer, Unite> entry : map.entrySet())
             if(this.equals(entry.getValue()))
@@ -63,6 +87,11 @@ public enum Unite {
         return 0;
     }
     
+    /**
+     * Recupère l'unité associé à l'entié
+     * @param i l'entier
+     * @return la constante de l'énumération Unite
+     */
     public static Unite fromInt(int i){
         return map.get(i);
     }

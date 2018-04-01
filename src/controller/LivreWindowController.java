@@ -71,7 +71,7 @@ public class LivreWindowController implements Initializable {
     
     /**
      * Est appelé par l'application pour donné une référence vers lui-même
-     * @param mainApp
+     * @param main la classe mère du GUI
      */
     public void setMain(Main main) {
         this.main = main;

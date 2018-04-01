@@ -10,12 +10,15 @@ import java.util.List;
 import model.*;
 
 /**
- *
+ * DataManager pour de la persistance en dur
  * @author Clément
  */
 public class StubDataManager implements DataManager{
     private List<IRecette> recettes = new ArrayList<>();
     
+    /**
+     * Constructeur de la classe remplis 
+     */
     public StubDataManager(){
         IRecette r1 = Fabrique.creerRecette("Crêpe", "Dans un saladier, versez la farine et les oeufs. Puis progressivement ajoutez le lait tout en mélangeant avec votre fouet. Ajoutez le sucre vanillé, la pincée de sel. Versez une demi-louche de votre pâte à crêpe et faites cuire 1 à 2 minutes par face.", 30, Difficulte.Facile, Budget.Reduit);
         r1.ajouterIngredient(Fabrique.creerIngredient("farine", 250, Unite.g));

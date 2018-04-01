@@ -61,16 +61,27 @@ public class RecetteFormulaireController implements Initializable {
     private IRecette temporaire;
     
     private boolean valider = false;
+    /**
+     * formulaire de recette a été valider ou annuler
+     * @return boolean si oui ou non
+     */
     public boolean estValider(){
         return valider;
     }
     
+    /**
+     * permet de récuperer la recette
+     * @return la recette modifier ou non
+     */
     public IRecette retour(){
         if(estValider())
             return temporaire;
         else return null;
     }
     
+    /**
+     * Ancienne liste des ingrédients
+     */
     private List<IIngredient> oldList;
     
     private String realOldValue = "0";
@@ -84,6 +95,7 @@ public class RecetteFormulaireController implements Initializable {
         nbIngBox.prefWidthProperty().bind(column1.prefWidthProperty());
         nbIngField.setText("0");
         nbIngField.prefWidthProperty().bind(nbIngBox.prefWidthProperty().multiply(0.25));
+        // Permet d'ajouter ou supprimer un formulaire d'ingrédient en fonction du nombre d'ingrédient désiré
         nbIngField.textProperty().addListener((observable, oldValue, newValue) -> {
             try{
                 int newV = Integer.parseInt(newValue), oldV = temporaire.nbIngredients();
@@ -109,14 +121,26 @@ public class RecetteFormulaireController implements Initializable {
         nbIngField.setText("0");
     }    
     
+    /**
+     * Associe la classe mère du GUI
+     * @param main l'instance de la classe mère
+     */
     public void setMain(Main main) {
         this.main = main;
     }
     
+    /**
+     * Associe le stage
+     * @param stage le stage de la classe mère
+     */
     public void setStage(Stage stage){
         this.stage = stage;
     }
     
+    /**
+     * Rempli le formulaire avec les valeurs de la recette en question
+     * @param recette la recette dont les valeurs remplissent le formulaire
+     */
     public void setRecette(IRecette recette){
         this.temporaire = recette;
         this.oldList = Fabrique.cloneListeIngredients(recette.getIngredients());
@@ -137,6 +161,9 @@ public class RecetteFormulaireController implements Initializable {
         });
     }
     
+    /**
+     * FXML action en cas d'appuis sur le bouton valider
+     */
     @FXML
     public void valider(){
         temporaire = Fabrique.creerRecette(nomField.getText(), recetteField.getText(), Integer.parseInt(dureeField.getText()), Difficulte.fromInt(difficulteField.getSelectionModel().getSelectedIndex()), Budget.fromInt(budgetField.getSelectionModel().getSelectedIndex()));
@@ -145,6 +172,9 @@ public class RecetteFormulaireController implements Initializable {
         stage.close();
     }
     
+    /**
+     * FXML action en cas d'appuis sur le bouton annuler
+     */
     @FXML
     public void annuler(){
         temporaire.ajouterIngredients(oldList);

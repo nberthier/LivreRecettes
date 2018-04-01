@@ -19,16 +19,17 @@ import java.util.List;
 public class ClassesManager {
 
     /**
+     * Méthode pour récupérer les classes d'un paquet (ou package)
      * 
      * @param nomPaquet le nom du paquet (ou package) dans lequel chercher les classes
      * @return La liste des classes trouvées
-     * @throws ClassNotFoundException
-     * @throws IOException 
+     * @throws ClassNotFoundException si cette exception est levée dans une méthode utilisée
+     * @throws IOException si cette exception est levée dans une méthode utilisée
      */
-    public static List<Class> getClasses(String nomRepertoire) throws ClassNotFoundException, IOException {
+    public static List<Class> getClasses(String nomPaquet) throws ClassNotFoundException, IOException {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         assert classLoader != null;
-        String path = nomRepertoire.replace('.', '/');
+        String path = nomPaquet.replace('.', '/');
         Enumeration resources = classLoader.getResources(path);
         List<File> dirs = new ArrayList();
         while (resources.hasMoreElements()) {
@@ -37,20 +38,20 @@ public class ClassesManager {
         }
         ArrayList<Class> classes = new ArrayList();
         for (File directory : dirs) {
-            classes.addAll(findClasses(directory, nomRepertoire));
+            classes.addAll(findClasses(directory, nomPaquet));
         }
         return classes;
     }
 
     /**
-     * Recursive method used to find all classes in a given directory and subdirs.
-     *
+     * Méthode récursive utilisée pour trouver toutes les classes dans un répertoire et ses sous-répertoires.
+     * 
      * @param repertoire le répertoire de base
-     * @param nomRepertoire le nom du paquet (ou package) pour les classes trouver dans le répertoire
-     * @return Les classes
-     * @throws ClassNotFoundException
+     * @param nomPaquet le nom du paquet (ou package) pour les classes trouvées dans le répertoire
+     * @return Les classes trouvées dans le répertoire
+     * @throws ClassNotFoundException si une classe manipulée n'existe pas
      */
-    public static List findClasses(File repertoire, String nomRepertoire) throws ClassNotFoundException {
+    public static List findClasses(File repertoire, String nomPaquet) throws ClassNotFoundException {
         List classes = new ArrayList();
         if (!repertoire.exists()) {
             return classes;
@@ -59,9 +60,9 @@ public class ClassesManager {
         for (File file : files) {
             if (file.isDirectory()) {
                 assert !file.getName().contains(".");
-                classes.addAll(findClasses(file, nomRepertoire + "." + file.getName()));
+                classes.addAll(findClasses(file, nomPaquet + "." + file.getName()));
             } else if (file.getName().endsWith(".class")) {
-                classes.add(Class.forName(nomRepertoire + '.' + file.getName().substring(0, file.getName().length() - 6)));
+                classes.add(Class.forName(nomPaquet + '.' + file.getName().substring(0, file.getName().length() - 6)));
             }
         }
         return classes;

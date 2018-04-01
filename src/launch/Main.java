@@ -34,44 +34,60 @@ import javafx.stage.Stage;
 import model.IRecette;
 import model.Livre;
 
-/** 
- *
- * @author clboissard
+/**
+ * La classe main de l'application lançant l'application graphique
+ * @author Clément
  */
 public class Main extends Application {
     
     private Stage stage;
+    /**
+     * Le conteneur JavaFX de plus haut level
+     * @return Stage
+     */
     public Stage getStage(){
         return stage;
     }
     private BorderPane rootWindow;
     
-    //public Livre livre
     private final ObjectProperty<Livre> livre = new SimpleObjectProperty<Livre>();
     public Livre getLivre(){ return livre.get(); }
     public void setLivre(Livre l){ livre.set(l); }
     public ObjectProperty<Livre> livreProperty() { return livre; }
     
+    /**
+     * L'observable liste des recettes
+     */
     private ObservableList<IRecette> recettesList;
     public ObservableList<IRecette> getRecettesList(){ return recettesList; }
     public void setRecetteList(List<IRecette> recettes){ recettesList = FXCollections.observableArrayList(recettes); }
     
+    /**
+     * Constructeur de la classe Main qui créer un livre et charge les recettes dans ce dernier
+     */
     public Main(){
         setLivre(new Livre());
         getLivre().chargerRecettes();
         recettesList = getLivre().getRecettesObservable();
     }
     
+    /**
+     * Méthode de lancement de l'application graphique appelée par la fonction launch
+     * @param stage le conteneur JavaFX de plus haut level
+     * @throws Exception si une exception quelconque est levée
+     */
     @Override
     public void start(Stage stage) throws Exception {
         this.stage = stage;
-        stage.getIcons().add(new Image("http://sr.photos2.fotosearch.com/bthumb/CSP/CSP389/k19789040.jpg"));
-        stage.setTitle("Livre de recettes");
         
         initRootWindow();
         lancerLivreWindow();
     }
     
+    /**
+     * Initialise le contenu de notre fenêtre graphique,
+     * tel que ses dimensions, son nom, son icon et la barre de menu
+     */
     public void initRootWindow(){
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -81,6 +97,8 @@ public class Main extends Application {
             RootWindowController controller = loader.getController();
             controller.setMain(this);
             
+            stage.getIcons().add(new Image("http://sr.photos2.fotosearch.com/bthumb/CSP/CSP389/k19789040.jpg"));
+            stage.setTitle("Livre de recettes");
             stage.setScene(new Scene(rootWindow,700,600));
             stage.show();
         } catch (IOException ex) {
@@ -88,6 +106,9 @@ public class Main extends Application {
         }
     }
     
+    /**
+     * Charge le contenu graphique avec la liste
+     */
     public void lancerLivreWindow(){
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -102,6 +123,11 @@ public class Main extends Application {
         }
     }
     
+    /**
+     * Lance le formulaire permettant de modifier ou d'ajouter une recette
+     * @param recette la recette en question
+     * @return IRecette la nouvelle recette
+     */
     public IRecette lancerRecetteFormulaire(IRecette recette){
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -130,12 +156,19 @@ public class Main extends Application {
     }
 
     /**
-     * @param args the command line arguments
+     * Méthode principale lançant l'interface graphique
+     * @param args les arguments de la ligne de commande
      */
     public static void main(String[] args) {
         launch(args);
     }
     
+    /**
+     * Affiche un message sous la forme d'une boîte de dialogue
+     * @param titre de la boîte de dialogue
+     * @param sous_titre de la boîte de dialogue
+     * @param explication contenu de la boîte de dialogue
+     */
     public void popup(String titre, String sous_titre, String explication){
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.initOwner(this.getStage());
@@ -145,13 +178,20 @@ public class Main extends Application {
         alert.showAndWait();
     }
     
-    public boolean dialogSauvegarde(String titre, String sous_titre, String explication){
+    /**
+     * Affiche une boîte de dialogue demandant confirmation d'une opération
+     * @param titre l'opération
+     * @param indication l'indication
+     * @param explication le texte de vérification
+     * @return le choix 
+     */
+    public boolean dialogSauvegarde(String titre, String indication, String explication){
         ButtonType oui = new ButtonType("Valider", ButtonBar.ButtonData.OK_DONE);
         ButtonType non = new ButtonType("Annuler", ButtonBar.ButtonData.CANCEL_CLOSE);
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.initOwner(this.getStage());
         alert.setTitle(titre);
-        alert.setHeaderText(sous_titre);
+        alert.setHeaderText(indication);
         alert.setContentText(explication);
         alert.getButtonTypes().setAll(oui,non);
         Optional<ButtonType> result = alert.showAndWait();

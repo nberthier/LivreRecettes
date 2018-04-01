@@ -6,8 +6,8 @@
 package model;
 
 /**
- *
- * @author cb946032
+ * Enumération correspondant à la difficulté de réalisation d'une recette
+ * @author Clément
  */
 public enum Difficulte {
     Inconnue,
@@ -16,6 +16,10 @@ public enum Difficulte {
     Difficile,
     Expert;
     
+    /**
+     * Convertit une constante de l'énumération en entier,
+     * @return int la valeur équivalente
+     */
     public int toInt(){
         int retour = 0;
         switch(this){
@@ -38,6 +42,11 @@ public enum Difficulte {
         return retour;
     }
     
+     /**
+     * Permet de récupérer la constante depuis un entier
+     * @param i l'entier
+     * @return Difficulte la constante équivalente
+     */
     public static Difficulte fromInt(int i){
         Difficulte b = Difficulte.Inconnue;
         switch(i){

@@ -18,7 +18,7 @@ import model.*;
 
 /**
  * FXML Controller class
- *
+ * 
  * @author Clément
  */
 public class IngredientFormCellController implements Initializable {
@@ -50,6 +50,10 @@ public class IngredientFormCellController implements Initializable {
         uniteField.setValue(Unite.unite);
     }    
     
+    /**
+     * Remplit le formulaire d'un ingrédient avec ses valeurs
+     * @param ingredient l'ingrédient à remplir
+     */
     public void setCurrentIngredient(IIngredient ingredient){
         ingredientCourant = ingredient;
         nomIngField.setText(ingredient.getNom());
@@ -66,6 +70,10 @@ public class IngredientFormCellController implements Initializable {
         });
     }
     
+    /**
+     * Accesseur de l'ingrédient courant du formulaire
+     * @return l'ingredient courant
+     */
     public IIngredient getIngredient(){
         return ingredientCourant;
     }

@@ -16,8 +16,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
- *
- * @author cb946032
+ * Classe représentant une recette
+ * @author Clément
  */
 class Recette implements IRecette{
     
@@ -68,7 +68,7 @@ class Recette implements IRecette{
     
     /**
      * Nombre d'ingrédients
-     * @return 
+     * @return entier le nombre d'ingrédient
      */
     public int nbIngredients(){ return this.getIngredients().size(); }
     private final StringProperty nbIngredientsP = new SimpleStringProperty();
@@ -94,9 +94,9 @@ class Recette implements IRecette{
     
     /**
      * Constructeur de Recette
-     * @param nom
-     * @param recette
-     * @param liste 
+     * @param nom le nom
+     * @param recette les indications pour la réalisation
+     * @param liste la liste des ingrédients
      */
     Recette(String nom, String recette, List<IIngredient> liste){
         setNom(nom);
@@ -107,17 +107,22 @@ class Recette implements IRecette{
         setPrix(Budget.Inconnu);
     }
     
+    /**
+     * Constructeur prenant 2 paramètres principaux
+     * @param nom le nom
+     * @param recette la recette
+     */
     Recette(String nom, String recette){
         this(nom, recette, new ArrayList<IIngredient>());
     }
     
     /**
      * Constructeur de Recette plus complet
-     * @param nom
-     * @param recette
-     * @param minutes
-     * @param difficulte
-     * @param prix 
+     * @param nom le nom   
+     * @param recette la recette
+     * @param minutes la duree
+     * @param difficulte la difficulte
+     * @param prix le prix
      */
     Recette(String nom, String recette, int minutes, Difficulte difficulte, Budget prix){
         this(nom, recette);
@@ -134,25 +139,41 @@ class Recette implements IRecette{
     }
     
     /**
-     * Fonction permettant d'ajouter un ingrédient au livre
-     * @param ingredient 
+     * Ajoute un ingrédient au livre
+     * @param ingredient l'ingrédient
      */
     public void ajouterIngredient(IIngredient ingredient){
         ingredients.add(ingredient);
     }
     
+    /**
+     * Ajoute plusieurs ingrédients au livre
+     * @param ingredients la liste d'ingrédient
+     */
     public void ajouterIngredients(List<IIngredient> ingredients){
         setIngredients(ingredients);
     }
     
+    /**
+     * Supprime un ingredient
+     * @param ingredient l'ingrédient à supprimer
+     */
     public void supprimerIngredient(IIngredient ingredient){
         ingredients.remove(ingredient);
     }
     
+    /**
+     * Supprime un ingrédient
+     * @param index la position de l'ingrédient dans la liste
+     */
     public void supprimerIngredient(int index){
         ingredients.remove(index);
     }
     
+    /**
+     * Redéfinition de la fonction toString
+     * @return String texte d'une recette
+     */
     public String toString(){
         String retour = getNom();/*+ " : \n";
         for(int i = 0; i < getNom().length(); i++)
@@ -168,14 +189,18 @@ class Recette implements IRecette{
         return retour;
     }
     
+    /**
+     * Redéfinition de la fonction hashCode
+     * @return un hash de la recette
+     */
     public int hashCode(){
         return getNom().toLowerCase().hashCode();
     }
  
     /**
-     * 
-     * @param Object o
-     * @return 
+     * Redéfinition de la fonction equals
+     * @param o l'objet avec lequel comparer
+     * @return boolean si égal ou non
      */
     public boolean equals(Object o){
         if(o == null) return false;
@@ -184,6 +209,11 @@ class Recette implements IRecette{
         return this.equals((Recette)o);
     }
     
+    /**
+     * Test si égal à une recette
+     * @param r la recette avec laquelle tester
+     * @return boolean si égal ou non
+     */
     public boolean equals(Recette r){
         return this.hashCode() == r.hashCode();
     }

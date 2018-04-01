@@ -95,7 +95,7 @@ public class RootWindowController implements Initializable {
     
     @FXML
     public void charger(){
-        if(main.dialogSauvegarde("Chargement","Les modifications efectuées sur les recettes, non sauvegarder, vont être écrasées !","Ëtes-vous sûr de vouloir valider le chargement ?"))
+        if(main.dialogSauvegarde("Chargement","Les modifications effectuées sur les recettes, non sauvegarder, vont être écrasées !","Ëtes-vous sûr de vouloir valider le chargement ?"))
             if(!main.getLivre().chargerRecettes())
                 main.popup("Erreur opération","Aucun mode de persistance selectionné","Veuillez selectionner un mode de persistance dans l'onglet 'Sauvegarde' puis 'Changer mode'");
     }

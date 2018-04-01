@@ -6,8 +6,8 @@
 package model;
 
 /**
- *
- * @author cb946032
+ * Enumération correspondant au budget d'une recette
+ * @author Clément
  */
 public enum Budget {
     Inconnu,
@@ -15,6 +15,10 @@ public enum Budget {
     Moyen,
     Eleve;
     
+    /**
+     * Convertit une constante de l'énumération en entier,
+     * @return int la valeur équivalente
+     */
     public int toInt(){
         int retour = 0;
         switch(this){
@@ -34,6 +38,11 @@ public enum Budget {
         return retour;
     }
     
+    /**
+     * Permet de récupérer la constante depuis un entier
+     * @param i l'entier
+     * @return Budget la constante équivalente
+     */
     public static Budget fromInt(int i){
         Budget b = Budget.Inconnu;
         switch(i){
