@@ -30,7 +30,7 @@ public class Livre {
     
     private DataManager dataManager;
     public void setDataManager(DataManager dataManager) { this.dataManager = dataManager; }
-    private DataManager getDataManager() { return dataManager; }
+    public DataManager getDataManager() { return dataManager; }
     
     public Livre(){
         setRecettes(new ArrayList<IRecette>());
