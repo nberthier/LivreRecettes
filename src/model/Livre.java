@@ -12,8 +12,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
- *
- * @author cb946032
+ * Classe Livre permettant la gestion des recettes.
+ * @author Clément
  */
 public class Livre {
     
