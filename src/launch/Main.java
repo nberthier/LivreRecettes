@@ -12,6 +12,7 @@ import controller.RootWindowController;
 import data.XMLDataManager;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
@@ -22,6 +23,9 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -53,7 +57,7 @@ public class Main extends Application {
     public void setRecetteList(List<IRecette> recettes){ recettesList = FXCollections.observableArrayList(recettes); }
     
     public Main(){
-        setLivre(new Livre(new XMLDataManager()));
+        setLivre(new Livre());
         getLivre().chargerRecettes();
         recettesList = getLivre().getRecettesObservable();
     }
@@ -130,5 +134,27 @@ public class Main extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+    }
+    
+    public void popup(String titre, String sous_titre, String explication){
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.initOwner(this.getStage());
+        alert.setTitle(titre);
+        alert.setHeaderText(sous_titre);
+        alert.setContentText(explication);
+        alert.showAndWait();
+    }
+    
+    public boolean dialogSauvegarde(String titre, String sous_titre, String explication){
+        ButtonType oui = new ButtonType("Valider", ButtonBar.ButtonData.OK_DONE);
+        ButtonType non = new ButtonType("Annuler", ButtonBar.ButtonData.CANCEL_CLOSE);
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.initOwner(this.getStage());
+        alert.setTitle(titre);
+        alert.setHeaderText(sous_titre);
+        alert.setContentText(explication);
+        alert.getButtonTypes().setAll(oui,non);
+        Optional<ButtonType> result = alert.showAndWait();
+        return result.isPresent() && result.get() == oui;
     }
 }

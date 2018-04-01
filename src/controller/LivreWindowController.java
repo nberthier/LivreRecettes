@@ -101,8 +101,10 @@ public class LivreWindowController implements Initializable {
         int index = recettesTable.getSelectionModel().getSelectedIndex();
         IRecette r = recettesTable.getSelectionModel().getSelectedItem();
         if(index >= 0){
-            recettesTable.getItems().remove(index);
-            main.getLivre().supprimerRecette(r);
+            if(main.dialogSauvegarde("Suppression","Suppression la recette !","Ëtes-vous sûr de vouloir valider la suppression ?")){
+                recettesTable.getItems().remove(index);
+                main.getLivre().supprimerRecette(r);
+            }
         } else{
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(main.getStage());

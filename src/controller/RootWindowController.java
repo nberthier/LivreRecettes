@@ -8,12 +8,16 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Menu;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.Toggle;
@@ -68,7 +72,7 @@ public class RootWindowController implements Initializable {
                 RadioMenuItem item = new RadioMenuItem(classe.getSimpleName().replace("DataManager", ""));
                 item.setUserData(classe.getName());
                 item.setToggleGroup(dataManagerGroup);
-                if(classe.equals(main.getLivre().getDataManager().getClass()))
+                if(main.getLivre().getDataManager() != null && classe.equals(main.getLivre().getDataManager().getClass()))
                     item.setSelected(true);
                 dataManagerMenu.getItems().add(item);
             }
@@ -84,12 +88,16 @@ public class RootWindowController implements Initializable {
     
     @FXML
     public void sauvegarder(){
-        main.getLivre().sauvegarderRecettes();
+        if(main.dialogSauvegarde("Sauvegarde","La précédentes sauvegarde va être écraser !","Ëtes-vous sûr de vouloir valider la sauvegarde ?"))
+            if(!main.getLivre().sauvegarderRecettes())
+                main.popup("Erreur opération","Aucun mode de persistance selectionné","Veuillez selectionner un mode de persistance dans l'onglet 'Sauvegarde' puis 'Changer mode'");
     }
     
     @FXML
     public void charger(){
-        main.getLivre().chargerRecettes();
+        if(main.dialogSauvegarde("Chargement","Les modifications efectuées sur les recettes, non sauvegarder, vont être écrasées !","Ëtes-vous sûr de vouloir valider le chargement ?"))
+            if(!main.getLivre().chargerRecettes())
+                main.popup("Erreur opération","Aucun mode de persistance selectionné","Veuillez selectionner un mode de persistance dans l'onglet 'Sauvegarde' puis 'Changer mode'");
     }
     
 }
