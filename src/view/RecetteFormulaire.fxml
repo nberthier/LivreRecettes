@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane styleClass="background" id="AnchorPane" prefHeight="560.0" prefWidth="400.0" stylesheets="@stylesheet.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controller.RecetteFormulaireController">
+<AnchorPane styleClass="background" id="AnchorPane" prefHeight="610.0" prefWidth="400.0" stylesheets="@stylesheet.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controller.RecetteFormulaireController">
     <children>
         <GridPane fx:id="gridPane" hgap="10" vgap="5" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
             <columnConstraints>
@@ -46,13 +46,13 @@
                         <TextField fx:id="nbIngField"/>
                     </children>
                 </HBox>
-                <TextArea fx:id="recetteField" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="7" />
+                <TextArea fx:id="recetteField" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="7"/>
             </children>
         </GridPane>
         <ButtonBar AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
             <buttons>
-                <Button mnemonicParsing="false" onAction="#valider" text="Valider" />
-                <Button mnemonicParsing="false" onAction="#annuler" text="Annuler" />
+                <Button mnemonicParsing="false" onAction="#valider" text="Valider" prefWidth="100"/>
+                <Button mnemonicParsing="false" onAction="#annuler" text="Annuler" prefWidth="100"/>
             </buttons>
         </ButtonBar>
     </children>
