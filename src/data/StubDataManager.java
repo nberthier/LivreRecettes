@@ -10,10 +10,13 @@ import java.util.List;
 import model.*;
 
 /**
- * DataManager pour de la persistance en dur
+ * Persistance en "dur" dans le code
  * @author Clément
  */
 public class StubDataManager implements DataManager{
+    /**
+     * Une liste de recettes
+     */
     private List<IRecette> recettes = new ArrayList<>();
     
     /**
@@ -69,11 +72,19 @@ public class StubDataManager implements DataManager{
         recettes.add(r4);
     }
 
+    /**
+     * Définition de la fonction de chargement
+     * @return la liste des recettes
+     */
     @Override
     public List<IRecette> chargementRecettes() {
         return recettes;
     }
 
+    /**
+     * La fonction de sauvegarde des recettes, throws UnsupportedOperationException
+     * @param recettes la liste des recettes
+     */
     @Override
     public void sauvegardeRecettes(List<IRecette> recettes) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

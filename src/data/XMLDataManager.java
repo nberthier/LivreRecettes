@@ -29,17 +29,36 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
- *
+ * Persistance des données en XML
  * @author Clément
  */
 public class XMLDataManager implements DataManager {
     
+    /**
+     * Le fichier de sauvegarde
+     */
     private String file = "src/data/sauvegarde.xml";
+    /**
+     * La liste des recettes à récupérer
+     */
     private List<IRecette> recettes = new ArrayList<>();
+    /**
+     * Le document pour gérer le document XML
+     */
     private Document document;
-    DocumentBuilderFactory dbFactory;
+    
+    /**
+     * L'objet pour obtenir le DOM du fichier XML
+     */
     DocumentBuilder docBuilder;
+    /**
+     * L'objet pour construire le DOM XML
+     */
+    DocumentBuilderFactory dbFactory;
  
+    /**
+     * Constructeur par défaut
+     */
     public XMLDataManager(){
         try {
             dbFactory = DocumentBuilderFactory.newInstance();
@@ -49,18 +68,23 @@ public class XMLDataManager implements DataManager {
         }
     }
     
+    /**
+     * Constructeur utilisant un fichier XML choisi
+     * @param file le nom du fichier
+     */
     public XMLDataManager(String file){
         this();
         this.file = file;
     }
     
+    /**
+     * Charge les recette depuis le fichier
+     * @return la liste des recettes
+     */
     @Override
     public List<IRecette> chargementRecettes() {
         try {
             document = docBuilder.parse(new File(file));
-            /*System.out.println(document.getXmlVersion());
-            System.out.println(document.getXmlEncoding());
-            System.out.println(document.getXmlStandalone());*/
             
             Element noeudRecettes = document.getDocumentElement();
             NodeList noeudsRecette = noeudRecettes.getChildNodes();
@@ -99,6 +123,10 @@ public class XMLDataManager implements DataManager {
         return recettes;
     }
 
+    /**
+     * Sauvegarde les recettes en XML dans le fichier
+     * @param recettes les recettes à sauvegarder
+     */
     @Override
     public void sauvegardeRecettes(List<IRecette> recettes) {
         try {
@@ -107,10 +135,11 @@ public class XMLDataManager implements DataManager {
             Element racine = document.createElement("recettes");
             document.appendChild(racine);
 
+            // pour chaque recette ajoute l'element XML à la racine
             for(IRecette recette : recettes)
                 racine.appendChild(this.recetteToXML(recette));
 
-            // write the content into xml file
+            // écrit le contenu dans le fichier
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(document);
@@ -125,6 +154,11 @@ public class XMLDataManager implements DataManager {
         }
     }
     
+    /**
+     * Créer le DOM XML d'un ingrédient
+     * @param produit l'ingrédient à convertir
+     * @return représente l'ingrédient en XML
+     */
     protected Element ingredientToXML(IIngredient produit){
         Element ingredient = document.createElement("ingredient");
         
@@ -146,6 +180,11 @@ public class XMLDataManager implements DataManager {
         return ingredient;
     }
     
+    /**
+     * Créer le DOM XML d'une recette
+     * @param recette la recette à convertir
+     * @return représente la recette en XML
+     */
     protected Element recetteToXML(IRecette recette){
         // l'élément recette
         Element element = document.createElement("recette");

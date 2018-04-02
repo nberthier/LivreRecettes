@@ -11,6 +11,9 @@ package model;
  */
 class Ingredient implements IIngredient {
     
+    /**
+     * Le nom de l'ingrédient
+     */
     private String nom;
     /**
      * Accesseur du nom
@@ -23,6 +26,9 @@ class Ingredient implements IIngredient {
      */
     public void setNom(String nom){ this.nom = nom; }
     
+    /**
+     * La quantite de l'ingrédient
+     */
     private int quantite;
     /**
      * Mutateur de la quantite
@@ -38,6 +44,9 @@ class Ingredient implements IIngredient {
      */
     public int getQuantite(){ return this.quantite; }
     
+    /**
+     * L'unité de la quantité de la recette
+     */
     private Unite unite;
     /**
      * Mutateur de l'unite de la quantite

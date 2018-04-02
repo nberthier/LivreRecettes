@@ -27,10 +27,10 @@ public class Test {
      * Fonction main de test
      * @param argc les arguments passés en argument de la ligne de commande
      */
-    public static void main(String argc[]){
+    /*public static void main(String argc[]){
         System.out.println("Menu principale : ");
         actions();
-    }
+    }*/
     
     /**
      * Fonction affichant le menu avec les différents choix d'action
