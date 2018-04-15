@@ -1,4 +1,4 @@
-sLivre de Recettes
+Livre de Recettes
 =================
 
 Explication du projet :
@@ -32,4 +32,4 @@ Mon code est donc réparti suivant plusieurs répertoires :
 Digramme de classes du modèle :
 -------------------------------
 
-![Diagramme de classe du Modèle](https://raw.githubusercontent.com/BOISSARD/LivreRecettes/master/UMLDiagram/exports/Class_diagram-Model-004.png)
+![Diagramme de classe du Modèle](https://raw.githubusercontent.com/BOISSARD/LivreRecettes/master/UMLDiagram/exports/Class_diagram-Model-001.png)
