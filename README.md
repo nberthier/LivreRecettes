@@ -1,4 +1,4 @@
-Livre de Recettes
+sLivre de Recettes
 =================
 
 Explication du projet :
@@ -23,10 +23,13 @@ Explication des packages :
 --------------------------
 
 Mon code est donc réparti suivant plusieurs répertoires :
-- model : le package modèle avec les classes de bases livre, recette et ingrédient par exemple.
+- models : le package avec les classes modèles, les classes de bases livre, recette et ingrédient par exemple.
 - data : dans ce package sont les classes pour la gestion de la persistance.
-- test : le package permettant d'executer le code sous forme d'application console, pratique pour tester l'efficacité du code.
-- launch : contient la classe main lançant l'application graphique.
-- view : contient les vues écrites en FXML.
-- controller : le package des contrôleurs associés à chacune des vues.
+- launchers :  le package permettant d'executer le code, il contient les différentes classes ayant une méthode `main`, une pour lancer l'application en mode console et l'autre lançant l'application en mode graphique.
+- views : contient les vues écrites en FXML.
+- controllers : le package des contrôleurs associés à chacune des vues.
 
+Digramme de classes du modèle :
+-------------------------------
+
+![Diagramme de classe du Modèle](https://raw.githubusercontent.com/BOISSARD/LivreRecettes/master/UMLDiagram/exports/Class_diagram-Model-001.png)
