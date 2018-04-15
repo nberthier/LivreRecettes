@@ -1,10 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package controller;
+package controllers;
 
+import models.Unite;
+import models.IIngredient;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -14,7 +11,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import model.*;
 
 /**
  * FXML Controller class
@@ -32,10 +28,16 @@ public class IngredientFormCellController implements Initializable {
     @FXML
     private AnchorPane AnchorPane;
     
+    /**
+     * Ingrédient courant pour mémoriser l'ingrédient avant sa modification, 
+     * permet de récupérer l'ancienne version en cas d'abandon de la modification.
+     */
     private IIngredient ingredientCourant;
     
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb 
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {

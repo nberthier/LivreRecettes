@@ -1,18 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package data;
+
+import models.DataManager;
+import models.Fabrique;
+import models.Unite;
+import models.Budget;
+import models.IRecette;
+import models.IIngredient;
+import models.Difficulte;
 
 import java.io.File;
 import java.io.IOException;
-import model.*;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -21,7 +20,6 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -63,9 +61,7 @@ public class XMLDataManager implements DataManager {
         try {
             dbFactory = DocumentBuilderFactory.newInstance();
             docBuilder = dbFactory.newDocumentBuilder();            
-        }catch (ParserConfigurationException e){
-            e.printStackTrace();
-        }
+        }catch (ParserConfigurationException e){}
     }
     
     /**
@@ -136,8 +132,7 @@ public class XMLDataManager implements DataManager {
             document.appendChild(racine);
 
             // pour chaque recette ajoute l'element XML à la racine
-            for(IRecette recette : recettes)
-                racine.appendChild(this.recetteToXML(recette));
+            recettes.forEach(recette -> racine.appendChild(this.recetteToXML(recette)));
 
             // écrit le contenu dans le fichier
             TransformerFactory transformerFactory = TransformerFactory.newInstance();

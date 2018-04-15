@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package models;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Objects;
 
 /**
  * Enumération pour l'unité de la quantité d'un ingrédient
@@ -71,6 +70,7 @@ public enum Unite {
      * Redéfinition de la fonction toString()
      * @return String le nom
      */
+    @Override
     public String toString(){
         return valeur;
     }

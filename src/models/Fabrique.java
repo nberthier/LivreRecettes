@@ -3,12 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package models;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
-import static java.util.stream.Collectors.toList;
 
 /**
  * Classe permettant d'instancier des objects inacessible en dehors du paquet model
@@ -74,8 +72,7 @@ public class Fabrique {
      */
     public static List<IIngredient> cloneListeIngredients(List<IIngredient> ingredients){
         List<IIngredient> copy = new ArrayList<>();
-        for(IIngredient i : ingredients)
-            copy.add(Fabrique.creerIIngredient(i));
+        ingredients.forEach(i -> copy.add(Fabrique.creerIIngredient(i)));
         return copy;
     }
 }

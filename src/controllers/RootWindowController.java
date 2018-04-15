@@ -1,30 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package controller;
+package controllers;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Menu;
 import javafx.scene.control.RadioMenuItem;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
-import launch.Main;
-import model.ClassesManager;
-import model.DataManager;
+import launchers.Main;
+import utils.ClassesManager;
+import models.DataManager;
 
 /**
  * FXML Controller class
@@ -44,6 +33,8 @@ public class RootWindowController implements Initializable {
     
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb 
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -68,6 +59,8 @@ public class RootWindowController implements Initializable {
     public void creerMenuModeDataManager(){
         try {
             dataManagerModes = ClassesManager.getClasses("data");
+            /*
+             * Ma boucle for pour parcourir les classes.
             for(Class classe : dataManagerModes){
                 RadioMenuItem item = new RadioMenuItem(classe.getSimpleName().replace("DataManager", ""));
                 item.setUserData(classe.getName());
@@ -76,14 +69,22 @@ public class RootWindowController implements Initializable {
                     item.setSelected(true);
                 dataManagerMenu.getItems().add(item);
             }
+             */
+            // "functional operation" créée par Netbeans équivalent à ma boucle for
+            dataManagerModes.stream().map((classe) -> { 
+                RadioMenuItem item = new RadioMenuItem(classe.getSimpleName().replace("DataManager", ""));
+                item.setUserData(classe.getName());
+                item.setToggleGroup(dataManagerGroup);
+                if(main.getLivre().getDataManager() != null && classe.equals(main.getLivre().getDataManager().getClass()))
+                    item.setSelected(true);
+                return item;
+            }).forEachOrdered((item) -> {
+                dataManagerMenu.getItems().add(item);
+            }); 
+            
         } catch (ClassNotFoundException | IOException ex) {
             Logger.getLogger(RootWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    
-    @FXML
-    public void changerMode(){
-        /** créer nouvelle fenetre avec combobox **/
     }
     
     @FXML

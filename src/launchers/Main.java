@@ -1,15 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor. 
- */
+package launchers;
 
-package launch;
-
-import controller.LivreWindowController;
-import controller.RecetteFormulaireController;
-import controller.RootWindowController;
-import data.XMLDataManager;
+import controllers.LivreWindowController;
+import controllers.RecetteFormulaireController;
+import controllers.RootWindowController;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +14,6 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
@@ -31,8 +23,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.IRecette;
-import model.Livre;
+import models.IRecette;
+import models.Livre;
 
 /**
  * La classe main de l'application lançant l'application graphique
@@ -50,9 +42,9 @@ public class Main extends Application {
     }
     private BorderPane rootWindow;
     
-    private final ObjectProperty<Livre> livre = new SimpleObjectProperty<Livre>();
-    public Livre getLivre(){ return livre.get(); }
-    public void setLivre(Livre l){ livre.set(l); }
+    private final ObjectProperty<Livre> livre = new SimpleObjectProperty<>();
+    public final Livre getLivre(){ return livre.get(); }
+    public final void setLivre(Livre l){ livre.set(l); }
     public ObjectProperty<Livre> livreProperty() { return livre; }
     
     /**
@@ -66,9 +58,9 @@ public class Main extends Application {
      * Constructeur de la classe Main qui créer un livre et charge les recettes dans ce dernier
      */
     public Main(){
-        setLivre(new Livre());
-        getLivre().chargerRecettes();
-        recettesList = getLivre().getRecettesObservable();
+        this.setLivre(new Livre());
+        this.getLivre().chargerRecettes();
+        recettesList = this.getLivre().getRecettesObservable();
     }
     
     /**
@@ -91,7 +83,7 @@ public class Main extends Application {
     public void initRootWindow(){
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("/view/RootWindow.fxml"));
+            loader.setLocation(Main.class.getResource("/views/RootWindow.fxml"));
             rootWindow = (BorderPane) loader.load();
             
             RootWindowController controller = loader.getController();
@@ -112,15 +104,13 @@ public class Main extends Application {
     public void lancerLivreWindow(){
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("/view/LivreWindow.fxml"));
+            loader.setLocation(Main.class.getResource("/views/LivreWindow.fxml"));
             AnchorPane livreWindow = (AnchorPane) loader.load();
             
             rootWindow.setCenter(livreWindow);
             LivreWindowController controller = loader.getController();
             controller.setMain(this);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        } catch (IOException e) {}
     }
     
     /**
@@ -131,7 +121,7 @@ public class Main extends Application {
     public IRecette lancerRecetteFormulaire(IRecette recette){
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("/view/RecetteFormulaire.fxml"));
+            loader.setLocation(Main.class.getResource("/views/RecetteFormulaire.fxml"));
             AnchorPane formulaire = (AnchorPane) loader.load();
             
             Stage stageEdition = new Stage();

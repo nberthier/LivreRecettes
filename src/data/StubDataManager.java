@@ -1,13 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package data;
 
+import models.DataManager;
+import models.Fabrique;
+import models.Unite;
+import models.Budget;
+import models.IRecette;
+import models.Difficulte;
 import java.util.ArrayList;
 import java.util.List;
-import model.*;
 
 /**
  * Persistance en "dur" dans le code
@@ -33,7 +33,7 @@ public class StubDataManager implements DataManager{
         r1.ajouterIngredient(Fabrique.creerIngredient("rhum", 1, Unite.cuillereSoupe));
         recettes.add(r1);
         
-        IRecette r2 = Fabrique.creerRecette("Gauffre", "Mettre la farine dans un saladier, y ajouter le sucre, les jaunes d'œufs et le beurre ramolli.Délayer peu à peu le tout en y ajoutant le lait pour qu'il n'y ait pas de grumeaux. Battre les blancs en neige avec une pincée de sel et les ajouter au restant en remuant délicatement. Cuire le tout dans un gaufrier légèrement beurré.");
+        IRecette r2 = Fabrique.creerRecette("Gauffre", "Mettre la farine dans un saladier, y ajouter le sucre, les jaunes d'œufs et le beurre ramolli. Délayer peu à peu le tout en y ajoutant le lait pour qu'il n'y ait pas de grumeaux. Battre les blancs en neige avec une pincée de sel et les ajouter au restant en remuant délicatement. Cuire le tout dans un gaufrier légèrement beurré.");
         r2.setDuree(17);
         r2.setDifficulte(Difficulte.Facile);
         r2.setPrix(Budget.Reduit);
@@ -45,7 +45,7 @@ public class StubDataManager implements DataManager{
         r2.ajouterIngredient(Fabrique.creerIngredient("sel", 1, Unite.pincee));
         recettes.add(r2);
         
-        IRecette r3 = Fabrique.creerRecette("Pâte à pizza","Mettre 350 g de farine dans un grand saladier puis ajouter successivement le sel, la levure boulangère et l'huile d'olive.Verser petit à petit l'eau tiède tout en mélangeant avec une cuillère en bois. Remuer longuement jusqu'à obtention d'une pâte qui se détache du saladier. Laisser reposer la pâte pendant 1h en couvrant le saladier avec un torchon dans un endroit chaud.Après le temps de repos, déposer de la farine sur votre plan de travail y déposer la pâte à pizza. La travailler comme on travaillerait une pâte à pain. Façonner votre pizza aux dimensions de votre plaque à four où l'idéal, c'est de déposer la pâte sur du papier cuisson.");
+        IRecette r3 = Fabrique.creerRecette("Pâte à pizza","Mettre 350 g de farine dans un grand saladier puis ajouter successivement le sel, la levure boulangère et l'huile d'olive. Verser petit à petit l'eau tiède tout en mélangeant avec une cuillère en bois. Remuer longuement jusqu'à obtention d'une pâte qui se détache du saladier. Laisser reposer la pâte pendant 1h en couvrant le saladier avec un torchon dans un endroit chaud.Après le temps de repos, déposer de la farine sur votre plan de travail y déposer la pâte à pizza. La travailler comme on travaillerait une pâte à pain. Façonner votre pizza aux dimensions de votre plaque à four où l'idéal, c'est de déposer la pâte sur du papier cuisson.");
         r3.setDuree(35);
         r3.setDifficulte(Difficulte.Moyen);
         r3.setPrix(Budget.Reduit);
@@ -57,7 +57,7 @@ public class StubDataManager implements DataManager{
         r3.ajouterIngredient(Fabrique.creerIngredient("eau tiède", 250, Unite.mL));
         recettes.add(r3);
         
-        IRecette r4 = Fabrique.creerRecette("Pizza aux 3 fromages", "Etaler la pâte à pizza dans un plat à tarte, la piquer avec une fourchette, étaler le coulis de tomate sur la pâte.Découper des rondelles de fromage de chèvre et de mozzarella, découper aussi de fines tranches de roquefort. Placer le fromage en alternance (une tranche de fromage de chèvre, une de mozzarella, une de roquefort). Couvrir de gruyère râpé. Saler et poivrer selon les goûts.Mettre au four à Thermostat 7 (210°C), pendant 1/2 heure et plus si nécessaire.");
+        IRecette r4 = Fabrique.creerRecette("Pizza aux 3 fromages", "Etaler la pâte à pizza dans un plat à tarte, la piquer avec une fourchette, étaler le coulis de tomate sur la pâte. Découper des rondelles de fromage de chèvre et de mozzarella, découper aussi de fines tranches de roquefort. Placer le fromage en alternance (une tranche de fromage de chèvre, une de mozzarella, une de roquefort). Couvrir de gruyère râpé. Saler et poivrer selon les goûts.Mettre au four à Thermostat 7 (210°C), pendant 1/2 heure et plus si nécessaire.");
         r4.setDuree(40);
         r4.setDifficulte(Difficulte.Facile);
         r4.setPrix(Budget.Reduit);

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package models;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,11 +25,11 @@ public class Livre {
     }*/
     private ObservableList<IRecette> recettes = FXCollections.observableArrayList();
     public List<IRecette> getRecettes(){ return recettes.stream().collect(Collectors.toList()); }
-    public void setRecettes(List<IRecette> recettes) { this.recettes = FXCollections.observableArrayList(recettes); }
+    public final void setRecettes(List<IRecette> recettes) { this.recettes = FXCollections.observableArrayList(recettes); }
     public ObservableList<IRecette> getRecettesObservable() { return recettes; }
     
     private DataManager dataManager;
-    public void setDataManager(DataManager dataManager) { this.dataManager = dataManager; }
+    public final void setDataManager(DataManager dataManager) { this.dataManager = dataManager; }
     public DataManager getDataManager() { return dataManager; }
     
     /**
@@ -37,7 +37,7 @@ public class Livre {
      * Initialise une liste de recettes vide
      */
     public Livre(){
-        setRecettes(new ArrayList<IRecette>());
+        setRecettes(new ArrayList<>());
     }
     
     /**
@@ -82,8 +82,7 @@ public class Livre {
      */
     public void ajouterRecettes(List<IRecette> recettes){
         //setRecettes(recettes);
-        for(IRecette recette : recettes)
-            ajouterRecette(recette);
+        recettes.forEach(recette -> ajouterRecette(recette));
     }
     
     /**
@@ -139,12 +138,12 @@ public class Livre {
      * Redéfinition de la fonction toString
      * @return String correspondant au texte à afficher
      */
+    @Override
     public String toString(){
         String retour = "Livre de recettes :\n===================\n";
         if(getRecettes().size() < 1)
             retour += "Il n'y a aucune recette\n";
-        for(IRecette recette : getRecettes())
-            retour += recette + "\n";
+        retour = getRecettes().stream().map(recette -> recette + "\n").reduce(retour, String::concat);
         return retour;
     }
 }

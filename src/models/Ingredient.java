@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package models;
 
 /**
  * Classe Ingrédient
@@ -19,12 +19,14 @@ class Ingredient implements IIngredient {
      * Accesseur du nom
      * @return String le nom
      */
+    @Override
     public String getNom(){ return nom; }
     /**
      * Mutateur du nom
      * @param nom le nom
      */
-    public void setNom(String nom){ this.nom = nom; }
+    @Override
+    public final void setNom(String nom){ this.nom = nom; }
     
     /**
      * La quantite de l'ingrédient
@@ -34,7 +36,8 @@ class Ingredient implements IIngredient {
      * Mutateur de la quantite
      * @param quantite la valeur de la quantite
      */
-    public void setQuantite(int quantite){
+    @Override
+    public final void setQuantite(int quantite){
         if(quantite < 0) quantite *= -1;
         this.quantite = quantite; 
     }
@@ -42,6 +45,7 @@ class Ingredient implements IIngredient {
      * Accesseur de la quantite de l'ingrédient
      * @return int la quantite
      */
+    @Override
     public int getQuantite(){ return this.quantite; }
     
     /**
@@ -52,11 +56,13 @@ class Ingredient implements IIngredient {
      * Mutateur de l'unite de la quantite
      * @param unite Constante de l'énumération Unite
      */
-    public void setUnite(Unite unite){ this.unite = unite; }
+    @Override
+    public final void setUnite(Unite unite){ this.unite = unite; }
     /**
      * Accesseur de l'unite
      * @return une constante de l'énumération Unite
      */
+    @Override
     public Unite getUnite(){ return this.unite; }
     /**
      * Converti une constante de l'Unite en une String
@@ -96,6 +102,7 @@ class Ingredient implements IIngredient {
      * Redéfinition de la fonction toStrong
      * @return String texte d'affichage d'un ingrédient
      */
+    @Override
     public String toString(){
         return getNom() + " : " + getQuantite() + " " + getUniteToString();
     }
@@ -104,6 +111,7 @@ class Ingredient implements IIngredient {
      * Redéfinition de la fonction hashCode
      * @return int le hash d'un ingrédient
      */
+    @Override
     public int hashCode(){
         return getNom().toLowerCase().hashCode();
     }
@@ -113,6 +121,7 @@ class Ingredient implements IIngredient {
      * @param o l'objet avec lequel comparer
      * @return boolean si égal ou non
      */
+    @Override
     public boolean equals(Object o){
         if(o == null) return false;
         if(o == this) return true;
@@ -133,13 +142,12 @@ class Ingredient implements IIngredient {
      * Définition de la fonction clone pour copier un ingrédient
      * @return un nouvel ingrédient
      */
+    @Override
     public Object clone(){
         Ingredient ing = null;
         try{
             ing = (Ingredient) super.clone();
-        }catch(CloneNotSupportedException e){
-            e.printStackTrace(System.err);
-        }
+        }catch(CloneNotSupportedException e){}
         return ing;
     }
 }

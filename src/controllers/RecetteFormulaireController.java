@@ -1,36 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package controller;
+package controllers;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import javafx.util.Callback;
-import launch.Main;
-import model.Budget;
-import model.Difficulte;
-import model.Fabrique;
-import model.IIngredient;
-import model.IRecette;
-import model.Unite;
+import launchers.Main;
+import models.Budget;
+import models.Difficulte;
+import models.Fabrique;
+import models.IIngredient;
+import models.IRecette;
+import models.Unite;
 
 /**
  * FXML Controller class
@@ -84,10 +74,10 @@ public class RecetteFormulaireController implements Initializable {
      */
     private List<IIngredient> oldList;
     
-    private String realOldValue = "0";
-    
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb 
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -103,10 +93,10 @@ public class RecetteFormulaireController implements Initializable {
                     int diff = newV - oldV;
                     if(diff > 0){
                         for(int i = 0; i < diff; i++){
-                            if(newV > oldList.size())
-                                temporaire.ajouterIngredient(Fabrique.creerIngredient("", 0, Unite.unite));
-                            else
+                            // permet lors de l'ajout d'une cellule de formulaire d'ingrédient de le remplir avec un ingredient si il y en a un de libre
+                            if(oldV < oldList.size() && (oldV + i) < oldList.size() )
                                 temporaire.ajouterIngredient(oldList.get(oldV + i));
+                            else temporaire.ajouterIngredient(Fabrique.creerIngredient("", 0, Unite.unite));                                
                         }
                     }else if(diff < 0){
                         for(int i = 0; i < (-diff); i++)
@@ -152,13 +142,15 @@ public class RecetteFormulaireController implements Initializable {
         budgetField.setValue(recette.getPrix());
         nbIngField.setText(Integer.toString(recette.nbIngredients()));
         ingredientsList.setItems(recette.getIngredientsObservable());
-        //ingredientsList.setCellFactory((param) -> {return new IngredientFormCell();}); // Même chose que en-dessous mais nécessite JDK8
+        ingredientsList.setCellFactory((ListView<IIngredient> param) -> new IngredientFormCell()); // Même chose que en-dessous mais en version lambda expression, nécessite JDK8
+        /*
         ingredientsList.setCellFactory(new Callback<ListView<IIngredient>, ListCell<IIngredient>>() {
             @Override
             public ListCell<IIngredient> call(ListView<IIngredient> param) {
                 return new IngredientFormCell();
             }
         });
+        */
     }
     
     /**

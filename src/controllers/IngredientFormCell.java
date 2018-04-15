@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package controller;
+package controllers;
 
 import java.io.IOException;
 import java.net.URL;
@@ -11,17 +6,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.ListCell;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import model.IIngredient;
-import model.Unite;
+import models.IIngredient;
 
 /**
- * Cellule graphique de liste, d'un formulaire d'ingrédient
+ * Cellule graphique de liste, cellule formulaire d'un seul ingrédient. Une cellule pour chaque ingrédient
  * @author Clément
  */
 public class IngredientFormCell extends ListCell<IIngredient>{
@@ -32,7 +22,7 @@ public class IngredientFormCell extends ListCell<IIngredient>{
     public IngredientFormCell(){
         super();
         try {
-            final URL fxmlURL = getClass().getResource("/view/IngredientFormCell.fxml");
+            final URL fxmlURL = getClass().getResource("/views/IngredientFormCell.fxml");
             final FXMLLoader fXMLLoader = new FXMLLoader(fxmlURL);
             renderer = fXMLLoader.load();
             rendererController = (IngredientFormCellController) fXMLLoader.getController();

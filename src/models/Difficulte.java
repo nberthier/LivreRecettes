@@ -1,35 +1,34 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package model;
+package models;
 
 /**
- * Enumération correspondant au budget d'une recette
+ * Enumération correspondant à la difficulté de réalisation d'une recette
  * @author Clément
  */
-public enum Budget {
-    Inconnu,
-    Reduit,
+public enum Difficulte {
+    Inconnue,
+    Facile,
     Moyen,
-    Eleve;
+    Difficile,
+    Expert;
     
     /**
      * Convertit une constante de l'énumération en entier,
      * @return int la valeur équivalente
      */
     public int toInt(){
-        int retour = 0;
+        int retour;
         switch(this){
-            case Reduit : 
+            case Facile : 
                 retour = 1;
                 break;
             case Moyen : 
                 retour = 2;
                 break;
-            case Eleve :
+            case Difficile :
                 retour = 3;
+                break;
+            case Expert :
+                retour = 4;
                 break;
             default :
                 retour = 0;
@@ -38,25 +37,28 @@ public enum Budget {
         return retour;
     }
     
-    /**
+     /**
      * Permet de récupérer la constante depuis un entier
      * @param i l'entier
-     * @return Budget la constante équivalente
+     * @return Difficulte la constante équivalente
      */
-    public static Budget fromInt(int i){
-        Budget b = Budget.Inconnu;
+    public static Difficulte fromInt(int i){
+        Difficulte b;
         switch(i){
             case 1 :
-                b = Budget.Reduit;
+                b = Difficulte.Facile;
                 break;
             case 2 :                
-                b = Budget.Moyen;
+                b = Difficulte.Moyen;
                 break;
             case 3 :                
-                b = Budget.Eleve;
+                b = Difficulte.Difficile;
+                break;
+            case 4 :                
+                b = Difficulte.Expert;
                 break;
             default :
-                b = Budget.Inconnu;
+                b = Difficulte.Inconnue;
                 break;
         }
         return b;

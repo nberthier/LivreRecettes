@@ -3,13 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package models;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -29,12 +27,13 @@ class Recette implements IRecette{
      * Accesseur du nom
      * @return String le nom
      */
+    @Override
     public String getNom(){ return nom; }
     /**
      * Mutateur du nom
      * @param nom le nouveau nom
      */
-    protected void setNom(String nom){ 
+    protected final void setNom(String nom){ 
         this.nom = nom; 
         setNomP(this.getNom());
     }
@@ -51,6 +50,7 @@ class Recette implements IRecette{
      * Accesseur de la propriété nomP
      * @return la propiété nomP
      */
+    @Override
     public StringProperty nomProperty() {return this.nomP; }
     
     /**
@@ -61,12 +61,13 @@ class Recette implements IRecette{
      * Accesseur de la réalisation
      * @return String les instructions
      */
+    @Override
     public String getRecette(){ return recette; }
     /**
      * Mutateur de la réalisation
      * @param recette le texte des instructions
      */
-    protected void setRecette(String recette) { 
+    protected final void setRecette(String recette) { 
         this.recette = recette; 
         setRecetteP(this.getRecette());
     }
@@ -79,6 +80,7 @@ class Recette implements IRecette{
      * @param recette le texte
      */
     protected void setRecetteP(String recette) { this.recetteP.set(recette); }
+    @Override
     public StringProperty recetteProperty() {return this.recetteP; }
         
     /**
@@ -89,21 +91,21 @@ class Recette implements IRecette{
      * Convertis l'ObservableList en List
      * @return List la liste des ingrédients
      */
+    @Override
     public List<IIngredient> getIngredients() { return ingredients.stream().collect(Collectors.toList()); }
     /**
      * Mutateur de l'observable liste des ingrédients
      * @param liste la liste des ingrédients
      */
-    public void setIngredients(List<IIngredient> liste) { this.ingredients = FXCollections.observableArrayList(liste); }
+    public final void setIngredients(List<IIngredient> liste) { this.ingredients = FXCollections.observableArrayList(liste); }
+    @Override
     public ObservableList<IIngredient> getIngredientsObservable() { return ingredients; }
-    /*private List<IIngredient> ingredients;
-    public List<IIngredient> getIngredients() { return ingredients; }
-    protected void setIngredients(List<IIngredient> ingredients) { this.ingredients = ingredients; }*/
     
     /**
      * Nombre d'ingrédients
      * @return entier le nombre d'ingrédient
      */
+    @Override
     public int nbIngredients(){ return this.getIngredients().size(); }
     /**
      * Propriété pour le nombre d'ingrédients
@@ -113,6 +115,7 @@ class Recette implements IRecette{
      * Accesseur de la propriété nbIngredientP
      * @return StringProperty le nombre d'ingrédient sous forme de string
      */
+    @Override
     public StringProperty nbIngredientsProperty() {
         nbIngredientsP.set(Integer.toString(nbIngredients()));
         return this.nbIngredientsP; 
@@ -126,7 +129,8 @@ class Recette implements IRecette{
      * Mutateur de la duree
      * @param duree le temps en minutes
      */
-    public void setDuree(int duree) { 
+    @Override
+    public final void setDuree(int duree) { 
         if(duree < 0) duree *= -1;
         this.duree = duree; 
     }
@@ -134,6 +138,7 @@ class Recette implements IRecette{
      * Accesseur de la duree
      * @return le nombre de minutes
      */
+    @Override
     public int getDuree() { return this.duree; }
     
     /**
@@ -144,11 +149,13 @@ class Recette implements IRecette{
      * Mutateur de la difficulté
      * @param difficulte une constante de l'énumération Difficulte
      */
-    public void setDifficulte(Difficulte difficulte) { this.difficulte = difficulte; }
+    @Override
+    public final void setDifficulte(Difficulte difficulte) { this.difficulte = difficulte; }
     /**
      * Accesseur de la difficulté
      * @return constante de Difficulte
      */
+    @Override
     public Difficulte getDifficulte() { return difficulte; }
     
     /**
@@ -159,11 +166,13 @@ class Recette implements IRecette{
      * Mutateur du budget
      * @param prix une constante de Budget
      */
-    public void setPrix(Budget prix) { this.prix = prix; }
+    @Override
+    public final void setPrix(Budget prix) { this.prix = prix; }
     /**
      * Accesseur du prix
      * @return une constante de Budget
      */
+    @Override
     public Budget getPrix() { return prix; }
     
     /**
@@ -216,6 +225,7 @@ class Recette implements IRecette{
      * Ajoute un ingrédient au livre
      * @param ingredient l'ingrédient
      */
+    @Override
     public void ajouterIngredient(IIngredient ingredient){
         ingredients.add(ingredient);
     }
@@ -224,6 +234,7 @@ class Recette implements IRecette{
      * Ajoute plusieurs ingrédients au livre
      * @param ingredients la liste d'ingrédient
      */
+    @Override
     public void ajouterIngredients(List<IIngredient> ingredients){
         setIngredients(ingredients);
     }
@@ -232,6 +243,7 @@ class Recette implements IRecette{
      * Supprime un ingredient
      * @param ingredient l'ingrédient à supprimer
      */
+    @Override
     public void supprimerIngredient(IIngredient ingredient){
         ingredients.remove(ingredient);
     }
@@ -240,6 +252,7 @@ class Recette implements IRecette{
      * Supprime un ingrédient
      * @param index la position de l'ingrédient dans la liste
      */
+    @Override
     public void supprimerIngredient(int index){
         ingredients.remove(index);
     }
@@ -248,8 +261,9 @@ class Recette implements IRecette{
      * Redéfinition de la fonction toString
      * @return String texte d'une recette
      */
+    @Override
     public String toString(){
-        String retour = getNom();/*+ " : \n";
+        String retour = getNom()+ " : \n";
         for(int i = 0; i < getNom().length(); i++)
             retour += "-";
         retour += "--\n" + getRecette() + "\n";
@@ -258,8 +272,7 @@ class Recette implements IRecette{
         retour += "* Difficulté : " + getDifficulte() + "\n";
         retour += "* Budget : " + getPrix() + "\n";
         retour += "# Les " + nbIngredients() + " ingrédients sont :\n";
-        for(IIngredient ingredient : getIngredients())
-            retour += "* " + ingredient + "\n";*/
+        retour = getIngredients().stream().map((ingredient) -> "* " + ingredient + "\n").reduce(retour, String::concat);
         return retour;
     }
     
@@ -267,6 +280,7 @@ class Recette implements IRecette{
      * Redéfinition de la fonction hashCode
      * @return un hash de la recette
      */
+    @Override
     public int hashCode(){
         return getNom().toLowerCase().hashCode();
     }
@@ -276,6 +290,7 @@ class Recette implements IRecette{
      * @param o l'objet avec lequel comparer
      * @return boolean si égal ou non
      */
+    @Override
     public boolean equals(Object o){
         if(o == null) return false;
         if(o == this) return true;
