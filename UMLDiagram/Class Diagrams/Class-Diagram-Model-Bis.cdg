@@ -2,7 +2,7 @@
 
 <ClassDiagram name="Multi-package class diagram">
   <ClassDiagramComponents>
-    <Class name="StubDataManager" package="data" visibility="public" xPosition="1032.0" yPosition="896.0">
+    <Class name="StubDataManager" package="data" visibility="public" xPosition="1032.0" yPosition="993.0">
       <Fields>
         <Field name="recettes" type="List&lt;IRecette&gt;" visibility="private"/>
       </Fields>
@@ -16,7 +16,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="XMLDataManager" package="data" visibility="public" xPosition="1032.0" yPosition="1105.0">
+    <Class name="XMLDataManager" package="data" visibility="public" xPosition="1032.0" yPosition="1284.0">
       <Fields>
         <Field name="file" type="String" visibility="private"/>
         <Field name="recettes" type="List&lt;IRecette&gt;" visibility="private"/>
@@ -43,7 +43,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Fabrique" package="models" visibility="public" xPosition="68.0" yPosition="1200.0">
+    <Class name="Fabrique" package="models" visibility="public" xPosition="55.0" yPosition="1379.0">
       <Fields/>
       <Constructors/>
       <Methods>
@@ -72,7 +72,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Ingredient" package="models" visibility="public" xPosition="1905.0" yPosition="442.0">
+    <Class name="Ingredient" package="models" visibility="public" xPosition="1531.0" yPosition="795.0">
       <Fields>
         <Field name="nom" type="String" visibility="private"/>
         <Field name="quantite" type="int" visibility="private"/>
@@ -111,7 +111,7 @@
         <Method name="clone" returnType="Object" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Livre" package="models" visibility="public" xPosition="3.0" yPosition="376.0">
+    <Class name="Livre" package="models" visibility="public" xPosition="6.0" yPosition="501.0">
       <Fields>
         <Field name="recettes" type="ObservableList&lt;IRecette&gt;" visibility="private"/>
         <Field name="dataManager" type="DataManager" visibility="private"/>
@@ -159,7 +159,7 @@
         <Method name="toString" returnType="String" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Recette" package="models" visibility="public" xPosition="1032.0" yPosition="13.0">
+    <Class name="Recette" package="models" visibility="public" xPosition="1032.0" yPosition="14.0">
       <Fields>
         <Field name="nom" type="String" visibility="private"/>
         <Field name="nomP" type="StringProperty" visibility="private" isFinal="true"/>
@@ -248,7 +248,7 @@
         </Method>
       </Methods>
     </Class>
-    <Interface name="DataManager" package="models" visibility="public" xPosition="522.0" yPosition="920.0">
+    <Interface name="DataManager" package="models" visibility="public" xPosition="422.0" yPosition="1028.0">
       <Methods>
         <Method name="chargementRecettes" returnType="List&lt;IRecette&gt;" visibility="public"/>
         <Method name="sauvegardeRecettes" returnType="void" visibility="public">
@@ -256,7 +256,7 @@
         </Method>
       </Methods>
     </Interface>
-    <Interface name="IIngredient" package="models" visibility="public" xPosition="1592.0" yPosition="541.0">
+    <Interface name="IIngredient" package="models" visibility="public" xPosition="1580.0" yPosition="501.0">
       <Methods>
         <Method name="getNom" returnType="String" visibility="public"/>
         <Method name="setNom" returnType="void" visibility="public">
@@ -273,7 +273,7 @@
         <Method name="clone" returnType="Object" visibility="public"/>
       </Methods>
     </Interface>
-    <Interface name="IRecette" package="models" visibility="public" xPosition="522.0" yPosition="227.0">
+    <Interface name="IRecette" package="models" visibility="public" xPosition="422.0" yPosition="355.0">
       <Methods>
         <Method name="ajouterIngredient" returnType="void" visibility="public">
           <Argument type="IIngredient" name="ingredient"/>
@@ -309,7 +309,7 @@
         <Method name="nbIngredientsProperty" returnType="StringProperty" visibility="public"/>
       </Methods>
     </Interface>
-    <Enum name="Budget" package="models" visibility="public" xPosition="1592.0" yPosition="13.0">
+    <Enum name="Budget" package="models" visibility="public" xPosition="1580.0" yPosition="64.0">
       <Literals>
         <Literal name="Inconnu"/>
         <Literal name="Reduit"/>
@@ -317,7 +317,7 @@
         <Literal name="Eleve"/>
       </Literals>
     </Enum>
-    <Enum name="Difficulte" package="models" visibility="public" xPosition="1592.0" yPosition="275.0">
+    <Enum name="Difficulte" package="models" visibility="public" xPosition="1580.0" yPosition="259.0">
       <Literals>
         <Literal name="Inconnue"/>
         <Literal name="Facile"/>
@@ -326,7 +326,7 @@
         <Literal name="Expert"/>
       </Literals>
     </Enum>
-    <Enum name="Unite" package="models" visibility="public" xPosition="1970.0" yPosition="983.0">
+    <Enum name="Unite" package="models" visibility="public" xPosition="1596.0" yPosition="1284.0">
       <Literals>
         <Literal name="unite"/>
         <Literal name="g"/>
