@@ -16,14 +16,24 @@
             <menus>
                 <Menu mnemonicParsing="false" text="Sauvegarde">
                     <items>
-                        <Menu fx:id="dataManagerMenu" mnemonicParsing="false" text="Changer mode"/>
+                        <Menu fx:id="dataManagerMenu" mnemonicParsing="false" text="Changer mode" />
                         <MenuItem mnemonicParsing="false" onAction="#sauvegarder" text="Sauvegarder">
                             <accelerator>
                                 <!--KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP"/-->
                             </accelerator>
                         </MenuItem>
                         <MenuItem mnemonicParsing="false" onAction="#charger" text="Charger" />
-                        <MenuItem mnemonicParsing="false" text="Changer de fichier" />
+                        <!--MenuItem mnemonicParsing="false" text="Changer de fichier" /-->
+                        <Menu fx:id="fileMenu" mnemonicParsing="false" text="Changer de fichier">
+                            <items>
+                                <CustomMenuItem hideOnClick="false">
+                                    <content>
+                                       <TextField fx:id="fileTextField"/>
+                                    </content>
+                                </CustomMenuItem>
+                                <MenuItem mnemonicParsing="false" text="Ouvrir" onAction="#ouvrir"/>
+                            </items>
+                        </Menu>
                     </items>
                 </Menu>
                 <!--Menu mnemonicParsing="false" text="Edit">

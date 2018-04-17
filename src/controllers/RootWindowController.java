@@ -1,5 +1,6 @@
 package controllers;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -11,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Menu;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.ToggleGroup;
+import javafx.stage.FileChooser;
 import launchers.Graphique;
 import utils.ClassesManager;
 import model.DataManager;
@@ -22,8 +24,14 @@ import model.DataManager;
  */
 public class RootWindowController implements Initializable {
 
+    /**
+     * Classe Graphique main, la classe qui lance l'application graphique
+     */
     Graphique main;
     
+    /**
+     * Menu qui contiendra les modes de persistance de type DataManager
+     */
     @FXML
     Menu dataManagerMenu;
     /**
@@ -34,6 +42,17 @@ public class RootWindowController implements Initializable {
      * La liste des classes pour la persistance de type DataManager
      */
     private List<Class> dataManagerModes;
+    
+    /**
+     * Menu qui contiendra le champs de texte pour l'url du fichier
+     */
+    @FXML
+    Menu fileMenu;
+    
+    /**
+     * Url du fichier de sauvegarde
+     */
+    private String fileUrl;
     
     /**
      * Initialise le contrôleur de la classe.
@@ -48,6 +67,9 @@ public class RootWindowController implements Initializable {
                 try {
                     Class clazz = Class.forName(dataManagerGroup.getSelectedToggle().getUserData().toString());
                     main.getLivre().setDataManager((DataManager)clazz.newInstance());
+                    // Modifie l'url du fichier courant
+                    if(main.getLivre().getDataManager() != null)
+                        fileUrl = main.getLivre().getDataManager().getFile();
                 } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
                     Logger.getLogger(RootWindowController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -103,6 +125,17 @@ public class RootWindowController implements Initializable {
         if(main.dialogSauvegarde("Chargement","Les modifications effectuées sur les recettes, non sauvegarder, vont être écrasées !","Ëtes-vous sûr de vouloir valider le chargement ?"))
             if(!main.getLivre().chargerRecettes())
                 main.popup("Erreur opération","Aucun mode de persistance selectionné","Veuillez selectionner un mode de persistance dans l'onglet 'Sauvegarde' puis 'Changer mode'");
+    }
+    
+    @FXML
+    public void ouvrir(){
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Fichier de sauvegarde");
+        System.out.println(fileUrl);
+        if(fileUrl != null)
+            fc.setInitialDirectory(new File(fileUrl));
+        File f = fc.showOpenDialog(main.getStage());
+        System.out.println(f);
     }
     
 }

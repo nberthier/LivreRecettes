@@ -20,5 +20,14 @@ public interface DataManager {
      */
     public void sauvegardeRecettes(List<IRecette> recettes);
     
-    
+    /**
+     * Mutateur de l'url du fichier de sauvegarde.
+     * @param fileUrl 
+     */
+    public void setFile(String fileUrl);
+    /**
+     * Accesseur de l'url du fichier
+     * @return file
+     */
+    public String getFile();
 }

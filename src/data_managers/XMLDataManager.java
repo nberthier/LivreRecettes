@@ -38,16 +38,18 @@ public class XMLDataManager implements DataManager {
     private String file = "src/data_managers/sauvegarde.xml";
     /**
      * Mutateur de l'url du fichier de sauvegarde.
-     * @param fileurl 
+     * @param fileUrl 
      */
-    public void setFile(String fileurl){
-        this.file = fileurl;
+    @Override
+    public void setFile(String fileUrl){
+        this.file = fileUrl;
     }
     /**
      * Accesseur de l'url du fichier
      * @return file
      */
-    private String getFile(){
+    @Override
+    public String getFile(){
         return this.file;
     }
     /**

@@ -14,6 +14,18 @@ import java.util.List;
  * @author Clément
  */
 public class StubDataManager implements DataManager{
+    
+
+    @Override
+    public void setFile(String fileUrl) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getFile() {
+        return ""; // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
     /**
      * Une liste de recettes
      */
