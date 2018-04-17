@@ -1,12 +1,12 @@
-package data;
+package data_managers;
 
-import models.DataManager;
-import models.Fabrique;
-import models.Unite;
-import models.Budget;
-import models.IRecette;
-import models.IIngredient;
-import models.Difficulte;
+import model.DataManager;
+import model.Fabrique;
+import model.Unite;
+import model.Budget;
+import model.IRecette;
+import model.IIngredient;
+import model.Difficulte;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,7 +39,7 @@ public class XMLDataManager implements DataManager {
     /**
      * La liste des recettes à récupérer
      */
-    private List<IRecette> recettes = new ArrayList<>();
+    private List<IRecette> recettes;
     /**
      * Le document pour gérer le document XML
      */
@@ -79,6 +79,7 @@ public class XMLDataManager implements DataManager {
      */
     @Override
     public List<IRecette> chargementRecettes() {
+        recettes = new ArrayList<>();
         try {
             document = docBuilder.parse(new File(file));
             
@@ -140,10 +141,7 @@ public class XMLDataManager implements DataManager {
             DOMSource source = new DOMSource(document);
             StreamResult resultat = new StreamResult(new File(file));
 
-            transformer.transform(source, resultat);
-
-            System.out.println("Fichier sauvegardé avec succès!");
-            
+            transformer.transform(source, resultat);            
          } catch (TransformerException e) {
             e.printStackTrace();
         }

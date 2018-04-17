@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package utils;
 
 import java.io.File;
@@ -13,7 +8,9 @@ import java.util.Enumeration;
 import java.util.List;
 
 /**
- * Classe permettant de trouver des classes
+ * Classe permettant de trouver des classes.<br>
+ * Le code de la classe a été récupéré et modifier pour qu'il fonctionne suivant mes besoins
+ * 
  * @author Clément
  */
 public class ClassesManager {

@@ -11,9 +11,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Menu;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.ToggleGroup;
-import launchers.Main;
+import launchers.Graphique;
 import utils.ClassesManager;
-import models.DataManager;
+import model.DataManager;
 
 /**
  * FXML Controller class
@@ -22,19 +22,23 @@ import models.DataManager;
  */
 public class RootWindowController implements Initializable {
 
-    Main main;
+    Graphique main;
     
     @FXML
     Menu dataManagerMenu;
-    
-    ToggleGroup dataManagerGroup;
-    
-    List<Class> dataManagerModes;
+    /**
+     * Le groupe à "bascule" pour les modes de persistance
+     */
+    private ToggleGroup dataManagerGroup;
+    /**
+     * La liste des classes pour la persistance de type DataManager
+     */
+    private List<Class> dataManagerModes;
     
     /**
-     * Initializes the controller class.
-     * @param url
-     * @param rb 
+     * Initialise le contrôleur de la classe.
+     * @param url l'emplacement pour les chemins de l'objet racine
+     * @param rb les ressources utilisées pour localiser l'objet racine
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -51,7 +55,7 @@ public class RootWindowController implements Initializable {
         });
     }
     
-    public void setMain(Main main) {
+    public void setMain(Graphique main) {
         this.main = main;
         creerMenuModeDataManager();
     }    

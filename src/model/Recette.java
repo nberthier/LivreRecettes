@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package models;
+package model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +7,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import utils.StringOperation;
 
 /**
  * Classe représentant une recette
@@ -80,6 +76,10 @@ class Recette implements IRecette{
      * @param recette le texte
      */
     protected void setRecetteP(String recette) { this.recetteP.set(recette); }
+    /**
+     * Accesseur de la propriété recette
+     * @return recetteP
+     */
     @Override
     public StringProperty recetteProperty() {return this.recetteP; }
         
@@ -98,12 +98,16 @@ class Recette implements IRecette{
      * @param liste la liste des ingrédients
      */
     public final void setIngredients(List<IIngredient> liste) { this.ingredients = FXCollections.observableArrayList(liste); }
+    /**
+     * Accesseur de ingredients
+     * @return la collection observable de ingredients
+     */
     @Override
     public ObservableList<IIngredient> getIngredientsObservable() { return ingredients; }
     
     /**
      * Nombre d'ingrédients
-     * @return entier le nombre d'ingrédient
+     * @return un entier le nombre d'ingrédient
      */
     @Override
     public int nbIngredients(){ return this.getIngredients().size(); }
@@ -263,6 +267,14 @@ class Recette implements IRecette{
      */
     @Override
     public String toString(){
+        return getNom();
+    }
+    
+    /**
+     * Permet d'avoir un affichage détaillé de la recette
+     * @return l'affichage de la recette
+     */
+    public String recetteToString(){
         String retour = getNom()+ " : \n";
         for(int i = 0; i < getNom().length(); i++)
             retour += "-";
@@ -282,7 +294,7 @@ class Recette implements IRecette{
      */
     @Override
     public int hashCode(){
-        return getNom().toLowerCase().hashCode();
+        return StringOperation.transform(getNom(),StringOperation.WITHOUT_ACCENTS | StringOperation.LOWER_CASE).hashCode();
     }
  
     /**

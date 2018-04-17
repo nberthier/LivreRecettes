@@ -1,31 +1,36 @@
 package launchers;
 
-import models.Livre;
-import data.*;
+import data_managers.StubDataManager;
+import data_managers.XMLDataManager;
+import model.Livre;
 import java.util.Scanner;
 
 /**
- * Classe de test en console,
+ * Classe de l'application en console,
  * utile avant la création de la partie graphique
  * 
  * @author Clément
  */
-public class Test {
+public class Console {
     
     /**
-     * Attributs de classe permettant le bon fonctionnement
+     * Le mode de persistance en cours d'utilisation
+     * <br>Attributs de classe permettant le bon fonctionnement.
      */
     private static String typeSauvegarde = "non sélectionné";
-    private static Livre l = new Livre();
+    /**
+     * Une instance de Livre
+     */
+    private static Livre livre = new Livre();
     
     /**
      * Fonction main de test
      * @param argc les arguments passés en argument de la ligne de commande
      */
-    /*public static void main(String argc[]){
+    public static void main(String argc[]){
         System.out.println("Menu principale : ");
         actions();
-    }*/
+    }
     
     /**
      * Fonction affichant le menu avec les différents choix d'action
@@ -64,17 +69,17 @@ public class Test {
             System.out.println("");
             switch(choix){
                 case 1 :
-                    System.out.print(l);
+                    System.out.print(livre.livreToString());
                     break;
                 case 4 :
-                    if(l.chargerRecettes())
+                    if(livre.chargerRecettes())
                         System.out.println("Chargement réalisé");
                     else
                         System.out.println("Erreur de chargement des recettes");
                     break;
                 case 5 :
-                    if(l.sauvegarderRecettes())
-                        System.out.println("Sauvegarde réussie");
+                    if(livre.sauvegarderRecettes())
+                        System.out.println("Fichier sauvegardé avec succès!");
                     else
                         System.out.println("Erreur d'enregistrement des recettes");
                     break;
@@ -101,11 +106,11 @@ public class Test {
             ok = true;
             switch(sc.nextInt()){
                 case 1 :
-                    l.setDataManager(new StubDataManager());
+                    livre.setDataManager(new StubDataManager());
                     typeSauvegarde = "Stub";
                     break;
                 case 2 :
-                    l.setDataManager(new XMLDataManager());
+                    livre.setDataManager(new XMLDataManager());
                     typeSauvegarde = "XML";
                     break;
                 default :

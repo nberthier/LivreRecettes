@@ -1,11 +1,11 @@
-package data;
+package data_managers;
 
-import models.DataManager;
-import models.Fabrique;
-import models.Unite;
-import models.Budget;
-import models.IRecette;
-import models.Difficulte;
+import model.DataManager;
+import model.Fabrique;
+import model.Unite;
+import model.Budget;
+import model.IRecette;
+import model.Difficulte;
 import java.util.ArrayList;
 import java.util.List;
 

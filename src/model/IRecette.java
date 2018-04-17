@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package models;
+package model;
 
 import java.util.List;
 import javafx.beans.property.StringProperty;
@@ -14,6 +9,7 @@ import javafx.collections.ObservableList;
  * @author Clément
  */
 public interface IRecette {
+    
     /**
      * Méthode ajout d'un ingrédient
      * @param ingredient l'ingrédient
@@ -111,4 +107,10 @@ public interface IRecette {
      * @return la propriété du nombre d'ingrédient
      */
     public StringProperty nbIngredientsProperty();
+    
+    /**
+     * Permet d'avoir un affichage détaillé de la recette
+     * @return l'affichage de la recette
+     */
+    public String recetteToString();
 }

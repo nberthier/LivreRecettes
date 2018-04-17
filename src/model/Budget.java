@@ -1,4 +1,4 @@
-package models;
+package model;
 
 /**
  * Enumération correspondant au budget d'une recette

@@ -1,4 +1,4 @@
-package models;
+package model;
 
 /**
  * Interface d'acces à un ingrédient,

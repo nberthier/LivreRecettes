@@ -23,14 +23,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import models.IRecette;
-import models.Livre;
+import model.IRecette;
+import model.Livre;
 
 /**
  * La classe main de l'application lançant l'application graphique
  * @author Clément
  */
-public class Main extends Application {
+public class Graphique extends Application {
     
     private Stage stage;
     /**
@@ -57,7 +57,7 @@ public class Main extends Application {
     /**
      * Constructeur de la classe Main qui créer un livre et charge les recettes dans ce dernier
      */
-    public Main(){
+    public Graphique(){
         this.setLivre(new Livre());
         this.getLivre().chargerRecettes();
         recettesList = this.getLivre().getRecettesObservable();
@@ -83,7 +83,7 @@ public class Main extends Application {
     public void initRootWindow(){
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("/views/RootWindow.fxml"));
+            loader.setLocation(Graphique.class.getResource("/views/RootWindow.fxml"));
             rootWindow = (BorderPane) loader.load();
             
             RootWindowController controller = loader.getController();
@@ -94,7 +94,7 @@ public class Main extends Application {
             stage.setScene(new Scene(rootWindow,700,600));
             stage.show();
         } catch (IOException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Graphique.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -104,7 +104,7 @@ public class Main extends Application {
     public void lancerLivreWindow(){
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("/views/LivreWindow.fxml"));
+            loader.setLocation(Graphique.class.getResource("/views/LivreWindow.fxml"));
             AnchorPane livreWindow = (AnchorPane) loader.load();
             
             rootWindow.setCenter(livreWindow);
@@ -121,7 +121,7 @@ public class Main extends Application {
     public IRecette lancerRecetteFormulaire(IRecette recette){
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("/views/RecetteFormulaire.fxml"));
+            loader.setLocation(Graphique.class.getResource("/views/RecetteFormulaire.fxml"));
             AnchorPane formulaire = (AnchorPane) loader.load();
             
             Stage stageEdition = new Stage();
@@ -140,7 +140,7 @@ public class Main extends Application {
             stageEdition.showAndWait();
             return controller.retour();
         } catch (IOException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Graphique.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }

@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package models;
+package model;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,7 +21,16 @@ public enum Unite {
     sachet ("sachet"),
     pot ("pot");
 
+    /**
+     * La chaîne de carctère de l'unité
+     */
     private String valeur;
+    
+    /**
+     * Le booléen si l'unité est une unité et non un objet :
+     * <br>    - true  : si une unité
+     * <br>    - false : si un objet et donc pas une unité
+     */
     private boolean measureUnit;
     /**
      * Accesseur si l'unite est une unité de mesure conventionnel

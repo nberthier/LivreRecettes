@@ -1,9 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package models;
+package model;
+
+import utils.StringOperation;
 
 /**
  * Classe Ingrédient
@@ -113,7 +110,7 @@ class Ingredient implements IIngredient {
      */
     @Override
     public int hashCode(){
-        return getNom().toLowerCase().hashCode();
+        return StringOperation.transform(getNom(),StringOperation.WITHOUT_ACCENTS | StringOperation.LOWER_CASE).hashCode();
     }
  
     /**
@@ -145,8 +142,7 @@ class Ingredient implements IIngredient {
     @Override
     public Object clone(){
         Ingredient ing = null;
-        try{
-            ing = (Ingredient) super.clone();
+        try{ ing = (Ingredient) super.clone();
         }catch(CloneNotSupportedException e){}
         return ing;
     }

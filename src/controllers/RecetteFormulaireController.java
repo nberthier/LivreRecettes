@@ -14,13 +14,13 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import launchers.Main;
-import models.Budget;
-import models.Difficulte;
-import models.Fabrique;
-import models.IIngredient;
-import models.IRecette;
-import models.Unite;
+import launchers.Graphique;
+import model.Budget;
+import model.Difficulte;
+import model.Fabrique;
+import model.IIngredient;
+import model.IRecette;
+import model.Unite;
 
 /**
  * FXML Controller class
@@ -29,7 +29,7 @@ import models.Unite;
  */
 public class RecetteFormulaireController implements Initializable {
 
-    private Main main;
+    private Graphique main;
     
     @FXML
     private TextField nomField, dureeField, nbIngField;
@@ -75,9 +75,9 @@ public class RecetteFormulaireController implements Initializable {
     private List<IIngredient> oldList;
     
     /**
-     * Initializes the controller class.
-     * @param url
-     * @param rb 
+     * Initialise le contrôleur de la classe.
+     * @param url l'emplacement pour les chemins de l'objet racine
+     * @param rb les ressources utilisées pour localiser l'objet racine
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -115,7 +115,7 @@ public class RecetteFormulaireController implements Initializable {
      * Associe la classe mère du GUI
      * @param main l'instance de la classe mère
      */
-    public void setMain(Main main) {
+    public void setMain(Graphique main) {
         this.main = main;
     }
     

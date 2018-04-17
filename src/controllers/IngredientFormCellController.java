@@ -1,7 +1,7 @@
 package controllers;
 
-import models.Unite;
-import models.IIngredient;
+import model.Unite;
+import model.IIngredient;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -35,9 +35,9 @@ public class IngredientFormCellController implements Initializable {
     private IIngredient ingredientCourant;
     
     /**
-     * Initializes the controller class.
-     * @param url
-     * @param rb 
+     * Initialise le contrôleur de la classe.
+     * @param url l'emplacement pour les chemins de l'objet racine
+     * @param rb les ressources utilisées pour localiser l'objet racine
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {

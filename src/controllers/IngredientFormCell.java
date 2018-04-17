@@ -8,7 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.AnchorPane;
-import models.IIngredient;
+import model.IIngredient;
 
 /**
  * Cellule graphique de liste, cellule formulaire d'un seul ingrédient. Une cellule pour chaque ingrédient

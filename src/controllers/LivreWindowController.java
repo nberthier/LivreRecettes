@@ -16,9 +16,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import launchers.Main;
-import models.Fabrique;
-import models.IRecette;
+import launchers.Graphique;
+import model.Fabrique;
+import model.IRecette;
 
 /**
  *
@@ -26,7 +26,7 @@ import models.IRecette;
  */
 public class LivreWindowController implements Initializable {
     
-    private Main main;
+    private Graphique main;
     
     @FXML
     private TableView<IRecette> recettesTable;
@@ -68,7 +68,7 @@ public class LivreWindowController implements Initializable {
      * Est appelé par l'application pour donné une référence vers lui-même
      * @param main la classe mère du GUI
      */
-    public void setMain(Main main) {
+    public void setMain(Graphique main) {
         this.main = main;
         recettesTable.setItems(main.getRecettesList());
     }

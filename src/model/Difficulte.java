@@ -1,4 +1,4 @@
-package models;
+package model;
 
 /**
  * Enumération correspondant à la difficulté de réalisation d'une recette
@@ -12,7 +12,7 @@ public enum Difficulte {
     Expert;
     
     /**
-     * Convertit une constante de l'énumération en entier,
+     * Convertit une constante de l'énumération en entier
      * @return int la valeur équivalente
      */
     public int toInt(){

@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package models;
+package model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,19 +12,39 @@ import javafx.collections.ObservableList;
  */
 public class Livre {
     
-   /* private List<IRecette> recettes;
-    public void setRecettes(List<IRecette> recettes) { this.recettes = recettes; }
-    public List<IRecette> getRecettes() { return this.recettes; }
-    public ObservableList<IRecette> getRecettesObservable(){ 
-        return FXCollections.observableArrayList(getRecettes()); 
-    }*/
+    /**
+     * La collection de recettes
+     */
     private ObservableList<IRecette> recettes = FXCollections.observableArrayList();
+    /**
+     * Recupère la collection de recettes sous forme de liste
+     * @return recettes au format List de IRecette
+     */
     public List<IRecette> getRecettes(){ return recettes.stream().collect(Collectors.toList()); }
+    /**
+     * Mutateur de la collection recettes
+     * @param recettes la nouvelle collection
+     */
     public final void setRecettes(List<IRecette> recettes) { this.recettes = FXCollections.observableArrayList(recettes); }
+    /**
+     * Accesseur de recettes
+     * @return la collection observable de recettes
+     */
     public ObservableList<IRecette> getRecettesObservable() { return recettes; }
     
+    /**
+     * Objet permettant la persistance des recettes
+     */
     private DataManager dataManager;
+    /**
+     * Mutateur du DataManager
+     * @param dataManager nouvelle instance de type DataManager
+     */
     public final void setDataManager(DataManager dataManager) { this.dataManager = dataManager; }
+    /**
+     * Accesseur du DataManager
+     * @return l'objet dataManager
+     */
     public DataManager getDataManager() { return dataManager; }
     
     /**
@@ -81,7 +96,6 @@ public class Livre {
      * @param recettes la liste des recettes
      */
     public void ajouterRecettes(List<IRecette> recettes){
-        //setRecettes(recettes);
         recettes.forEach(recette -> ajouterRecette(recette));
     }
     
@@ -136,14 +150,22 @@ public class Livre {
     
     /**
      * Redéfinition de la fonction toString
-     * @return String correspondant au texte à afficher
+     * @return La liste des recettes en String
      */
     @Override
     public String toString(){
+        return getRecettes().toString();
+    }
+
+    /**
+     * Méthode d'affichage des recettes du livre de manière plus détaillée
+     * @return String correspondant au texte à afficher
+     */
+    public String livreToString(){
         String retour = "Livre de recettes :\n===================\n";
         if(getRecettes().size() < 1)
             retour += "Il n'y a aucune recette\n";
-        retour = getRecettes().stream().map(recette -> recette + "\n").reduce(retour, String::concat);
+        retour = getRecettes().stream().map(recette -> recette.recetteToString() + "\n").reduce(retour, String::concat);
         return retour;
     }
 }
