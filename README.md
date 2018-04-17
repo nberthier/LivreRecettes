@@ -23,11 +23,12 @@ Explication des packages :
 --------------------------
 
 Mon code est donc réparti suivant plusieurs répertoires :
-- models : le package avec les classes modèles, les classes de bases livre, recette et ingrédient par exemple.
-- data : dans ce package sont les classes pour la gestion de la persistance.
+- model : le package représentant le modèle de l'application, les classes de bases livre, recette et ingrédient par exemple.
+- data_managers : dans ce package sont les classes pour la gestion de la persistance.
 - launchers :  le package permettant d'executer le code, il contient les différentes classes ayant une méthode `main`, une pour lancer l'application en mode console et l'autre lançant l'application en mode graphique.
 - views : contient les vues écrites en FXML.
 - controllers : le package des contrôleurs associés à chacune des vues.
+- utils : est le package avec des classes "outils" récupérées sur le net qui sont nécessaires au bon fonctionnement de l'application
 
 Conception du modèle :
 ----------------------
@@ -37,7 +38,7 @@ La partie modèle de l'application est la partie qui gère les données et la lo
 ### Diagramme de classes :
 
 Voici donc le diagramme de classes de la partie Modèle de l'application, ce diagramme représente donc les classes de base pour que l'application fonctionne, mais ne montre pas les classes gérant la partie graphique de l'application.  
-En effet sur ce diagramme sont réprésentées les classes du package `models` ainsi que les classes du package `data` (les classes héritant de l'interface `DataManager`).
+En effet sur ce diagramme sont réprésentées les classes du package `model` ainsi que les classes du package `data_managers` (les classes héritant de l'interface `DataManager`).
 
 ![Diagramme de classe du Modèle](https://raw.githubusercontent.com/BOISSARD/LivreRecettes/master/UMLDiagram/exports/Class_diagram-Model-001.png)
 
@@ -69,6 +70,6 @@ La classe `Fabrique` permet d'instancier un objet d'une classe privée (ou "priv
 
 L'interface `DataManager` permet de définir les classes gérant la persistance afin qu'elles puissent être utilisées pour la persistance des recettes.  
 Cette conception correspond au patron de conception "Stratégie".  
-Les classes permettant réellement de réaliser la persistance ce trouvent dans le package `data` telle que la classe `XMLDataManager` permettant la persistance au format XML. Ainsi avec cette conception il est possbible d'avoir autant de classe permettant la persistance que l'on souhaite, par exemple si l'on veut maintenant effectuer la persistance au format JSon il suffit de créer la classe avec le bon code et d'instancier la classe JSonDataManager plutôt que XMLDataManager ou autre. 
+Les classes permettant réellement de réaliser la persistance ce trouvent dans le package `data_managers` telle que la classe `XMLDataManager` permettant la persistance au format XML. Ainsi avec cette conception il est possbible d'avoir autant de classe permettant la persistance que l'on souhaite, par exemple si l'on veut maintenant effectuer la persistance au format JSon il suffit de créer la classe avec le bon code et d'instancier la classe JSonDataManager plutôt que XMLDataManager ou autre. 
 
 On peut voir qu'il y a une autre classe, nommée `StubDataManager`, cette classe correspond à une "persistance" en "dur" dans le code et permettait de voir si le code était fonctionnel avant de m'attaquer à une vrai classe de persistance, car dans ce cas si ça ne marche ça ne peut venir que d'un endroit la classe en rédaction.
