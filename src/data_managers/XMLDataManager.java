@@ -35,7 +35,21 @@ public class XMLDataManager implements DataManager {
     /**
      * Le fichier de sauvegarde
      */
-    private String file = "src/data/sauvegarde.xml";
+    private String file = "src/data_managers/sauvegarde.xml";
+    /**
+     * Mutateur de l'url du fichier de sauvegarde.
+     * @param fileurl 
+     */
+    public void setFile(String fileurl){
+        this.file = fileurl;
+    }
+    /**
+     * Accesseur de l'url du fichier
+     * @return file
+     */
+    private String getFile(){
+        return this.file;
+    }
     /**
      * La liste des recettes à récupérer
      */
@@ -70,7 +84,7 @@ public class XMLDataManager implements DataManager {
      */
     public XMLDataManager(String file){
         this();
-        this.file = file;
+        setFile(file);
     }
     
     /**

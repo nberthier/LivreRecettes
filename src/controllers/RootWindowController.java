@@ -62,7 +62,7 @@ public class RootWindowController implements Initializable {
     
     public void creerMenuModeDataManager(){
         try {
-            dataManagerModes = ClassesManager.getClasses("data");
+            dataManagerModes = ClassesManager.getClasses("data_managers");
             /*
              * Ma boucle for pour parcourir les classes.
             for(Class classe : dataManagerModes){

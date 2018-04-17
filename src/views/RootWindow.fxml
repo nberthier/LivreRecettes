@@ -23,13 +23,14 @@
                             </accelerator>
                         </MenuItem>
                         <MenuItem mnemonicParsing="false" onAction="#charger" text="Charger" />
+                        <MenuItem mnemonicParsing="false" text="Changer de fichier" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
+                <!--Menu mnemonicParsing="false" text="Edit">
                     <items>
                         <MenuItem mnemonicParsing="false" text="Delete" />
                     </items>
-                </Menu>
+                </Menu-->
             </menus>
         </MenuBar>
     </top>
