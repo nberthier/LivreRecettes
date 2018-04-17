@@ -19,12 +19,25 @@ import javafx.scene.layout.HBox;
  */
 public class IngredientFormCellController implements Initializable {
 
+    /**
+     * Les champs texte de la cellule formulaire.
+     * 1 Pour le nom et 1 pour la quantité de l'ingrédient.
+     */
     @FXML
     private TextField nomIngField, quantiteField;
+    /**
+     * La combobox pour l'unité de la quantité de l'ingrédient.
+     */
     @FXML
     private ComboBox uniteField;
+    /**
+     * Le conteneur des éléments graphiques de la cellule.
+     */
     @FXML
     private HBox HBox;
+    /**
+     * Le volet d'encrage racine du hbox de la cellule.
+     */
     @FXML
     private AnchorPane AnchorPane;
     

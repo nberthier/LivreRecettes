@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<recettes>
+    <recette>
+        <nom>test</nom>
+        <budget>2</budget>
+        <duree>5</duree>
+        <difficulte>1</difficulte>
+        <etapes>ceci est ma recette test que je modifie, supprime et rajoute à volonté pour mes tests</etapes>
+        <ingredients>
+            <ingredient>
+                <nom>test</nom>
+                <quantite>1</quantite>
+                <unite>5</unite>
+            </ingredient>
+        </ingredients>
+    </recette>
+</recettes>

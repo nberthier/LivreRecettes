@@ -7,7 +7,7 @@ import model.IRecette;
 import model.Livre;
 
 /**
- * Classe pour effectuer des tests unitaires
+ * Classe pour effectuer des tests unitaires divers et variés
  * @author Clément
  */
 public class Tests {

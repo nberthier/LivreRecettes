@@ -23,7 +23,6 @@
                             </accelerator>
                         </MenuItem>
                         <MenuItem mnemonicParsing="false" onAction="#charger" text="Charger" />
-                        <!--MenuItem mnemonicParsing="false" text="Changer de fichier" /-->
                         <Menu fx:id="fileMenu" mnemonicParsing="false" text="Changer de fichier">
                             <items>
                                 <CustomMenuItem hideOnClick="false">
@@ -36,11 +35,11 @@
                         </Menu>
                     </items>
                 </Menu>
-                <!--Menu mnemonicParsing="false" text="Edit">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="Delete" />
-                    </items>
-                </Menu-->
+                <Menu onAction="#rechercher" mnemonicParsing="false" text="Rechercher">
+                    <!--items>
+                        <MenuItem mnemonicParsing="false" text="" />
+                    </items-->
+                </Menu>
             </menus>
         </MenuBar>
     </top>

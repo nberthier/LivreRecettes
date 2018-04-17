@@ -11,14 +11,23 @@ import javafx.scene.layout.AnchorPane;
 import model.IIngredient;
 
 /**
- * Cellule graphique de liste, cellule formulaire d'un seul ingrédient. Une cellule pour chaque ingrédient
+ * Cellule graphique de liste, cellule formulaire d'un seul ingrédient. 
+ * <br>Une cellule de cette classe sera instancier pour chaque ingrédient.
  * @author Clément
  */
 public class IngredientFormCell extends ListCell<IIngredient>{
-    
+    /**
+     * Volet d'ancrage d'éléments graphiques.
+     */
     private AnchorPane renderer;
+    /**
+     * Le contrôleur du formulaire d'ingrédient.
+     */
     private IngredientFormCellController rendererController;
     
+    /**
+     * Le constructeur de la cellule formualire d'un ingrédient.
+     */
     public IngredientFormCell(){
         super();
         try {
@@ -32,6 +41,11 @@ public class IngredientFormCell extends ListCell<IIngredient>{
         
     }
     
+    /**
+     * Méthode permettant de personnaliser la cellule.
+     * @param object
+     * @param empty 
+     */
     @Override
     protected void updateItem(IIngredient object, boolean empty){
         super.updateItem(object, empty);

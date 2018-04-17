@@ -16,11 +16,19 @@ import java.util.List;
  */
 public class StubDataManager implements DataManager{
 
+    /**
+     * Mutateur de l'url du fichier de sauvegarde.
+     * @param filePath le chemin du fichier ne sera pas mis en place car pas de fichier dans cette classe.
+     */
     @Override
-    public void setFile(String fileUrl) {
+    public void setFile(String filePath) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Accesseur du chemin du fichier.
+     * @return null car pas de fichier
+     */
     @Override
     public File getFile() {
         return null;

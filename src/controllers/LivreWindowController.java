@@ -25,31 +25,67 @@ import model.IRecette;
  * @author Clément
  */
 public class LivreWindowController implements Initializable {
-    
+    /**
+     * Classe Graphique main, la classe qui lance l'application graphique
+     */
     private Graphique main;
     
+    /**
+     * La table des recettes "Master"
+     */
     @FXML
     private TableView<IRecette> recettesTable;
+    /**
+     * La colonne des nom de la table
+     */
     @FXML
     private TableColumn<IRecette, String> nomColumn;
+    /**
+     * La séparation de la partie Master et de la partie Details
+     */
     @FXML
     private SplitPane splitpane;
+    /**
+     * Volets d'ancrage pour les éléments graphiques
+     */
     @FXML
     private AnchorPane anchorPaneFirst, anchorPaneSecond;
+    /**
+     * La grille centrale pour les éléments graphiques
+     */
     @FXML
     private GridPane gridPane;
+    /**
+     * Les colonnes de la grille
+     */
     @FXML 
     private ColumnConstraints column1, column2, column3;
+    /**
+     * Une boîte de rangement horizontal d'élément graphique
+     */
     @FXML
     private HBox hBox;
+    /**
+     * Panneau scrollable
+     */
     @FXML
     private ScrollPane recetteScrollPane;
-    
+    /**
+     * Les différents labels
+     */
     @FXML
     private Label nomLabel, dureeLabel, difficulteLabel, budgetLabel, recetteLabel;
+    /**
+     * La liste des ingrédients
+     */
     @FXML
     private ListView ingredientsLabel;
 
+    /**
+     * Initialise le contrôleur de la classe.
+     * @param url l'emplacement pour les chemins de l'objet racine
+     * @param rb les ressources utilisées pour localiser l'objet racine
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         splitpane.setDividerPositions(0.22);
@@ -73,6 +109,10 @@ public class LivreWindowController implements Initializable {
         recettesTable.setItems(main.getRecettesList());
     }
     
+    /**
+     * Méthode qui remplis la zone Details
+     * @param recette la recette à détailler
+     */
     private void afficherDetailsRecette(IRecette recette){
         if(recette != null){
             nomLabel.setText(recette.getNom());
@@ -91,6 +131,10 @@ public class LivreWindowController implements Initializable {
         }
     }
     
+    /**
+     * Méthode action pour supprimer une recette.
+     * <br>Supprime la recette sélectionnée dans la liste Master.
+     */
     @FXML
     private void supprimerRecette() {
         int index = recettesTable.getSelectionModel().getSelectedIndex();
@@ -110,6 +154,10 @@ public class LivreWindowController implements Initializable {
         }
     }
     
+    /**
+     * Méthode action ajouter une recette.
+     * <br>Lance la fenêtre de formulaire de recette.
+     */
     @FXML
     private void ajouterRecette(){
         IRecette nouvelle = Fabrique.creerRecette();
@@ -120,6 +168,10 @@ public class LivreWindowController implements Initializable {
         }
     }
     
+    /**
+     * Méthode action modifier une recette.
+     * <br>Lance la fenêtre de formulaire de recette avec la recette à modifier.
+     */
     @FXML
     private void modifierRecette(){
         IRecette nouvelle = recettesTable.getSelectionModel().getSelectedItem();

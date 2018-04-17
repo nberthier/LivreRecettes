@@ -2,6 +2,7 @@ package launchers;
 
 import data_managers.StubDataManager;
 import data_managers.XMLDataManager;
+import java.io.File;
 import model.Livre;
 import java.util.Scanner;
 
@@ -18,6 +19,11 @@ public class Console {
      * <br>Attributs de classe permettant le bon fonctionnement.
      */
     private static String typeSauvegarde = "non sélectionné";
+    /**
+     * Le chemin du fichier en cours d'utilisation
+     * <br>Attributs de classe permettant le bon fonctionnement. 
+     */
+    private static String fileUrl = "fichier non sélectionné";
     /**
      * Une instance de Livre
      */
@@ -44,6 +50,7 @@ public class Console {
         System.out.println("4- Charger les recettes");
         System.out.println("5- Sauvegarder les recettes");
         System.out.println("6- Modifier système de sauvegarde ("+typeSauvegarde+")");
+        System.out.println("7- Changer le fichier de sauvegarde ("+fileUrl+")");
         System.out.println("0- Quitter");
         System.out.println();
         return choix();
@@ -92,10 +99,28 @@ public class Console {
                 case 6 :
                     typeSauvegarde();
                     break;
+                case 7 :
+                    fichierSauvegarde();
+                    break;
                 default : 
                     System.out.println("Erreur ! Le numéro n'est pas valide, veuillez tapez un numéro valide");
             }
         }
+    }
+    
+    /**
+     * Pour le choix du fichier de persistance
+     */
+    public static void fichierSauvegarde(){
+        if(livre.getDataManager() == null){
+            System.out.println("Aucun DataManager défini");
+            return;
+        }
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Quel est le chemin du fichier ?");
+        livre.getDataManager().setFile(sc.nextLine());
+        fileUrl = livre.getDataManager().getFile().getPath();
+        //src/data_managers/test_de_sauv_dans_ce_fichier.xml
     }
     
     /**

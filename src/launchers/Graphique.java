@@ -33,19 +33,41 @@ import model.Livre;
  */
 public class Graphique extends Application {
     
-    private Stage stage;
     /**
      * Le conteneur JavaFX de plus haut level
+     */
+    private Stage stage;
+    /**
+     * Accesseur du stage de l'application
      * @return Stage
      */
     public Stage getStage(){
         return stage;
     }
+    
+    /**
+     * La racine graphique de la fenêtre de base.
+     */
     private BorderPane rootWindow;
     
+    /**
+     * La propriété du livre de recette
+     */
     private final ObjectProperty<Livre> livre = new SimpleObjectProperty<>();
+    /**
+     * Recupère le Livre de la propriété livre
+     * @return Le livre
+     */
     public final Livre getLivre(){ return livre.get(); }
+    /**
+     * Mutateur de la propriété livre
+     * @param l le nouveau livre
+     */
     public final void setLivre(Livre l){ livre.set(l); }
+    /**
+     * Accesseur de la propriété livre
+     * @return livre
+     */
     public ObjectProperty<Livre> livreProperty() { return livre; }
     
     /**

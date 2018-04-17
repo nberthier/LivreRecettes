@@ -39,15 +39,15 @@ public class XMLDataManager implements DataManager {
     private File file; // String file = "src/data_managers/sauvegarde.xml";
     /**
      * Mutateur de l'url du fichier de sauvegarde.
-     * @param fileUrl 
+     * @param filePath le chemin du nouveau fichier
      */
     @Override
-    public void setFile(String fileUrl){
-        this.file = new File(fileUrl);
+    public void setFile(String filePath){
+        this.file = new File(filePath);
     }
     /**
      * Accesseur de l'url du fichier
-     * @return file
+     * @return le fichier
      */
     @Override
     public File getFile(){
@@ -80,7 +80,7 @@ public class XMLDataManager implements DataManager {
     
     /**
      * Constructeur utilisant un fichier XML choisi
-     * @param file le nom du fichier
+     * @param fileUrl le chemin du fichier
      */
     public XMLDataManager(String fileUrl){
         setFile(fileUrl);

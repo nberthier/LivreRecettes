@@ -27,9 +27,9 @@ public interface DataManager {
     
     /**
      * Mutateur du fichier de sauvegarde.
-     * @param fileUrl 
+     * @param filePath le chemin du fichier
      */
-    public void setFile(String fileUrl);
+    public void setFile(String filePath);
     /**
      * Accesseur du fichier
      * @return file

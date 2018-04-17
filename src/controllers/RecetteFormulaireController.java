@@ -28,28 +28,68 @@ import model.Unite;
  * @author Clément
  */
 public class RecetteFormulaireController implements Initializable {
-
+       
+    /**
+     * Classe Graphique main, la classe qui lance l'application graphique
+     */
     private Graphique main;
     
+    /**
+     * Les champs texte de la recette.
+     */
     @FXML
     private TextField nomField, dureeField, nbIngField;
+    /**
+     * Le champs texte des instructions de la recette.
+     */
     @FXML
     private TextArea recetteField;
+    /**
+     * Les 2 combobox pour la difficulté et le budget de la recette.
+     */
     @FXML 
     private ComboBox difficulteField, budgetField;
+    /**
+     * La liste des ingrédients du formulaire. Où chaque élément est une cellule formulaire d'un ingédient : IngredientFormCell .
+     */
     @FXML
     private ListView<IIngredient> ingredientsList;
+    /**
+     * La grille pour positionner les élements graphiques.
+     */
     @FXML
     private GridPane gridPane;
+    /**
+     * Les colonnes de la grille.
+     */
     @FXML
     private ColumnConstraints column1;
+    /**
+     * Le conteneur horizontale pour les élements graphiques en rapport avec le nombre d'ingrédients de la recette.
+     */
     @FXML
     private HBox nbIngBox;
     
+    /**
+     * Le stage à utiliser.
+     */
     private Stage stage;
+    /**
+     * Mutateur de l'attribut stage.
+     * @param stage le stage de la classe mère
+     */
+    public void setStage(Stage stage){
+        this.stage = stage;
+    }
     
+    /**
+     * La recette temporaire, à mémoriser en cas d'annulation pour rendre l'ancienne version de la recette sans les possibles modification effectuées.
+     */
     private IRecette temporaire;
     
+    /**
+     * Booléen si le formulaire est validé sinon qu'il est annulé.
+     */
     private boolean valider = false;
     /**
      * formulaire de recette a été valider ou annuler
@@ -117,14 +157,6 @@ public class RecetteFormulaireController implements Initializable {
      */
     public void setMain(Graphique main) {
         this.main = main;
-    }
-    
-    /**
-     * Associe le stage
-     * @param stage le stage de la classe mère
-     */
-    public void setStage(Stage stage){
-        this.stage = stage;
     }
     
     /**

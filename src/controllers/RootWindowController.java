@@ -86,11 +86,18 @@ public class RootWindowController implements Initializable {
         });
     }
     
+    /**
+     * La méthode est appelé par l'application pour donné une référence vers lui-même
+     * @param main la classe mère du GUI
+     */
     public void setMain(Graphique main) {
         this.main = main;
         creerMenuModeDataManager();
     }    
     
+    /**
+     * Méthode qui permet de créer le menu contenant les différents modes de persistances disponible
+     */
     public void creerMenuModeDataManager(){
         try {
             dataManagerModes = ClassesManager.getClasses("data_managers");
@@ -122,6 +129,10 @@ public class RootWindowController implements Initializable {
         }
     }
     
+    /**
+     * Méthode action de sauvegarder
+     * <br>Sauvegarde les recettes depuis le DataManager
+     */
     @FXML
     public void sauvegarder(){
         try {
@@ -132,6 +143,10 @@ public class RootWindowController implements Initializable {
         }
     }
     
+    /**
+     * Méthode action de charger
+     * <br>Charge les recettes depuis le DataManager
+     */
     @FXML
     public void charger(){
         try{
@@ -142,6 +157,10 @@ public class RootWindowController implements Initializable {
         }
     }
     
+    /**
+     * Méthode action ouvrir.
+     * <br>Ouvre la fenêtre de sélection de fichier pour sélectionner un fichier dans l'arborescence.
+     */
     @FXML
     public void ouvrir(){
         FileChooser fc = new FileChooser();
@@ -152,6 +171,10 @@ public class RootWindowController implements Initializable {
         System.out.println(currentFile);
     }
     
+    /**
+     * Métohde permettant de changer le fichier de sauvegarde courant. 
+     * @param file le nouveau fichier courant.
+     */
     public void changerCurrentFile(File file){
         if(file != null){
             if(main.getLivre().getDataManager() != null)
@@ -159,5 +182,14 @@ public class RootWindowController implements Initializable {
             currentFile = file;
             fileTextField.setText(currentFile.getAbsolutePath());
         }
+    }
+    
+    /**
+     * Méthode action rechercher.
+     * <br>Permet de lancer la fenêtre de selection des recettes à rechercher.
+     */
+    @FXML
+    public void rechercher(){
+        
     }
 }
