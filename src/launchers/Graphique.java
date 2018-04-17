@@ -3,6 +3,7 @@ package launchers;
 import controllers.LivreWindowController;
 import controllers.RecetteFormulaireController;
 import controllers.RootWindowController;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -48,6 +49,11 @@ public class Graphique extends Application {
     public ObjectProperty<Livre> livreProperty() { return livre; }
     
     /**
+     * Url du fichier courant de sauvegarde
+     */
+    private /*SimpleObjectProperty<File>*/ File currentFile;
+    
+    /**
      * L'observable liste des recettes
      */
     private ObservableList<IRecette> recettesList;
@@ -59,7 +65,11 @@ public class Graphique extends Application {
      */
     public Graphique(){
         this.setLivre(new Livre());
-        this.getLivre().chargerRecettes();
+        try {
+            this.getLivre().chargerRecettes();
+        } catch (Exception ex) {
+            //this.popup("Erreur opération","Problème durant le chargement",ex.getMessage(),true);
+        }
         recettesList = this.getLivre().getRecettesObservable();
     }
     
@@ -128,6 +138,7 @@ public class Graphique extends Application {
             stageEdition.setTitle("Edition Recette");
             stageEdition.initModality(Modality.WINDOW_MODAL);
             stageEdition.initOwner(stage);
+            stageEdition.getIcons().add(new Image("http://sr.photos2.fotosearch.com/bthumb/CSP/CSP389/k19789040.jpg"));
             
             Scene scene = new Scene(formulaire);
             stageEdition.setScene(scene);
@@ -158,14 +169,28 @@ public class Graphique extends Application {
      * @param titre de la boîte de dialogue
      * @param sous_titre de la boîte de dialogue
      * @param explication contenu de la boîte de dialogue
+     * @param erreur si la pop-up est une erreur, sinon un simple warning
      */
-    public void popup(String titre, String sous_titre, String explication){
-        Alert alert = new Alert(Alert.AlertType.WARNING);
+    public void popup(String titre, String sous_titre, String explication, boolean erreur){
+        Alert alert;
+        if(erreur)
+            alert = new Alert(Alert.AlertType.ERROR);
+        else alert = new Alert(Alert.AlertType.WARNING);
         alert.initOwner(this.getStage());
         alert.setTitle(titre);
         alert.setHeaderText(sous_titre);
         alert.setContentText(explication);
         alert.showAndWait();
+    }
+    
+    /**
+     * Meme appele que au-dessus mais sans le paramètre warning
+     * @param titre de la boîte de dialogue
+     * @param sous_titre de la boîte de dialogue
+     * @param explication contenu de la boîte de dialogue
+     */
+    public void popup(String titre, String sous_titre, String explication){
+        popup(titre, sous_titre, explication, false);
     }
     
     /**

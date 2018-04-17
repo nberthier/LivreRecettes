@@ -72,16 +72,22 @@ public class Console {
                     System.out.print(livre.livreToString());
                     break;
                 case 4 :
-                    if(livre.chargerRecettes())
+                    try {
+                        livre.chargerRecettes();
                         System.out.println("Chargement réalisé");
-                    else
+                    } catch(Exception e){
+                        System.err.println(e.getMessage());
                         System.out.println("Erreur de chargement des recettes");
+                    }
                     break;
                 case 5 :
-                    if(livre.sauvegarderRecettes())
+                    try {
+                        livre.sauvegarderRecettes();
                         System.out.println("Fichier sauvegardé avec succès!");
-                    else
+                    } catch(Exception e){
+                        System.err.println(e.getMessage());
                         System.out.println("Erreur d'enregistrement des recettes");
+                    }
                     break;
                 case 6 :
                     typeSauvegarde();

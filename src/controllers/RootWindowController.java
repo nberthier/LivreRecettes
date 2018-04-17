@@ -7,10 +7,12 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Menu;
 import javafx.scene.control.RadioMenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.FileChooser;
 import launchers.Graphique;
@@ -48,11 +50,16 @@ public class RootWindowController implements Initializable {
      */
     @FXML
     Menu fileMenu;
+    /**
+     * TextField contenant le chemin du fichier
+     */
+    @FXML
+    TextField fileTextField;
     
     /**
      * Url du fichier de sauvegarde
      */
-    private String fileUrl;
+    private /*SimpleObjectProperty<File>*/ File currentFile;
     
     /**
      * Initialise le contrôleur de la classe.
@@ -67,9 +74,11 @@ public class RootWindowController implements Initializable {
                 try {
                     Class clazz = Class.forName(dataManagerGroup.getSelectedToggle().getUserData().toString());
                     main.getLivre().setDataManager((DataManager)clazz.newInstance());
-                    // Modifie l'url du fichier courant
-                    if(main.getLivre().getDataManager() != null)
-                        fileUrl = main.getLivre().getDataManager().getFile();
+                    // Modifie le fichier courant du menu
+                        if(currentFile != null)
+                            changerCurrentFile(currentFile);
+                        else
+                            changerCurrentFile(main.getLivre().getDataManager().getFile());
                 } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
                     Logger.getLogger(RootWindowController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -115,27 +124,40 @@ public class RootWindowController implements Initializable {
     
     @FXML
     public void sauvegarder(){
-        if(main.dialogSauvegarde("Sauvegarde","La précédentes sauvegarde va être écraser !","Ëtes-vous sûr de vouloir valider la sauvegarde ?"))
-            if(!main.getLivre().sauvegarderRecettes())
-                main.popup("Erreur opération","Aucun mode de persistance selectionné","Veuillez selectionner un mode de persistance dans l'onglet 'Sauvegarde' puis 'Changer mode'");
+        try {
+            if(main.dialogSauvegarde("Sauvegarde","La précédentes sauvegarde va être écraser !","Ëtes-vous sûr de vouloir valider la sauvegarde ?"))
+                main.getLivre().sauvegarderRecettes();
+        } catch (Exception ex) {
+            main.popup("Erreur opération","Problème durant la sauvegarde",ex.getMessage()+"\nVeuillez vérifier le fichier choisi dans l'onglet 'Sauvegarde' puis 'Fichier'"+"\nVeuillez selectionner un mode de persistance dans l'onglet 'Sauvegarde' puis 'Changer mode'",true);
+        }
     }
     
     @FXML
     public void charger(){
-        if(main.dialogSauvegarde("Chargement","Les modifications effectuées sur les recettes, non sauvegarder, vont être écrasées !","Ëtes-vous sûr de vouloir valider le chargement ?"))
-            if(!main.getLivre().chargerRecettes())
-                main.popup("Erreur opération","Aucun mode de persistance selectionné","Veuillez selectionner un mode de persistance dans l'onglet 'Sauvegarde' puis 'Changer mode'");
+        try{
+            if(main.dialogSauvegarde("Chargement","Les modifications effectuées sur les recettes, non sauvegarder, vont être écrasées !","Ëtes-vous sûr de vouloir valider le chargement ?"))
+                main.getLivre().chargerRecettes();
+        } catch (Exception ex) {
+            main.popup("Erreur opération","Problème durant le chargement",ex.getMessage()+"\nVeuillez vérifier le fichier choisi dans l'onglet 'Sauvegarde' puis 'Fichier'"+"\nVeuillez selectionner un mode de persistance valide dans l'onglet 'Sauvegarde' puis 'Changer mode'",true);
+        }
     }
     
     @FXML
     public void ouvrir(){
         FileChooser fc = new FileChooser();
         fc.setTitle("Fichier de sauvegarde");
-        System.out.println(fileUrl);
-        if(fileUrl != null)
-            fc.setInitialDirectory(new File(fileUrl));
-        File f = fc.showOpenDialog(main.getStage());
-        System.out.println(f);
+        if(currentFile != null)
+            fc.setInitialDirectory(currentFile.getParentFile()); //currentFile.getValue().getParentFile()
+        changerCurrentFile(fc.showOpenDialog(main.getStage()));
+        System.out.println(currentFile);
     }
     
+    public void changerCurrentFile(File file){
+        if(file != null){
+            if(main.getLivre().getDataManager() != null)
+                main.getLivre().getDataManager().setFile(file.getAbsolutePath());
+            currentFile = file;
+            fileTextField.setText(currentFile.getAbsolutePath());
+        }
+    }
 }

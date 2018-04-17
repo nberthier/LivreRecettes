@@ -129,23 +129,24 @@ public class Livre {
     
     /**
      * Charge les recettes grâce à la persistance dans la liste
-     * @return boolean correspondant à la valeur de réussite de l'opération
+     * @throws Exception si une exception est levée par le dataManager durant le chargement, ou si aucun DataManager instancié
      */
-    public boolean chargerRecettes(){
-        if(dataManager == null) return false;
-        getRecettesObservable().clear();
-        ajouterRecettes(getDataManager().chargementRecettes());
-        return true;
+    public void chargerRecettes() throws Exception{
+        if(dataManager == null) throw new Exception("Aucun mode de persistance sélectionné !");
+        List<IRecette> l = getDataManager().chargementRecettes();
+        if(l.size() > 0){
+            getRecettesObservable().clear();
+            ajouterRecettes(l);
+        }
     }
     
     /**
      * Sauvegarde la liste des recettes grâce à la persistance
-     * @return boolean correspondant à la valeur de réussite de l'opération
+     * @throws Exception si une exception est levée par le dataManager durant la sauvegarde, ou si aucun DataManager instancié
      */
-    public boolean sauvegarderRecettes(){
-        if(dataManager == null) return false;
+    public void sauvegarderRecettes() throws Exception{
+        if(dataManager == null) throw new Exception("Aucun mode de persistance sélectionné !");
         getDataManager().sauvegardeRecettes(getRecettes());
-        return true;
     }
     
     /**

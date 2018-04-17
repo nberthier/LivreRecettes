@@ -1,6 +1,7 @@
 package launchers;
 
 import data_managers.XMLDataManager;
+import model.DataManager;
 import model.Fabrique;
 import model.IRecette;
 import model.Livre;
@@ -23,6 +24,9 @@ public class Tests {
         System.out.println("Ajout de la recette " + r2);
         l.ajouterRecette(r2);
         System.out.println(l);
+        
+        DataManager d = new XMLDataManager();
+        System.out.println(d.getFile().getAbsolutePath());
     }
     
 }

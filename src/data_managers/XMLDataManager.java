@@ -10,6 +10,7 @@ import model.Difficulte;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
@@ -35,21 +36,21 @@ public class XMLDataManager implements DataManager {
     /**
      * Le fichier de sauvegarde
      */
-    private String file = "src/data_managers/sauvegarde.xml";
+    private File file; // String file = "src/data_managers/sauvegarde.xml";
     /**
      * Mutateur de l'url du fichier de sauvegarde.
      * @param fileUrl 
      */
     @Override
     public void setFile(String fileUrl){
-        this.file = fileUrl;
+        this.file = new File(fileUrl);
     }
     /**
      * Accesseur de l'url du fichier
      * @return file
      */
     @Override
-    public String getFile(){
+    public File getFile(){
         return this.file;
     }
     /**
@@ -74,6 +75,15 @@ public class XMLDataManager implements DataManager {
      * Constructeur par défaut
      */
     public XMLDataManager(){
+        this("src/data_managers/sauvegarde.xml");
+    }
+    
+    /**
+     * Constructeur utilisant un fichier XML choisi
+     * @param file le nom du fichier
+     */
+    public XMLDataManager(String fileUrl){
+        setFile(fileUrl);
         try {
             dbFactory = DocumentBuilderFactory.newInstance();
             docBuilder = dbFactory.newDocumentBuilder();            
@@ -81,56 +91,46 @@ public class XMLDataManager implements DataManager {
     }
     
     /**
-     * Constructeur utilisant un fichier XML choisi
-     * @param file le nom du fichier
-     */
-    public XMLDataManager(String file){
-        this();
-        setFile(file);
-    }
-    
-    /**
      * Charge les recette depuis le fichier
      * @return la liste des recettes
+     * @throws SAXException si erreur de parsing
+     * @throws IOException si erreur durant entrée ou sortie flux de données
      */
     @Override
-    public List<IRecette> chargementRecettes() {
+    public List<IRecette> chargementRecettes() throws SAXException, IOException{
         recettes = new ArrayList<>();
-        try {
-            document = docBuilder.parse(new File(file));
-            
-            Element noeudRecettes = document.getDocumentElement();
-            NodeList noeudsRecette = noeudRecettes.getChildNodes();
-            
-            for (int i = 0; i < noeudsRecette.getLength(); i++) {
-                if(noeudsRecette.item(i).getNodeType() == Node.ELEMENT_NODE){
-                    Element recette = (Element)noeudsRecette.item(i);
-                    String nom = recette.getElementsByTagName("nom").item(0).getTextContent();
-                    Budget budget = Budget.fromInt(Integer.parseInt(recette.getElementsByTagName("budget").item(0).getTextContent()));
-                    int duree = Integer.parseInt(recette.getElementsByTagName("duree").item(0).getTextContent());
-                    Difficulte difficulte = Difficulte.fromInt(Integer.parseInt(recette.getElementsByTagName("difficulte").item(0).getTextContent()));
-                    String etapes = recette.getElementsByTagName("etapes").item(0).getTextContent();
-                    
-                    IRecette r = Fabrique.creerRecette(nom, etapes, duree, difficulte, budget);
-                    
-                    Element noeudIngredients = (Element)recette.getElementsByTagName("ingredients").item(0);
-                    NodeList noeudsIngredient = noeudIngredients.getChildNodes();
-                    for(int j = 0; j < noeudsIngredient.getLength(); j++){
-                        if(noeudsIngredient.item(j).getNodeType() == Node.ELEMENT_NODE){
-                            Element ingredient = (Element)noeudsIngredient.item(j);
-                            String nomIng = ingredient.getElementsByTagName("nom").item(0).getTextContent();
-                            int quantite = Integer.parseInt(ingredient.getElementsByTagName("quantite").item(0).getTextContent());
-                            Unite unite = Unite.fromInt(Integer.parseInt(ingredient.getElementsByTagName("unite").item(0).getTextContent()));
-                    
-                            r.ajouterIngredient(Fabrique.creerIngredient(nomIng, quantite, unite));
-                        }
+        
+        document = docBuilder.parse(file);
+
+        Element noeudRecettes = document.getDocumentElement();
+        NodeList noeudsRecette = noeudRecettes.getChildNodes();
+
+        for (int i = 0; i < noeudsRecette.getLength(); i++) {
+            if(noeudsRecette.item(i).getNodeType() == Node.ELEMENT_NODE){
+                Element recette = (Element)noeudsRecette.item(i);
+                String nom = recette.getElementsByTagName("nom").item(0).getTextContent();
+                Budget budget = Budget.fromInt(Integer.parseInt(recette.getElementsByTagName("budget").item(0).getTextContent()));
+                int duree = Integer.parseInt(recette.getElementsByTagName("duree").item(0).getTextContent());
+                Difficulte difficulte = Difficulte.fromInt(Integer.parseInt(recette.getElementsByTagName("difficulte").item(0).getTextContent()));
+                String etapes = recette.getElementsByTagName("etapes").item(0).getTextContent();
+
+                IRecette r = Fabrique.creerRecette(nom, etapes, duree, difficulte, budget);
+
+                Element noeudIngredients = (Element)recette.getElementsByTagName("ingredients").item(0);
+                NodeList noeudsIngredient = noeudIngredients.getChildNodes();
+                for(int j = 0; j < noeudsIngredient.getLength(); j++){
+                    if(noeudsIngredient.item(j).getNodeType() == Node.ELEMENT_NODE){
+                        Element ingredient = (Element)noeudsIngredient.item(j);
+                        String nomIng = ingredient.getElementsByTagName("nom").item(0).getTextContent();
+                        int quantite = Integer.parseInt(ingredient.getElementsByTagName("quantite").item(0).getTextContent());
+                        Unite unite = Unite.fromInt(Integer.parseInt(ingredient.getElementsByTagName("unite").item(0).getTextContent()));
+
+                        r.ajouterIngredient(Fabrique.creerIngredient(nomIng, quantite, unite));
                     }
-                    
-                    recettes.add(r);
                 }
+
+                recettes.add(r);
             }
-        } catch (SAXException | IOException e) {
-            e.printStackTrace();
         }
         
         return recettes;
@@ -139,28 +139,25 @@ public class XMLDataManager implements DataManager {
     /**
      * Sauvegarde les recettes en XML dans le fichier
      * @param recettes les recettes à sauvegarder
+     * @throws javax.xml.transform.TransformerException si erreur durant transformation XML
      */
     @Override
-    public void sauvegardeRecettes(List<IRecette> recettes) {
-        try {
-            // élément de racine
-            document = docBuilder.newDocument();
-            Element racine = document.createElement("recettes");
-            document.appendChild(racine);
+    public void sauvegardeRecettes(List<IRecette> recettes) throws TransformerException {
+        // élément de racine
+        document = docBuilder.newDocument();
+        Element racine = document.createElement("recettes");
+        document.appendChild(racine);
 
-            // pour chaque recette ajoute l'element XML à la racine
-            recettes.forEach(recette -> racine.appendChild(this.recetteToXML(recette)));
+        // pour chaque recette ajoute l'element XML à la racine
+        recettes.forEach(recette -> racine.appendChild(this.recetteToXML(recette)));
 
-            // écrit le contenu dans le fichier
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-            DOMSource source = new DOMSource(document);
-            StreamResult resultat = new StreamResult(new File(file));
+        // écrit le contenu dans le fichier
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        Transformer transformer = transformerFactory.newTransformer();
+        DOMSource source = new DOMSource(document);
+        StreamResult resultat = new StreamResult(file);
 
-            transformer.transform(source, resultat);            
-         } catch (TransformerException e) {
-            e.printStackTrace();
-        }
+        transformer.transform(source, resultat);
     }
     
     /**

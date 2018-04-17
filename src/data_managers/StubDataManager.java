@@ -1,5 +1,6 @@
 package data_managers;
 
+import java.io.File;
 import model.DataManager;
 import model.Fabrique;
 import model.Unite;
@@ -14,16 +15,15 @@ import java.util.List;
  * @author Clément
  */
 public class StubDataManager implements DataManager{
-    
 
     @Override
     public void setFile(String fileUrl) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public String getFile() {
-        return ""; // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public File getFile() {
+        return null;
     }
     
     /**
@@ -98,7 +98,7 @@ public class StubDataManager implements DataManager{
      * @param recettes la liste des recettes
      */
     @Override
-    public void sauvegardeRecettes(List<IRecette> recettes) {
+    public void sauvegardeRecettes(List<IRecette> recettes) throws UnsupportedOperationException{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
