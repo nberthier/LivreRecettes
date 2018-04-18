@@ -101,7 +101,10 @@ class Ingredient implements IIngredient {
      */
     @Override
     public String toString(){
-        return getNom() + " : " + getQuantite() + " " + getUniteToString();
+        if(getUnite() != Unite.inconnu)
+            return getNom() + " : " + getQuantite() + " " + getUniteToString();
+        else
+            return getNom();
     }
     
     /**

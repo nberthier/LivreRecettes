@@ -219,6 +219,20 @@ class Recette implements IRecette{
     }
     
     /**
+     * Constructeur de Recette prenant uns liste d'ingrédients en plus
+     * @param nom le nom   
+     * @param recette la recette
+     * @param minutes la duree
+     * @param difficulte la difficulte
+     * @param prix le prix
+     * @param ingredients la liste d'ingrédients
+     */
+    Recette(String nom, String recette, int minute, Difficulte difficulte, Budget prix, List<IIngredient> ingredients){
+        this(nom,recette,minute,difficulte,prix);
+        setIngredients(ingredients);
+    }
+    
+    /**
      * Constructeur de Recette anonyme
      */
     Recette(){

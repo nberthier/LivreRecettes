@@ -9,6 +9,7 @@ import java.util.Map.Entry;
  * @author Clément
  */
 public enum Unite {
+    inconnu ("", true),
     unite ("", true),
     g ("g", true),
     mL ("mL", true),
@@ -19,7 +20,10 @@ public enum Unite {
     morceau ("morceau"),
     pincee ("pincee"),
     sachet ("sachet"),
-    pot ("pot");
+    pot ("pot"),
+    brin("brin"),
+    feuille("feuille"),
+    bouteille("bouteille");
 
     /**
      * La chaîne de carctère de l'unité

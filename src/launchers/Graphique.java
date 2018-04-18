@@ -2,6 +2,7 @@ package launchers;
 
 import controllers.LivreWindowController;
 import controllers.RecetteFormulaireController;
+import controllers.RechercheFormulaireController;
 import controllers.RootWindowController;
 import java.io.File;
 import java.io.IOException;
@@ -24,6 +25,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Fabrique;
 import model.IRecette;
 import model.Livre;
 
@@ -82,6 +84,10 @@ public class Graphique extends Application {
     public ObservableList<IRecette> getRecettesList(){ return recettesList; }
     public void setRecetteList(List<IRecette> recettes){ recettesList = FXCollections.observableArrayList(recettes); }
     
+    /**
+     * La recherche en cours
+     */
+    private IRecette recherche = Fabrique.creerRecette();;
     /**
      * Constructeur de la classe Main qui créer un livre et charge les recettes dans ce dernier
      */
@@ -172,6 +178,42 @@ public class Graphique extends Application {
             
             stageEdition.showAndWait();
             return controller.retour();
+        } catch (IOException ex) {
+            Logger.getLogger(Graphique.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    
+    
+    /**
+     * Lance le formulaire permettant de renseigner les élements de recherche,
+     * <br>utilise la précédente recherche si il y en a une.
+     * @return IRecette la recette par rapport à laquelle rechercher des recettes
+     */
+    public IRecette lancerRechercheFormulaire(){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Graphique.class.getResource("/views/RechercheFormulaire.fxml"));
+            AnchorPane formulaire = (AnchorPane) loader.load();
+            
+            Stage stageEdition = new Stage();
+            stageEdition.setTitle("Recherche Recette");
+            stageEdition.initModality(Modality.WINDOW_MODAL);
+            stageEdition.initOwner(stage);
+            stageEdition.getIcons().add(new Image("http://sr.photos2.fotosearch.com/bthumb/CSP/CSP389/k19789040.jpg"));
+            
+            Scene scene = new Scene(formulaire);
+            stageEdition.setScene(scene);
+            
+            RechercheFormulaireController controller = loader.getController();
+            controller.setStage(stageEdition);
+            controller.setRecette(recherche);
+            controller.setMain(this);
+            
+            stageEdition.showAndWait();
+            recherche = controller.retour();
+            return recherche;
         } catch (IOException ex) {
             Logger.getLogger(Graphique.class.getName()).log(Level.SEVERE, null, ex);
             return null;

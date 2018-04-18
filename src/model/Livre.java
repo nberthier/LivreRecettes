@@ -162,6 +162,9 @@ public class Livre {
     public void rechercherRecettes(IRecette recette){
         if(listeTemporaire == null || listeTemporaire.size() == 0)
             listeTemporaire = FXCollections.observableArrayList(recettes);
+        
+        System.out.println(recette.recetteToString());
+        
         recettes.clear();
     }
     

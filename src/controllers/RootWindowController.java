@@ -7,15 +7,12 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import launchers.Graphique;
 import utils.ClassesManager;
@@ -202,8 +199,7 @@ public class RootWindowController implements Initializable {
      */
     @FXML
     public void rechercher(){
-        IRecette recette = Fabrique.creerRecette();
-        recette = main.lancerRecetteFormulaire(recette);
+        IRecette recette = main.lancerRechercheFormulaire();
         if(recette != null)
             main.getLivre().rechercherRecettes(recette);
     }

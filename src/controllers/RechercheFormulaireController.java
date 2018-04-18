@@ -27,7 +27,7 @@ import model.Unite;
  *
  * @author Clément
  */
-public class RecetteFormulaireController implements Initializable {
+public class RechercheFormulaireController implements Initializable {
        
     /**
      * Classe Graphique main, la classe qui lance l'application graphique
@@ -39,11 +39,6 @@ public class RecetteFormulaireController implements Initializable {
      */
     @FXML
     private TextField nomField, dureeField, nbIngField;
-    /**
-     * Le champs texte des instructions de la recette.
-     */
-    @FXML
-    private TextArea recetteField;
     /**
      * Les 2 combobox pour la difficulté et le budget de la recette.
      */
@@ -166,23 +161,14 @@ public class RecetteFormulaireController implements Initializable {
     public void setRecette(IRecette recette){
         this.temporaire = recette;
         this.oldList = Fabrique.cloneListeIngredients(recette.getIngredients());
-        
+
         nomField.setText(recette.getNom());
-        recetteField.setText(recette.getRecette());
         dureeField.setText(Integer.toString(recette.getDuree()));
         difficulteField.setValue(recette.getDifficulte());
         budgetField.setValue(recette.getPrix());
         nbIngField.setText(Integer.toString(recette.nbIngredients()));
         ingredientsList.setItems(recette.getIngredientsObservable());
-        ingredientsList.setCellFactory((ListView<IIngredient> param) -> new IngredientFormCell()); // Même chose que en-dessous mais en version lambda expression, nécessite JDK8
-        /*
-        ingredientsList.setCellFactory(new Callback<ListView<IIngredient>, ListCell<IIngredient>>() {
-            @Override
-            public ListCell<IIngredient> call(ListView<IIngredient> param) {
-                return new IngredientFormCell();
-            }
-        });
-        */
+        ingredientsList.setCellFactory((ListView<IIngredient> param) -> new IngredientFormCell());
     }
     
     /**
@@ -191,7 +177,7 @@ public class RecetteFormulaireController implements Initializable {
     @FXML
     public void valider(){
         try{
-            temporaire = Fabrique.creerRecette(nomField.getText(), recetteField.getText(), Integer.parseInt(dureeField.getText()), Difficulte.fromInt(difficulteField.getSelectionModel().getSelectedIndex()), Budget.fromInt(budgetField.getSelectionModel().getSelectedIndex()));
+            temporaire = Fabrique.creerRecette(nomField.getText(), "", Integer.parseInt(dureeField.getText()), Difficulte.fromInt(difficulteField.getSelectionModel().getSelectedIndex()), Budget.fromInt(budgetField.getSelectionModel().getSelectedIndex()));
             temporaire.ajouterIngredients(ingredientsList.getItems());
             valider = true;
             stage.close();

@@ -8,6 +8,7 @@ import model.Budget;
 import model.IRecette;
 import model.Difficulte;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -90,6 +91,34 @@ public class StubDataManager implements DataManager{
         r4.ajouterIngredient(Fabrique.creerIngredient("poivre", 1, Unite.pincee));
         r4.ajouterIngredient(Fabrique.creerIngredient("sel", 1, Unite.pincee));
         recettes.add(r4);
+        
+        IRecette r5 = Fabrique.creerRecette("Ratatouille", "du texte", 80, Difficulte.Moyen, Budget.Moyen);
+        r5.ajouterIngredients(Arrays.asList(Fabrique.creerIngredient("Aubergines", 350, Unite.g),Fabrique.creerIngredient("Courgettes", 350, Unite.g),Fabrique.creerIngredient("Oignons", 350, Unite.g),
+        Fabrique.creerIngredient("Tomates bien mûres", 500, Unite.g),Fabrique.creerIngredient("Gousses d'ail", 3, Unite.unite),Fabrique.creerIngredient("Huile d'olive", 6, Unite.cuillereSoupe),
+        Fabrique.creerIngredient("Thym", 1, Unite.brin),Fabrique.creerIngredient("Laurier", 1, Unite.feuille),Fabrique.creerIngredient("Poivre", 1, Unite.inconnu),Fabrique.creerIngredient("Sel", 1, Unite.inconnu)));
+        recettes.add(r5);
+        
+        IRecette r6 = Fabrique.creerRecette("Hamburger", "du texte", 25, Difficulte.Facile, Budget.Reduit,Arrays.asList(Fabrique.creerIngredient("Pains spéciaux hamburgers", 4, Unite.unite), Fabrique.creerIngredient("Steaks hachés", 4, Unite.unite),
+        Fabrique.creerIngredient("Oignon", 1, Unite.unite),Fabrique.creerIngredient("Fromages mimolette", 4, Unite.tranche),Fabrique.creerIngredient("Sauces", 1, Unite.inconnu),Fabrique.creerIngredient("Cornichons", 4, Unite.unite)));
+        recettes.add(r6);
+        
+        IRecette r7 = Fabrique.creerRecette("Beuf bourguignon", "du texte", 360, Difficulte.Moyen, Budget.Moyen, Arrays.asList(Fabrique.creerIngredient("Viande de bourguignon", 600, Unite.g),Fabrique.creerIngredient("Oignons",4,Unite.unite),
+        Fabrique.creerIngredient("Carottes", 4, Unite.unite),Fabrique.creerIngredient("Vin rouge", 1, Unite.bouteille),Fabrique.creerIngredient("Beurre", 100, Unite.g),Fabrique.creerIngredient("Poivre", 1, Unite.inconnu),Fabrique.creerIngredient("Sel", 1, Unite.inconnu)));
+        recettes.add(r7);
+        
+        IRecette r8 = Fabrique.creerRecette("Sauce bolognaise", "de texte", 25, Difficulte.Facile, Budget.Reduit, Arrays.asList(Fabrique.creerIngredient("Beurre", 30, Unite.g),Fabrique.creerIngredient("Huile d'olive", 1, Unite.cuillereSoupe),
+        Fabrique.creerIngredient("Coulis de tomate", 1, Unite.bouteille),Fabrique.creerIngredient("Viande hachée", 200, Unite.g),Fabrique.creerIngredient("Oignon", 1, Unite.inconnu),Fabrique.creerIngredient("Ail", 1, Unite.inconnu),
+        Fabrique.creerIngredient("Poivre", 1, Unite.inconnu),Fabrique.creerIngredient("Sel", 1, Unite.inconnu)));
+        recettes.add(r8);
+        
+        IRecette r9 = Fabrique.creerRecette("Cassoulet", "du texte", 240, Difficulte.Moyen, Budget.Moyen, Arrays.asList(Fabrique.creerIngredient("Haricot coco ou mojette de Vendée", 750, Unite.g),Fabrique.creerIngredient("Saucissons à l'ail", 1, Unite.tranche),Fabrique.creerIngredient("Saucisses de Toulouse non fumées", 8, Unite.unite),
+        Fabrique.creerIngredient("Poitrines de porc fraîche", 4, Unite.tranche), Fabrique.creerIngredient("Poitrines de porc fumée", 4, Unite.tranche),Fabrique.creerIngredient("Cuisse de confits de canard", 4, Unite.unite),Fabrique.creerIngredient("Concentré de tomates", 70, Unite.g),Fabrique.creerIngredient("Chapelure", 1, Unite.inconnu),
+        Fabrique.creerIngredient("Ail", 1, Unite.inconnu),Fabrique.creerIngredient("Thym", 1, Unite.inconnu),Fabrique.creerIngredient("Laurier", 1, Unite.inconnu),Fabrique.creerIngredient("Poivre", 1, Unite.inconnu),Fabrique.creerIngredient("Sel", 1, Unite.inconnu)));
+        recettes.add(r9);
+        
+        IRecette r10 = Fabrique.creerRecette("Clafoutis aux cerises", "du texte", 55, Difficulte.Facile, Budget.Moyen, Arrays.asList(Fabrique.creerIngredient("Cerises bien mûres", 700, Unite.g),Fabrique.creerIngredient("Oeufs", 2, Unite.unite),Fabrique.creerIngredient("Jaune d'oeufs", 2, Unite.unite),
+        Fabrique.creerIngredient("Farine", 100, Unite.g),Fabrique.creerIngredient("Sucre roux", 100, Unite.g),Fabrique.creerIngredient("Lait", 250, Unite.mL),Fabrique.creerIngredient("Beurre", 60, Unite.g),
+        Fabrique.creerIngredient("Sel", 1, Unite.pincee),Fabrique.creerIngredient("Extrait de vanille", 1, Unite.cuillere),Fabrique.creerIngredient("Sucre vanillé", 1, Unite.sachet)));
     }
 
     /**

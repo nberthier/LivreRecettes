@@ -41,6 +41,20 @@ public class Fabrique {
     }
     
     /**
+     * Appelle le constructeur prenant une liste d'ingédients en plus
+     * @param nom son nom
+     * @param recette la recette
+     * @param minutes la durée de réalisation
+     * @param difficulte la difficulté de réalisation
+     * @param prix le prix
+     * @param ingrédients la liste d'ingrédients
+     * @return une recette
+     */
+    public static IRecette creerRecette(String nom, String recette, int minutes, Difficulte difficulte, Budget prix, List<IIngredient> ingrédients){
+        return new Recette(nom, recette, minutes, difficulte, prix, ingrédients);
+    }
+    
+    /**
      * Appelle le constructeur d'un ingrédient
      * @param nom le nom
      * @param quantite la quantite
