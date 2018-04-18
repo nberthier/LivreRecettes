@@ -83,8 +83,8 @@ public class LivreWindowController implements Initializable {
 
     /**
      * Initialise le contrôleur de la classe.
-     * @param url l'emplacement pour les chemins de l'objet racine
-     * @param rb les ressources utilisées pour localiser l'objet racine
+     * @param location l'emplacement pour les chemins de l'objet racine
+     * @param resources les ressources utilisées pour localiser l'objet racine
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {

@@ -43,8 +43,8 @@ public class IngredientFormCell extends ListCell<IIngredient>{
     
     /**
      * Méthode permettant de personnaliser la cellule.
-     * @param object
-     * @param empty 
+     * @param object l'objet avec lequel remplir la cellule
+     * @param empty si la cellule est vide ou non
      */
     @Override
     protected void updateItem(IIngredient object, boolean empty){

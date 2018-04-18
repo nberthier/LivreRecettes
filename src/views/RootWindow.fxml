@@ -27,18 +27,18 @@
                             <items>
                                 <CustomMenuItem hideOnClick="false">
                                     <content>
-                                       <TextField fx:id="fileTextField"/>
+                                       <TextField fx:id="fileTextField" />
                                     </content>
                                 </CustomMenuItem>
-                                <MenuItem mnemonicParsing="false" text="Ouvrir" onAction="#ouvrir"/>
+                                <MenuItem mnemonicParsing="false" onAction="#ouvrir" text="Ouvrir" />
                             </items>
                         </Menu>
                     </items>
                 </Menu>
-                <Menu onAction="#rechercher" mnemonicParsing="false" text="Rechercher">
-                    <!--items>
-                        <MenuItem mnemonicParsing="false" text="" />
-                    </items-->
+                <Menu mnemonicParsing="false">
+                    <graphic>
+                        <Label text="Rechercher" fx:id="rechercherLabel"/>
+                    </graphic>
                 </Menu>
             </menus>
         </MenuBar>

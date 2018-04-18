@@ -27,6 +27,8 @@ public class Tests {
         
         DataManager d = new XMLDataManager();
         System.out.println(d.getFile().getAbsolutePath());
+        
+        
     }
     
 }

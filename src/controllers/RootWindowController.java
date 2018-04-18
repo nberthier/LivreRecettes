@@ -7,17 +7,21 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import launchers.Graphique;
 import utils.ClassesManager;
 import model.DataManager;
+import model.Fabrique;
+import model.IRecette;
 
 /**
  * FXML Controller class
@@ -55,6 +59,11 @@ public class RootWindowController implements Initializable {
      */
     @FXML
     TextField fileTextField;
+    /**
+     * Label
+     */
+    @FXML
+    Label rechercherLabel;
     
     /**
      * Url du fichier de sauvegarde
@@ -83,6 +92,9 @@ public class RootWindowController implements Initializable {
                     Logger.getLogger(RootWindowController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+        });
+        rechercherLabel.setOnMouseClicked((MouseEvent event) -> {
+            IRecette r = main.lancerRecetteFormulaire(Fabrique.creerRecette());
         });
     }
     
@@ -188,8 +200,8 @@ public class RootWindowController implements Initializable {
      * Méthode action rechercher.
      * <br>Permet de lancer la fenêtre de selection des recettes à rechercher.
      */
-    @FXML
+    /*@FXML
     public void rechercher(){
-        
-    }
+        System.out.println(main.lancerRecetteFormulaire(null));
+    }*/
 }
