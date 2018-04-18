@@ -1,8 +1,12 @@
 package controllers;
 
 import java.net.URL;
+import java.util.List;
+import java.util.Observable;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -106,7 +110,15 @@ public class LivreWindowController implements Initializable {
      */
     public void setMain(Graphique main) {
         this.main = main;
-        recettesTable.setItems(main.getRecettesList());
+        setListeRecettes(main.getRecettesList());
+    }
+    
+    /**
+     * Permet d'assigner la liste de recettes à la partie Master.
+     * @param liste la liste de recettes
+     */
+    public void setListeRecettes(ObservableList<IRecette> liste){
+        recettesTable.setItems(liste);
     }
     
     /**

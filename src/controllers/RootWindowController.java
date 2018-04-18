@@ -62,8 +62,8 @@ public class RootWindowController implements Initializable {
     /**
      * Label
      */
-    @FXML
-    Label rechercherLabel;
+    /*@FXML
+    Label rechercherLabel;*/
     
     /**
      * Url du fichier de sauvegarde
@@ -93,9 +93,9 @@ public class RootWindowController implements Initializable {
                 }
             }
         });
-        rechercherLabel.setOnMouseClicked((MouseEvent event) -> {
+        /*rechercherLabel.setOnMouseClicked((MouseEvent event) -> {
             IRecette r = main.lancerRecetteFormulaire(Fabrique.creerRecette());
-        });
+        });*/
     }
     
     /**
@@ -200,8 +200,20 @@ public class RootWindowController implements Initializable {
      * Méthode action rechercher.
      * <br>Permet de lancer la fenêtre de selection des recettes à rechercher.
      */
-    /*@FXML
+    @FXML
     public void rechercher(){
-        System.out.println(main.lancerRecetteFormulaire(null));
-    }*/
+        IRecette recette = Fabrique.creerRecette();
+        recette = main.lancerRecetteFormulaire(recette);
+        if(recette != null)
+            main.getLivre().rechercherRecettes(recette);
+    }
+    
+    /**
+     * Méthode action réinitialiser.
+     * <br>Permet de reinitialiser la liste des recettes
+     */
+    @FXML
+    public void reset(){
+        main.getLivre().restaurerRecettes();
+    }
 }

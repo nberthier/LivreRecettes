@@ -33,6 +33,11 @@ public class Livre {
     public ObservableList<IRecette> getRecettesObservable() { return recettes; }
     
     /**
+     * Collection provisoire pour ne pas réeffectuer d'opération longue.
+     */
+    private ObservableList<IRecette> listeTemporaire;
+    
+    /**
      * Objet permettant la persistance des recettes
      */
     private DataManager dataManager;
@@ -147,6 +152,28 @@ public class Livre {
     public void sauvegarderRecettes() throws Exception{
         if(dataManager == null) throw new Exception("Aucun mode de persistance sélectionné !");
         getDataManager().sauvegardeRecettes(getRecettes());
+    }
+    
+    /**
+     * Méthode permettant de rechercher les recettes contenant tous (ou presques tous) les éléments de la recette de recherche.
+     * @param recette la recette de recherche
+     * <br>Passe toutes les recettes dans une liste temporaire pour avoir dans la liste de recettes celles correspondantes.
+     */
+    public void rechercherRecettes(IRecette recette){
+        if(listeTemporaire == null || listeTemporaire.size() == 0)
+            listeTemporaire = FXCollections.observableArrayList(recettes);
+        recettes.clear();
+    }
+    
+    /**
+     * Méthode qui restaure les recettes dans la liste recettes.
+     */
+    public void restaurerRecettes(){
+        if(listeTemporaire != null && listeTemporaire.size() > 0){
+            ajouterRecettes(listeTemporaire);
+            System.out.println(listeTemporaire);
+            listeTemporaire.clear();
+        }
     }
     
     /**

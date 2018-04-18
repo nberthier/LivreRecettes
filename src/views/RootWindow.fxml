@@ -35,10 +35,16 @@
                         </Menu>
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false">
+                <!--Menu mnemonicParsing="false">
                     <graphic>
                         <Label text="Rechercher" fx:id="rechercherLabel"/>
                     </graphic>
+                </Menu-->
+                <Menu mnemonicParsing="false" text="Recherche">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#rechercher" text="Rechercher" />
+                        <MenuItem mnemonicParsing="false" onAction="#reset" text="Réinitialiser" />
+                    </items>
                 </Menu>
             </menus>
         </MenuBar>
