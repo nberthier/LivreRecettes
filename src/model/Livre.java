@@ -1,5 +1,6 @@
 package model;
 
+import utils.RecetteComparateur;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,6 +32,11 @@ public class Livre {
      * @return la collection observable de recettes
      */
     public ObservableList<IRecette> getRecettesObservable() { return recettes; }
+    /**
+     * Permet de connaître le nombre de recette dans le livre
+     * @return entier
+     */
+    public int getNbRecettes(){ return getRecettesObservable().size(); }
     
     /**
      * Collection provisoire pour ne pas réeffectuer d'opération longue.
@@ -156,16 +162,20 @@ public class Livre {
     
     /**
      * Méthode permettant de rechercher les recettes contenant tous (ou presques tous) les éléments de la recette de recherche.
-     * @param recette la recette de recherche
+     * @param recherche la recette de recherche
      * <br>Passe toutes les recettes dans une liste temporaire pour avoir dans la liste de recettes celles correspondantes.
      */
-    public void rechercherRecettes(IRecette recette){
+    public void rechercherRecettes(IRecette recherche){
         if(listeTemporaire == null || listeTemporaire.size() == 0)
             listeTemporaire = FXCollections.observableArrayList(recettes);
         
-        System.out.println(recette.recetteToString());
+        System.out.println("La recherche : " + recherche);
+        List<IRecette> trouves = new ArrayList<>();
+                
+        trouves.addAll(listeTemporaire.stream().filter(r -> RecetteComparateur.nomEqual(r, recherche) || RecetteComparateur.nomContenu(recherche, r)).collect(Collectors.toList()));
         
         recettes.clear();
+        recettes.addAll(trouves);
     }
     
     /**
@@ -173,8 +183,8 @@ public class Livre {
      */
     public void restaurerRecettes(){
         if(listeTemporaire != null && listeTemporaire.size() > 0){
+            recettes.clear();
             ajouterRecettes(listeTemporaire);
-            System.out.println(listeTemporaire);
             listeTemporaire.clear();
         }
     }

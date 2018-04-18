@@ -18,6 +18,15 @@ public class Fabrique {
     }
     
     /**
+     * Appelle le constructeur basique prenant uniquement le nom
+     * @param nom le nom de la recette
+     * @return une recette
+     */
+    public static IRecette creerRecette(String nom){
+        return new Recette(nom, "");
+    }
+    
+    /**
      * Appelle le constructeur prenant 2 attributs
      * @param nom le nom de la recette
      * @param recette la recette à suivre pour la réaliser

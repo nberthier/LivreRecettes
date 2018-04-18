@@ -38,11 +38,16 @@ public interface IRecette {
      */
     public String getNom();
     /**
+     * Recupère le nom simplifié pour effectuer de la comparaison.
+     * <br>Sans accent et en minuscule.
+     * @return le nom simplifié
+     */
+    //public String getNomSimplifie();
+    /**
      * Accesseur de la propriété nom
      * @return la propriété nom
      */
     public StringProperty nomProperty();
-    
     /**
      * Mutateur de la duree
      * @param duree la valeur
