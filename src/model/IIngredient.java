@@ -5,7 +5,7 @@ package model;
  * extends Cloneable
  * @author Clément
  */
-public interface IIngredient extends Cloneable { // extends IngredientBis {
+public interface IIngredient extends Cloneable {
     
     /**
      * Accesseur du nom

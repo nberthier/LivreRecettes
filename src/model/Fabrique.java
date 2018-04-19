@@ -8,8 +8,7 @@ import java.util.List;
  * @author Clément
  */
 public class Fabrique {
-    
-    /**
+     /**
      * Appelle le constructeur par défaut d'une recette
      * @return une recette depuis son interface IRecette
      */
@@ -56,11 +55,11 @@ public class Fabrique {
      * @param minutes la durée de réalisation
      * @param difficulte la difficulté de réalisation
      * @param prix le prix
-     * @param ingrédients la liste d'ingrédients
+     * @param ingredients la liste d'ingrédients
      * @return une recette
      */
-    public static IRecette creerRecette(String nom, String recette, int minutes, Difficulte difficulte, Budget prix, List<IIngredient> ingrédients){
-        return new Recette(nom, recette, minutes, difficulte, prix, ingrédients);
+    public static IRecette creerRecette(String nom, String recette, int minutes, Difficulte difficulte, Budget prix, List<IIngredient> ingredients){
+        return new Recette(nom, recette, minutes, difficulte, prix, ingredients);
     }
     
     /**
@@ -93,4 +92,5 @@ public class Fabrique {
         ingredients.forEach(i -> copy.add(Fabrique.creerIIngredient(i)));
         return copy;
     }
+    
 }

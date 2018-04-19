@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Multi-file class diagram">
+  <ClassDiagramComponents>
+    <Class name="Ingredient" package="model" visibility="public" xPosition="1900.0" yPosition="1356.0">
+      <Fields>
+        <Field name="nom" type="String" visibility="private"/>
+        <Field name="quantite" type="int" visibility="private"/>
+        <Field name="unite" type="Unite" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="nom"/>
+          <Argument type="int" name="quantite"/>
+          <Argument type="Unite" name="unite"/>
+        </Constructor>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getNom" returnType="String" visibility="public"/>
+        <Method name="setNom" returnType="String" visibility="public" isFinal="true">
+          <Argument type="String" name="nom"/>
+        </Method>
+        <Method name="setQuantite" returnType="int" visibility="public" isFinal="true">
+          <Argument type="int" name="quantite"/>
+        </Method>
+        <Method name="getQuantite" returnType="int" visibility="public"/>
+        <Method name="setUnite" returnType="Unite" visibility="public" isFinal="true">
+          <Argument type="Unite" name="unite"/>
+        </Method>
+        <Method name="getUnite" returnType="Unite" visibility="public"/>
+        <Method name="getUniteToString" returnType="String" visibility="protected"/>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="hashCode" returnType="int" visibility="public"/>
+        <Method name="equals" returnType="Object" visibility="public">
+          <Argument type="Object" name="o"/>
+        </Method>
+        <Method name="equals" returnType="Ingredient" visibility="public">
+          <Argument type="Ingredient" name="i"/>
+        </Method>
+        <Method name="clone" returnType="Object" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Recette" package="model" visibility="public" xPosition="1113.0" yPosition="287.0">
+      <Fields>
+        <Field name="nom" type="String" visibility="private"/>
+        <Field name="nomP" type="StringProperty" visibility="private" isFinal="true"/>
+        <Field name="recette" type="String" visibility="private"/>
+        <Field name="recetteP" type="StringProperty" visibility="private" isFinal="true"/>
+        <Field name="ingredients" type="ObservableList&lt;IIngredient&gt;" visibility="private"/>
+        <Field name="nbIngredientsP" type="StringProperty" visibility="private" isFinal="true"/>
+        <Field name="duree" type="int" visibility="private"/>
+        <Field name="difficulte" type="Difficulte" visibility="private"/>
+        <Field name="prix" type="Budget" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="package">
+          <Argument type="String" name="nom"/>
+          <Argument type="String" name="recette"/>
+          <Argument type="List&lt;IIngredient&gt;" name="liste"/>
+        </Constructor>
+        <Constructor visibility="package">
+          <Argument type="String" name="nom"/>
+          <Argument type="String" name="recette"/>
+        </Constructor>
+        <Constructor visibility="package">
+          <Argument type="String" name="nom"/>
+          <Argument type="String" name="recette"/>
+          <Argument type="int" name="minutes"/>
+          <Argument type="Difficulte" name="difficulte"/>
+          <Argument type="Budget" name="prix"/>
+        </Constructor>
+        <Constructor visibility="package">
+          <Argument type="String" name="nom"/>
+          <Argument type="String" name="recette"/>
+          <Argument type="int" name="minutes"/>
+          <Argument type="Difficulte" name="difficulte"/>
+          <Argument type="Budget" name="prix"/>
+          <Argument type="List&lt;IIngredient&gt;" name="ingredients"/>
+        </Constructor>
+        <Constructor visibility="package"/>
+      </Constructors>
+      <Methods>
+        <Method name="getNom" returnType="String" visibility="public"/>
+        <Method name="setNom" returnType="String" visibility="protected" isFinal="true">
+          <Argument type="String" name="nom"/>
+        </Method>
+        <Method name="setNomP" returnType="String" visibility="protected">
+          <Argument type="String" name="nom"/>
+        </Method>
+        <Method name="nomProperty" returnType="StringProperty" visibility="public"/>
+        <Method name="getRecette" returnType="String" visibility="public"/>
+        <Method name="setRecette" returnType="String" visibility="protected" isFinal="true">
+          <Argument type="String" name="recette"/>
+        </Method>
+        <Method name="setRecetteP" returnType="String" visibility="protected">
+          <Argument type="String" name="recette"/>
+        </Method>
+        <Method name="recetteProperty" returnType="StringProperty" visibility="public"/>
+        <Method name="getIngredients" returnType="List&lt;IIngredient&gt;" visibility="public"/>
+        <Method name="setIngredients" returnType="List&lt;IIngredient&gt;" visibility="public" isFinal="true">
+          <Argument type="List&lt;IIngredient&gt;" name="liste"/>
+        </Method>
+        <Method name="getIngredientsObservable" returnType="ObservableList&lt;IIngredient&gt;" visibility="public"/>
+        <Method name="nbIngredients" returnType="int" visibility="public"/>
+        <Method name="nbIngredientsProperty" returnType="StringProperty" visibility="public"/>
+        <Method name="setDuree" returnType="int" visibility="public" isFinal="true">
+          <Argument type="int" name="duree"/>
+        </Method>
+        <Method name="getDuree" returnType="int" visibility="public"/>
+        <Method name="setDifficulte" returnType="Difficulte" visibility="public" isFinal="true">
+          <Argument type="Difficulte" name="difficulte"/>
+        </Method>
+        <Method name="getDifficulte" returnType="Difficulte" visibility="public"/>
+        <Method name="setPrix" returnType="Budget" visibility="public" isFinal="true">
+          <Argument type="Budget" name="prix"/>
+        </Method>
+        <Method name="getPrix" returnType="Budget" visibility="public"/>
+        <Method name="ajouterIngredient" returnType="IIngredient" visibility="public">
+          <Argument type="IIngredient" name="ingredient"/>
+        </Method>
+        <Method name="ajouterIngredients" returnType="List&lt;IIngredient&gt;" visibility="public">
+          <Argument type="List&lt;IIngredient&gt;" name="ingredients"/>
+        </Method>
+        <Method name="supprimerIngredient" returnType="IIngredient" visibility="public">
+          <Argument type="IIngredient" name="ingredient"/>
+        </Method>
+        <Method name="supprimerIngredient" returnType="int" visibility="public">
+          <Argument type="int" name="index"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="recetteToString" returnType="String" visibility="public"/>
+        <Method name="hashCode" returnType="int" visibility="public"/>
+        <Method name="equals" returnType="Object" visibility="public">
+          <Argument type="Object" name="o"/>
+        </Method>
+        <Method name="equals" returnType="Recette" visibility="public">
+          <Argument type="Recette" name="r"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Livre" package="model" visibility="public" xPosition="5.0" yPosition="1048.0">
+      <Fields>
+        <Field name="recettes" type="ObservableList&lt;IRecette&gt;" visibility="private"/>
+        <Field name="listeTemporaire" type="ObservableList&lt;IRecette&gt;" visibility="private"/>
+        <Field name="dataManager" type="DataManager" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="DataManager" name="dataManager"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getRecettes" returnType="List&lt;IRecette&gt;" visibility="public"/>
+        <Method name="setRecettes" returnType="List&lt;IRecette&gt;" visibility="public" isFinal="true">
+          <Argument type="List&lt;IRecette&gt;" name="recettes"/>
+        </Method>
+        <Method name="getRecettesObservable" returnType="ObservableList&lt;IRecette&gt;" visibility="public"/>
+        <Method name="getNbRecettes" returnType="int" visibility="public"/>
+        <Method name="setDataManager" returnType="DataManager" visibility="public" isFinal="true">
+          <Argument type="DataManager" name="dataManager"/>
+        </Method>
+        <Method name="getDataManager" returnType="DataManager" visibility="public"/>
+        <Method name="getRecette" returnType="String" visibility="public">
+          <Argument type="String" name="nom"/>
+        </Method>
+        <Method name="getRecetteIndex" returnType="String" visibility="public">
+          <Argument type="String" name="nom"/>
+        </Method>
+        <Method name="ajouterRecette" returnType="IRecette" visibility="public">
+          <Argument type="IRecette" name="recette"/>
+        </Method>
+        <Method name="ajouterRecettes" returnType="List&lt;IRecette&gt;" visibility="public">
+          <Argument type="List&lt;IRecette&gt;" name="recettes"/>
+        </Method>
+        <Method name="supprimerRecette" returnType="IRecette" visibility="public">
+          <Argument type="IRecette" name="recette"/>
+        </Method>
+        <Method name="supprimerRecette" returnType="int" visibility="public">
+          <Argument type="int" name="index"/>
+        </Method>
+        <Method name="modifierRecette" returnType="IRecette" visibility="public">
+          <Argument type="String" name="nomEx"/>
+          <Argument type="IRecette" name="recette"/>
+        </Method>
+        <Method name="chargerRecettes" returnType="void" visibility="public"/>
+        <Method name="sauvegarderRecettes" returnType="void" visibility="public"/>
+        <Method name="rechercherRecettes" returnType="IRecette" visibility="public">
+          <Argument type="IRecette" name="recherche"/>
+        </Method>
+        <Method name="restaurerRecettes" returnType="void" visibility="public"/>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="livreToString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="RecetteComparateur" package="model" visibility="public" xPosition="534.0" yPosition="1390.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="simplifie" returnType="String" visibility="private" isStatic="true">
+          <Argument type="String" name="chaine"/>
+        </Method>
+        <Method name="contient" returnType="String" visibility="private" isStatic="true">
+          <Argument type="String" name="test"/>
+          <Argument type="String" name="recherche"/>
+        </Method>
+        <Method name="nomsRecettesEqual" returnType="IRecette" visibility="public" isStatic="true">
+          <Argument type="IRecette" name="r1"/>
+          <Argument type="IRecette" name="r2"/>
+        </Method>
+        <Method name="nomsRecettesContenu" returnType="IRecette" visibility="public" isStatic="true">
+          <Argument type="IRecette" name="test"/>
+          <Argument type="IRecette" name="recherche"/>
+        </Method>
+        <Method name="nomsIngredientsContenu" returnType="IIngredient" visibility="private" isStatic="true">
+          <Argument type="IIngredient" name="test"/>
+          <Argument type="IIngredient" name="recherche"/>
+        </Method>
+        <Method name="ingredientInRecette" returnType="IRecette" visibility="public" isStatic="true">
+          <Argument type="IIngredient" name="ingredient"/>
+          <Argument type="IRecette" name="recette"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="StubDataManager" package="data_managers" visibility="public" xPosition="1270.0" yPosition="2053.0">
+      <Fields>
+        <Field name="recettes" type="List&lt;IRecette&gt;" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="setFile" returnType="String" visibility="public">
+          <Argument type="String" name="filePath"/>
+        </Method>
+        <Method name="getFile" returnType="File" visibility="public"/>
+        <Method name="chargementRecettes" returnType="List&lt;IRecette&gt;" visibility="public"/>
+        <Method name="sauvegardeRecettes" returnType="List&lt;IRecette&gt;" visibility="public">
+          <Argument type="List&lt;IRecette&gt;" name="recettes"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="XMLDataManager" package="data_managers" visibility="public" xPosition="1270.0" yPosition="1483.0">
+      <Fields>
+        <Field name="file" type="File" visibility="private"/>
+        <Field name="recettes" type="List&lt;IRecette&gt;" visibility="private"/>
+        <Field name="document" type="Document" visibility="private"/>
+        <Field name="docBuilder" type="DocumentBuilder" visibility="package"/>
+        <Field name="dbFactory" type="DocumentBuilderFactory" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="fileUrl"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="setFile" returnType="String" visibility="public">
+          <Argument type="String" name="filePath"/>
+        </Method>
+        <Method name="getFile" returnType="File" visibility="public"/>
+        <Method name="chargementRecettes" returnType="List&lt;IRecette&gt;" visibility="public"/>
+        <Method name="sauvegardeRecettes" returnType="List&lt;IRecette&gt;" visibility="public">
+          <Argument type="List&lt;IRecette&gt;" name="recettes"/>
+        </Method>
+        <Method name="ingredientToXML" returnType="IIngredient" visibility="protected">
+          <Argument type="IIngredient" name="produit"/>
+        </Method>
+        <Method name="recetteToXML" returnType="IRecette" visibility="protected">
+          <Argument type="IRecette" name="recette"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Interface name="IRecette" package="model" visibility="public" xPosition="534.0" yPosition="287.0">
+      <Methods>
+        <Method name="ajouterIngredient" returnType="IIngredient" visibility="public">
+          <Argument type="IIngredient" name="ingredient"/>
+        </Method>
+        <Method name="ajouterIngredients" returnType="List&lt;IIngredient&gt;" visibility="public">
+          <Argument type="List&lt;IIngredient&gt;" name="ingredients"/>
+        </Method>
+        <Method name="supprimerIngredient" returnType="IIngredient" visibility="public">
+          <Argument type="IIngredient" name="ingredient"/>
+        </Method>
+        <Method name="supprimerIngredient" returnType="int" visibility="public">
+          <Argument type="int" name="index"/>
+        </Method>
+        <Method name="getNom" returnType="String" visibility="public"/>
+        <Method name="nomProperty" returnType="StringProperty" visibility="public"/>
+        <Method name="setDuree" returnType="int" visibility="public">
+          <Argument type="int" name="duree"/>
+        </Method>
+        <Method name="getDuree" returnType="int" visibility="public"/>
+        <Method name="setDifficulte" returnType="Difficulte" visibility="public">
+          <Argument type="Difficulte" name="difficulte"/>
+        </Method>
+        <Method name="getDifficulte" returnType="Difficulte" visibility="public"/>
+        <Method name="setPrix" returnType="Budget" visibility="public">
+          <Argument type="Budget" name="prix"/>
+        </Method>
+        <Method name="getPrix" returnType="Budget" visibility="public"/>
+        <Method name="getRecette" returnType="String" visibility="public"/>
+        <Method name="recetteProperty" returnType="StringProperty" visibility="public"/>
+        <Method name="getIngredients" returnType="List&lt;IIngredient&gt;" visibility="public"/>
+        <Method name="getIngredientsObservable" returnType="ObservableList&lt;IIngredient&gt;" visibility="public"/>
+        <Method name="nbIngredients" returnType="int" visibility="public"/>
+        <Method name="nbIngredientsProperty" returnType="StringProperty" visibility="public"/>
+        <Method name="recetteToString" returnType="String" visibility="public"/>
+      </Methods>
+    </Interface>
+    <Interface name="IIngredient" package="model" visibility="public" xPosition="1965.0" yPosition="963.0">
+      <Methods>
+        <Method name="getNom" returnType="String" visibility="public"/>
+        <Method name="setNom" returnType="String" visibility="public">
+          <Argument type="String" name="nom"/>
+        </Method>
+        <Method name="getQuantite" returnType="int" visibility="public"/>
+        <Method name="setQuantite" returnType="int" visibility="public">
+          <Argument type="int" name="quantite"/>
+        </Method>
+        <Method name="getUnite" returnType="Unite" visibility="public"/>
+        <Method name="setUnite" returnType="Unite" visibility="public">
+          <Argument type="Unite" name="unite"/>
+        </Method>
+        <Method name="clone" returnType="Object" visibility="public"/>
+      </Methods>
+    </Interface>
+    <Interface name="DataManager" package="model" visibility="public" xPosition="549.0" yPosition="1813.0">
+      <Methods>
+        <Method name="chargementRecettes" returnType="List&lt;IRecette&gt;" visibility="public"/>
+        <Method name="sauvegardeRecettes" returnType="List&lt;IRecette&gt;" visibility="public">
+          <Argument type="List&lt;IRecette&gt;" name="recettes"/>
+        </Method>
+        <Method name="setFile" returnType="String" visibility="public">
+          <Argument type="String" name="filePath"/>
+        </Method>
+        <Method name="getFile" returnType="File" visibility="public"/>
+      </Methods>
+    </Interface>
+    <Enum name="Difficulte" package="model" visibility="public" xPosition="1965.0" yPosition="586.0">
+      <Literals>
+        <Literal name="Inconnue"/>
+        <Literal name="Facile"/>
+        <Literal name="Moyen"/>
+        <Literal name="Difficile"/>
+        <Literal name="Expert"/>
+      </Literals>
+    </Enum>
+    <Enum name="Unite" package="model" visibility="public" xPosition="1981.0" yPosition="1893.0">
+      <Literals>
+        <Literal name="inconnu"/>
+        <Literal name="unite"/>
+        <Literal name="g"/>
+        <Literal name="mL"/>
+        <Literal name="L"/>
+        <Literal name="cuillere"/>
+        <Literal name="cuillereSoupe"/>
+        <Literal name="tranche"/>
+        <Literal name="morceau"/>
+        <Literal name="pincee"/>
+        <Literal name="sachet"/>
+        <Literal name="pot"/>
+        <Literal name="brin"/>
+        <Literal name="feuille"/>
+        <Literal name="bouteille"/>
+      </Literals>
+    </Enum>
+    <Enum name="Budget" package="model" visibility="public" xPosition="1965.0" yPosition="287.0">
+      <Literals>
+        <Literal name="Inconnu"/>
+        <Literal name="Reduit"/>
+        <Literal name="Moyen"/>
+        <Literal name="Eleve"/>
+      </Literals>
+    </Enum>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="data_managers.XMLDataManager" target="model.DataManager"/>
+    <HasRelation name="difficulte" source="model.Recette" target="model.Difficulte" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="Utilise" source="model.RecetteComparateur" target="model.IIngredient" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="data_managers.XMLDataManager" target="model.IIngredient" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="listeTemporaire" source="model.Livre" target="model.IRecette" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ObservableList&lt;IRecette&gt;"/>
+    <HasRelation name="recettes" source="data_managers.StubDataManager" target="model.IRecette" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;IRecette&gt;"/>
+    <HasRelation name="dataManager" source="model.Livre" target="model.DataManager" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="ingredients" source="model.Recette" target="model.IIngredient" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ObservableList&lt;IIngredient&gt;"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="model.Ingredient" target="model.IIngredient"/>
+    <UseRelation name="Utilise" source="model.RecetteComparateur" target="model.IRecette" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="unite" source="model.Ingredient" target="model.Unite" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="data_managers.StubDataManager" target="model.DataManager"/>
+    <HasRelation name="recettes" source="data_managers.XMLDataManager" target="model.IRecette" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;IRecette&gt;"/>
+    <HasRelation name="recettes" source="model.Livre" target="model.IRecette" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ObservableList&lt;IRecette&gt;"/>
+    <HasRelation name="prix" source="model.Recette" target="model.Budget" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="model.Recette" target="model.IRecette"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
