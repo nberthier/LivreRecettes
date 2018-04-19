@@ -169,13 +169,18 @@ public class Livre {
         if(listeTemporaire == null || listeTemporaire.size() == 0)
             listeTemporaire = FXCollections.observableArrayList(recettes);
         
-        System.out.println("La recherche : " + recherche);
-        List<IRecette> trouves = new ArrayList<>();
-                
-        trouves.addAll(listeTemporaire.stream().filter(r -> RecetteComparateur.nomEqual(r, recherche) || RecetteComparateur.nomContenu(recherche, r)).collect(Collectors.toList()));
-        
+        //System.out.println(recherche.recetteToString());
+        List<IRecette> trouves = new ArrayList<>((recettes.isEmpty()?listeTemporaire:recettes));
         recettes.clear();
-        recettes.addAll(trouves);
+        
+        ajouterRecettes(listeTemporaire.stream().filter((r) -> {
+            boolean retour = RecetteComparateur.nomsRecettesEqual(r, recherche) || RecetteComparateur.nomsRecettesContenu(r, recherche);// || 
+            retour &= recherche.getIngredients().stream().anyMatch(i -> RecetteComparateur.ingredientInRecette(i, r));
+            return retour;
+        }).collect(Collectors.toList()));
+        
+        if(recettes.isEmpty())
+            ajouterRecettes(listeTemporaire.stream().filter(r -> RecetteComparateur.nomsRecettesEqual(r, recherche) || RecetteComparateur.nomsRecettesContenu(r, recherche) || recherche.getIngredients().stream().anyMatch(i -> RecetteComparateur.ingredientInRecette(i, r))).collect(Collectors.toList()));
     }
     
     /**

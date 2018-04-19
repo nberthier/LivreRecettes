@@ -15,6 +15,8 @@ import model.Unite;
  */
 public class Tests {
 
+    public static Livre l;
+    
     public static void main(String[] argc) throws Exception{
         System.out.println("Tests :\n=======");
         
@@ -22,7 +24,7 @@ public class Tests {
         System.out.println();
         // Création d'un livre
         System.out.println("Création d'un Livre l.");
-        Livre l = new Livre();
+        l = new Livre();
         // Création d'un datamanager
         System.out.println("Création d'un DataManager dm.");
         DataManager dm = new StubDataManager(); // new XMLDataManager();
@@ -64,15 +66,26 @@ public class Tests {
         System.out.println("Recherche de recettes dans le Livre l");
         // Création d'un "recette" de recherche
         IRecette recherche = Fabrique.creerRecette("pizza");
-        System.out.println("Création d'une \"recette\" de recherche : " + recherche);
         // Recherche de recettes par le nom
-        l.rechercherRecettes(recherche);
-        System.out.println("Les recettes trouvés : " + l);
-        // Recherche de recettes par ingrédient
+        testRecherche(recherche);
+        
+        // Création d'une "recette" sans nom mais avec ingrédient(s)
         recherche = Fabrique.creerRecette("");
-        recherche.ajouterIngredient(Fabrique.creerIngredient("", 0, Unite.unite));
-        System.out.println("Création d'une \"recette\" de recherche avec les ingrédients : " + recherche.getIngredients());
-        l.rechercherRecettes(recherche);
+        recherche.ajouterIngredient(Fabrique.creerIngredient("tomates", 0, Unite.unite));
+        // Recherche de recettes par ingrédient
+        testRecherche(recherche);
+        
+        // Création d'une "recette" 
+        recherche = Fabrique.creerRecette("pizza");
+        recherche.ajouterIngredient(Fabrique.creerIngredient("tomates", 0, Unite.unite));
+        // Recherche de recettes par ingrédient et par nom
+        testRecherche(recherche);
+    }
+    
+    private static void testRecherche(IRecette recette){
+        System.out.println("---- Nouveau test de recherche ----");
+        System.out.println("Création d'une \"recette\" de recherche : \"" + recette + "\" avec les ingrédients : " + recette.getIngredients());
+        l.rechercherRecettes(recette);
         System.out.println("Les recettes trouvés : " + l);
     }
     

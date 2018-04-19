@@ -1,5 +1,6 @@
 package utils;
 
+import model.IIngredient;
 import model.IRecette;
 import utils.StringOperation;
 
@@ -22,12 +23,22 @@ public class RecetteComparateur {
     }
     
     /**
+     * 
+     * @param test
+     * @param recherche
+     * @return 
+     */
+    private static boolean contient(String test, String recherche){
+        return test.contains(recherche);
+    }
+    
+    /**
      * Test si les noms {@link #simplifie(String chaine) simplifiés} de chaque recette sont égaux
      * @param r1 la première recette
      * @param r2 la seconde
      * @return si les noms simplifié sont égaux
      */
-    public static boolean nomEqual(IRecette r1, IRecette r2){
+    public static boolean nomsRecettesEqual(IRecette r1, IRecette r2){
         String nom1 = simplifie(r1.getNom()),
                nom2 = simplifie(r2.getNom());
         
@@ -36,15 +47,44 @@ public class RecetteComparateur {
     
     /**
      * Test si les noms {@link #simplifie(String chaine) simplifiés} de chaque recette sont similaire
-     * @param recherche la recette à rechercher
-     * @param test la recette à laquelle comparer la recette recherchée
+     * @param test la recette à rechercher
+     * @param recherche la recette à laquelle comparer la recette recherchée
      * @return si le nom de la recette à rechercher est contenu dans celui de la recette à tester
      */
-    public static boolean nomContenu(IRecette recherche, IRecette test){
-        if(nomEqual(recherche, test)) return true;
-        return simplifie(test.getNom()).contains(simplifie(recherche.getNom()));
+    public static boolean nomsRecettesContenu(IRecette test, IRecette recherche){
+        if(nomsRecettesEqual(test, recherche)) return true;
+        if(recherche.getNom() == null || recherche.getNom().length() == 0) return false;
+        return contient(simplifie(test.getNom()),simplifie(recherche.getNom()));
     }
     
+    /**
+     * Test si les noms {@link #simplifie(String chaine) simplifiés} de chacun des ingrédients sont similaires
+     * @param test premier ingrédient
+     * @param recherche second ingrédient
+     * @return si le nom de l'ingrédient 2 est contenu dans celui de l'ingrédient 1
+     */
+    private static boolean nomsIngredientsContenu(IIngredient test, IIngredient recherche){
+        boolean retour = false; 
+        String nom = recherche.getNom();
+        do {
+            retour = contient(simplifie(test.getNom()),simplifie(nom));
+            //System.out.println(test.getNom()+" = "+nom+" : "+retour);
+            nom = nom.substring(0, ((int)nom.length()*2/3));
+        }while (!retour && nom.length() > 3);
+        return retour;
+    }
     
-    
+    /**
+     * Test si un ingrédiant est dans une recette
+     * @param ingredient l'ingrédient à trouver
+     * @param recette la recette dans laquelle chercher
+     * @return si il y a ou non l'ingrédient
+     */
+    public static boolean ingredientInRecette(IIngredient ingredient, IRecette recette){
+        /*for(IIngredient i : recette.getIngredients())
+            if(nomsIngredientsContenu(i, ingredient))
+                return true;
+        */ 
+        return recette.getIngredients().stream().anyMatch((i) -> (nomsIngredientsContenu(i, ingredient)));
+    }
 }
