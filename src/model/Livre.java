@@ -1,6 +1,5 @@
 package model;
 
-import utils.RecetteComparateur;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -161,7 +160,7 @@ public class Livre {
     }
     
     /**
-     * Méthode permettant de rechercher les recettes contenant tous (ou presques tous) les éléments de la recette de recherche.
+     * Méthode permettant de rechercher les recettes contenant des éléments de la recette de recherche.
      * @param recherche la recette de recherche
      * <br>Passe toutes les recettes dans une liste temporaire pour avoir dans la liste de recettes celles correspondantes.
      */

@@ -227,8 +227,8 @@ class Recette implements IRecette{
      * @param prix le prix
      * @param ingredients la liste d'ingrédients
      */
-    Recette(String nom, String recette, int minute, Difficulte difficulte, Budget prix, List<IIngredient> ingredients){
-        this(nom,recette,minute,difficulte,prix);
+    Recette(String nom, String recette, int minutes, Difficulte difficulte, Budget prix, List<IIngredient> ingredients){
+        this(nom,recette,minutes,difficulte,prix);
         setIngredients(ingredients);
     }
     

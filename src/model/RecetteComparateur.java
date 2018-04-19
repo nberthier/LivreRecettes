@@ -1,7 +1,5 @@
-package utils;
+package model;
 
-import model.IIngredient;
-import model.IRecette;
 import utils.StringOperation;
 
 /**
@@ -23,13 +21,24 @@ public class RecetteComparateur {
     }
     
     /**
-     * 
-     * @param test
-     * @param recherche
-     * @return 
+     * Test si une chaine est contenu dans une autre
+     * @param test la chaîne dans laquelle tester
+     * @param recherche la chaine à chercher
+     * @return si elle est contenu
      */
     private static boolean contient(String test, String recherche){
-        return test.contains(recherche);
+        boolean retour = false; 
+        recherche = simplifie(recherche);
+        test = simplifie(test);
+        int longueur;
+        do {
+            retour = test.contains(recherche);
+            if(recherche.length() <= 5)
+                longueur = ((int)recherche.length()*4/5);
+            else longueur = ((int)recherche.length()*2/3);
+            recherche = recherche.substring(0, longueur);
+        }while (!retour && recherche.length() > 3);
+        return retour;
     }
     
     /**
@@ -64,17 +73,7 @@ public class RecetteComparateur {
      * @return si le nom de l'ingrédient 2 est contenu dans celui de l'ingrédient 1
      */
     private static boolean nomsIngredientsContenu(IIngredient test, IIngredient recherche){
-        boolean retour = false; 
-        String nom = recherche.getNom();
-        int longueur = 0;
-        do {
-            retour = contient(simplifie(test.getNom()),simplifie(nom));
-            if(nom.length() <= 5)
-                longueur = ((int)nom.length()*4/5);
-            else longueur = ((int)nom.length()*2/3);
-            nom = nom.substring(0, longueur);
-        }while (!retour && nom.length() > 3);
-        return retour;
+        return contient(simplifie(test.getNom()),simplifie(recherche.getNom()));
     }
     
     /**
