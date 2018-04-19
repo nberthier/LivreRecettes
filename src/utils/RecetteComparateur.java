@@ -66,10 +66,13 @@ public class RecetteComparateur {
     private static boolean nomsIngredientsContenu(IIngredient test, IIngredient recherche){
         boolean retour = false; 
         String nom = recherche.getNom();
+        int longueur = 0;
         do {
             retour = contient(simplifie(test.getNom()),simplifie(nom));
-            //System.out.println(test.getNom()+" = "+nom+" : "+retour);
-            nom = nom.substring(0, ((int)nom.length()*2/3));
+            if(nom.length() <= 5)
+                longueur = ((int)nom.length()*4/5);
+            else longueur = ((int)nom.length()*2/3);
+            nom = nom.substring(0, longueur);
         }while (!retour && nom.length() > 3);
         return retour;
     }
@@ -81,10 +84,6 @@ public class RecetteComparateur {
      * @return si il y a ou non l'ingrédient
      */
     public static boolean ingredientInRecette(IIngredient ingredient, IRecette recette){
-        /*for(IIngredient i : recette.getIngredients())
-            if(nomsIngredientsContenu(i, ingredient))
-                return true;
-        */ 
         return recette.getIngredients().stream().anyMatch((i) -> (nomsIngredientsContenu(i, ingredient)));
     }
 }

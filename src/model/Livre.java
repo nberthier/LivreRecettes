@@ -174,13 +174,34 @@ public class Livre {
         recettes.clear();
         
         ajouterRecettes(listeTemporaire.stream().filter((r) -> {
-            boolean retour = RecetteComparateur.nomsRecettesEqual(r, recherche) || RecetteComparateur.nomsRecettesContenu(r, recherche);// || 
-            retour &= recherche.getIngredients().stream().anyMatch(i -> RecetteComparateur.ingredientInRecette(i, r));
+            boolean retour = RecetteComparateur.nomsRecettesEqual(r, recherche) || RecetteComparateur.nomsRecettesContenu(r, recherche);// ||
+            if(recherche.getIngredients().isEmpty()) return retour;
+            int nbMatch = 0;
+            nbMatch = recherche.getIngredients().stream().map((i) -> RecetteComparateur.ingredientInRecette(i, r)? 1 : 0).reduce(nbMatch, Integer::sum);
+            retour &= (nbMatch/recherche.getIngredients().size() > 0.5);
             return retour;
         }).collect(Collectors.toList()));
         
         if(recettes.isEmpty())
+            ajouterRecettes(listeTemporaire.stream().filter((r) -> {
+                boolean retour = RecetteComparateur.nomsRecettesEqual(r, recherche) || RecetteComparateur.nomsRecettesContenu(r, recherche);// ||
+                if(recherche.getIngredients().isEmpty()) return retour;
+                int nbMatch = 0;
+                nbMatch = recherche.getIngredients().stream().map((i) -> RecetteComparateur.ingredientInRecette(i, r)? 1 : 0).reduce(nbMatch, Integer::sum);
+                retour |= (nbMatch/recherche.getIngredients().size() > 0.5);
+                return retour;
+            }).collect(Collectors.toList()));
+        
+        if(recettes.isEmpty())
+            ajouterRecettes(listeTemporaire.stream().filter((r) -> {
+                boolean retour = RecetteComparateur.nomsRecettesEqual(r, recherche) || RecetteComparateur.nomsRecettesContenu(r, recherche);// || 
+                retour &= recherche.getIngredients().stream().anyMatch(i -> RecetteComparateur.ingredientInRecette(i, r));
+                return retour;
+            }).collect(Collectors.toList()));
+        
+        if(recettes.isEmpty())
             ajouterRecettes(listeTemporaire.stream().filter(r -> RecetteComparateur.nomsRecettesEqual(r, recherche) || RecetteComparateur.nomsRecettesContenu(r, recherche) || recherche.getIngredients().stream().anyMatch(i -> RecetteComparateur.ingredientInRecette(i, r))).collect(Collectors.toList()));
+        
     }
     
     /**

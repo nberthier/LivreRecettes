@@ -2,6 +2,7 @@ package launchers;
 
 import data_managers.StubDataManager;
 import data_managers.XMLDataManager;
+import java.util.Arrays;
 import java.util.List;
 import model.DataManager;
 import model.Fabrique;
@@ -70,7 +71,7 @@ public class Tests {
         testRecherche(recherche);
         
         // Création d'une "recette" sans nom mais avec ingrédient(s)
-        recherche = Fabrique.creerRecette("");
+        recherche = Fabrique.creerRecette();
         recherche.ajouterIngredient(Fabrique.creerIngredient("tomates", 0, Unite.unite));
         // Recherche de recettes par ingrédient
         testRecherche(recherche);
@@ -79,6 +80,13 @@ public class Tests {
         recherche = Fabrique.creerRecette("pizza");
         recherche.ajouterIngredient(Fabrique.creerIngredient("tomates", 0, Unite.unite));
         // Recherche de recettes par ingrédient et par nom
+        testRecherche(recherche);
+        
+        // Création d'un recette 
+        recherche = Fabrique.creerRecette();
+        recherche.ajouterIngredients(Arrays.asList(Fabrique.creerIngredient("farine", 0, Unite.unite),Fabrique.creerIngredient("sucre", 0, Unite.unite),
+            Fabrique.creerIngredient("lait", 0, Unite.unite),Fabrique.creerIngredient("beurre", 0, Unite.unite),Fabrique.creerIngredient("oeufs", 0, Unite.unite)));
+        // Recherche recettes contenant plusieurs ingrédient
         testRecherche(recherche);
     }
     
