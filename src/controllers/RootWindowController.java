@@ -1,8 +1,12 @@
 package controllers;
 
+import data_managers.StubDataManager;
+import data_managers.XMLDataManager;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -109,7 +113,7 @@ public class RootWindowController implements Initializable {
      */
     public void creerMenuModeDataManager(){
         try {
-            dataManagerModes = ClassesManager.getClasses("data_managers");
+            dataManagerModes = new ArrayList<>(Arrays.asList(StubDataManager.class,XMLDataManager.class));//ClassesManager.getClasses("data_managers");
             /*
              * Ma boucle for pour parcourir les classes.
             for(Class classe : dataManagerModes){
@@ -133,7 +137,7 @@ public class RootWindowController implements Initializable {
                 dataManagerMenu.getItems().add(item);
             }); 
             
-        } catch (ClassNotFoundException | IOException ex) {
+        } catch (Exception ex){//ClassNotFoundException | IOException ex) {
             Logger.getLogger(RootWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -174,7 +178,7 @@ public class RootWindowController implements Initializable {
     public void ouvrir(){
         FileChooser fc = new FileChooser();
         fc.setTitle("Fichier de sauvegarde");
-        if(currentFile != null)
+        if(currentFile != null && currentFile.getParentFile().isDirectory())
             fc.setInitialDirectory(currentFile.getParentFile()); //currentFile.getValue().getParentFile()
         changerCurrentFile(fc.showOpenDialog(main.getStage()));
         System.out.println(currentFile);
@@ -188,8 +192,10 @@ public class RootWindowController implements Initializable {
         if(file != null){
             if(main.getLivre().getDataManager() != null)
                 main.getLivre().getDataManager().setFile(file.getAbsolutePath());
-            currentFile = file;
-            fileTextField.setText(currentFile.getAbsolutePath());
+            if(file.exists()){
+                currentFile = file;
+                fileTextField.setText(currentFile.getAbsolutePath());
+            }
         }
     }
     
