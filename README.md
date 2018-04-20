@@ -40,7 +40,7 @@ La partie modèle de l'application est la partie qui gère les données et la lo
 Voici donc le diagramme de classes de la partie Modèle de l'application, ce diagramme représente donc les classes de base pour que l'application fonctionne, mais ne montre pas les classes gérant la partie graphique de l'application.  
 En effet sur ce diagramme sont réprésentées les classes du package `model` ainsi que les classes du package `data_managers` (les classes héritant de l'interface `DataManager`).
 
-![Diagramme de classe du Modèle](https://raw.githubusercontent.com/BOISSARD/LivreRecettes/master/UMLDiagram/exports/Class-Diagram-Model-001.png)
+![Diagramme de classe du Modèle](https://raw.githubusercontent.com/BOISSARD/LivreRecettes/master/UMLDiagram/exports/Class-Diagram-Model-002.png)
 
 ### Conception :
 
